@@ -1,2 +1,5 @@
-/config
-/tmp
+config/
+logs/
+tmp/
+vendors/
+webroot/img/logos/
