@@ -1,0 +1,88 @@
+<?php
+/**
+ * Routes configuration
+ *
+ * In this file, you set up routes to your controllers and their actions.
+ * Routes are very important mechanism that allows you to freely connect
+ * different urls to chosen controllers and their actions (functions).
+ *
+ * PHP versions 4 and 5
+ *
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @package       cake
+ * @subpackage    cake.app.config
+ * @since         CakePHP(tm) v 0.2.9
+ * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ */
+/**
+ * Here, we are connecting '/' (base path) to controller called 'Pages',
+ * its action cralled 'display', and we pass a param to select the view file
+ * to use (in this case, /app/views/pages/home.ctp)...
+ */
+
+Router::connect('/', array('controller' => 'users', 'action' => 'dashboard'));
+/**
+ * ...and connect the rest of 'Pages' controller's urls.
+ */
+Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+
+// Login/Signup
+Router::connect('/signup', array('controller' => 'users', 'action' => 'signup'));
+Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
+	
+// Profiles
+Router::connect('/profiles/*', array('controller' => 'users', 'action' => 'view'));
+
+// Products
+App::import('Lib', 'ProductRoute');
+Router::connect('/:productSlug/forum/:threadSlug',
+	array('controller' => 'threads', 'action' => 'view', 'plugin' => false),
+	array(
+		'routeClass' => 'ProductRoute',
+		'pass' => array('productSlug', 'threadSlug')
+	)
+);
+
+Router::connect('/:productSlug/forum',
+	array('controller' => 'threads', 'action' => 'all', 'plugin' => false),
+	array(
+		'routeClass' => 'ProductRoute',
+		'pass' => array('productSlug')
+	)
+);
+
+Router::connect('/:productSlug',
+	array('controller' => 'products', 'action' => 'view', 'plugin' => false),
+	array(
+		'routeClass' => 'ProductRoute',
+		'pass' => array('productSlug')
+	)
+);
+
+Router::connect(
+	'/comments/:slug/*',
+	array('controller' => 'products', 'action' => 'comments', 'plugin' => false),
+	array(
+		'pass' => array('slug'),
+		'slug' => '[a-z0-9-]+'
+	)
+);
+
+// Categories
+Router::connect(
+	'/categories/:slug',
+	array('controller' => 'categories', 'action' => 'view'),
+	array(
+		'pass' => array('slug'),
+		'slug' => '[a-z0-9-]+'
+	)
+);
+
+Router::parseExtensions('json');
