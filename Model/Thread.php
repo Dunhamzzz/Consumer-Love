@@ -16,22 +16,23 @@ class Thread extends AppModel {
 	public $hasMany = array('Post');
 	
 	public $actsAs = array(
-		'Utils.Sluggable' => array(
+	// @todo work out why this breaks a save
+	/*	'Utils.Sluggable' => array(
 			'label' => 'title',
 			'method' => 'multibyteSlug',
 			'separator' => '-',
 			'slug' => 'slug',
 			'length' => 150
-		)
+		) */
 	);
 	
-	public function addThread($data) {
+	public function add($data) {
 		$this->set($data);
 		
 		if($this->validates()) {
 			
 			$this->create();
-			$this->save($data, false, array('product_id', 'user_id', 'title', 'published'));
+			$this->save($data, false, array('product_id', 'user_id', 'title', 'published', 'user_ip', 'content'));
 			
 			$threadId = $this->id;
 			$userId = $data['Thread']['user_id'];
@@ -60,7 +61,7 @@ class Thread extends AppModel {
 		));
 	}
 	
-	public function getThreadForViewing($slug) {
+	public function getForViewing($slug) {
 		return $this->find('first', array(
 			'conditions' => array(
 				'Thread.slug' => $slug
@@ -71,7 +72,7 @@ class Thread extends AppModel {
 		));
 	}
 	
-	public function getThreadForReply($threadId) {
+	public function getForReply($threadId) {
 		return $this->find('first', array(
 			'conditions' => array(
 				'Thread.id' => $threadId

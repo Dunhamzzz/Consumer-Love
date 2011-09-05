@@ -5,7 +5,7 @@ class CategoriesController extends AppController {
         'Product' => array(
             'joins' => array(
                 array(
-                    'table' => 'categories_products', // or products_categories
+                    'table' => 'categories_products',
                     'alias' => 'CategoryFilter',
                     'type' => 'INNER',
                     'conditions' => array(
@@ -33,7 +33,7 @@ class CategoriesController extends AppController {
 		$this->Category->contain(false);
 		$category = $this->Category->findBySlug($slug);
 		if(!$category) {
-			$this->cakeError('error404');
+			throw new NotFoundException(__('Invalid category'));
 		}
 		
 		$path = $this->Category->getPath($category['Category']['id']);
@@ -43,6 +43,8 @@ class CategoriesController extends AppController {
 			$this->paginate['Product']['order'] = array($this->params['data']['sort'] => $this->params['data']['order']);
 		}
 		
+		
+		// @todo use 2.0 paginator
 		$products = $this->paginate($this->Category->Product, array(
 			'CategoryFilter.category_id' => $category['Category']['id']
 		));
@@ -63,22 +65,24 @@ class CategoriesController extends AppController {
 	public function admin_edit($id = null) {
 		$this->Category->id = $id;
 		
-		if($id && empty($this->data)) {
-			$this->data = $this->Category->read();
-			$this->set('title_for_layout','Edit '.$this->data['Category']['name']);
-			$this->set('pageAction', 'edit');
-			if(empty($this->data)) {
-				$this->Session->setFlash('Invalid category ID.');
-				$this->redirect(array('action' => 'index'));
+		if($id && !$this->request->is('post')) {
+			
+			if(!$this->Category->exists()) {
+				throw new NotFoundException(__('Invalid category'));
 			}
+			
+			$this->request->data = $this->Category->read(null, $id);
+			$this->set('title_for_layout','Edit '.$this->request->data['Category']['name']);
+			$this->set('pageAction', 'edit');
+			
 		} else {
-			if(!empty($this->data)) { //Saving
-				if($this->Category->save($this->data)) {
-					$this->Session->setFlash('Changes made to '.$this->data['Category']['name'].' have been saved.');
-					$this->data = $this->Category->read();
+			if($this->request->is('post') || $this->request->is('put')) { //Saving
+				if($this->Category->save($this->request->data)) {
+					$this->Session->setFlash('Changes made to '.$this->request->data['Category']['name'].' have been saved.');
+					$this->request->data = $this->Category->read(null, $id);
 				}
 				
-				$this->set('title_for_layout','Edit '.$this->data['Category']['name']);
+				$this->set('title_for_layout','Edit '.$this->request->data['Category']['name']);
 				$this->set('pageAction', 'edit');
 			} else {
 				$this->set('title_for_layout', 'Add Category');

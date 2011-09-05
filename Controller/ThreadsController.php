@@ -19,7 +19,7 @@ class ThreadsController extends AppController {
 	
 	public function all($productSlug) {
 		$product = $this->Thread->Product->justGetProductBySlug($productSlug);
-		
+		// @todo use 2.0 paginator
 		$threads = $this->paginate('Thread', array('product_id' => $product['Product']['id']));
 		
 		$title_for_layout = $product['Product']['name']. ' Forum';
@@ -28,26 +28,25 @@ class ThreadsController extends AppController {
 	
 	public function create($productId = null) {
 		// Check Product
-		$this->Thread->Product->id = $productId ?: $this->data['Thread']['product_id'];
-		$this->Thread->Product->contain('Category');
-		$product = $this->Thread->Product->read();
+		$this->Thread->Product->id = $productId ?: $this->request->data['Thread']['product_id'];
 		
-		if(empty($product)) {
-			$this->cakeError('error404');
+		if(!$this->Thread->Product->exists()) {
+			throw new NotFoundException(__('Invalid Product.'));
 		}
 		
-		if(!empty($this->data)) {
-			$this->data['Thread']['user_id'] = $this->userData['User']['id'];
-			$this->data['Thread']['user_ip'] = $this->RequestHandler->getClientIp();
+		$this->Thread->Product->contain('Category'); // For meta widget
+		$product = $this->Thread->Product->read();
+		
+		if(!empty($this->request->data)) {
+			$this->request->data['Thread']['user_id'] = $this->userData['id'];
+			$this->request->data['Thread']['user_ip'] = $this->RequestHandler->getClientIp();
 			
 			// Spam check goes here
-			$this->data['Thread']['published'] = 1;
+			$this->request->data['Thread']['published'] = 1;
 			
-			if($threadId = $this->Thread->addThread($this->data)) {
+			if($this->Thread->add($this->request->data)) {
 				$this->Session->setFlash('Your thread has been saved successfully.');
-				if(!$this->isApiCall()) {
-					$this->redirect(array('controller' => 'products', 'action' => 'view', $product['Product']['slug']));
-				}
+				$this->redirect(array('controller' => 'products', 'action' => 'view', $product['Product']['slug']));
 			} else {
 				$this->Session->setFlash('Please correct the errors below.');
 			}
@@ -62,11 +61,12 @@ class ThreadsController extends AppController {
 		$product = $this->Thread->Product->justGetProductBySlug($productSlug);
 		
 		if(empty($product)) {
-			$this->cakeError('error404');
+			throw new NotFoundException(__('Invalid Product.'));
 		}
 		
-		$thread = $this->Thread->getThreadForViewing($threadSlug);
+		$thread = $this->Thread->getForViewing($threadSlug);
 		
+		//@todo use 2.0 paginator
 		$posts = $this->paginate('Post', array('thread_id' => $thread['Thread']['id']));
 		
 		$this->set('title_for_layout', $thread['Thread']['title']);

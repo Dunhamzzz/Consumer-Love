@@ -68,7 +68,7 @@ class DATABASE_CONFIG {
 		'prefix' => '',
 	);
 	
-	public $default = array(
+	public $test = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',

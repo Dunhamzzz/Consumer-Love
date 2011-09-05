@@ -24,4 +24,15 @@ class Category extends AppModel {
 	
 	public $hasAndBelongsToMany = array('Product' => array('counterCache' => true));
 	
+	public function search($term, $limit = 10) {
+		return $this->find('all', array(
+				'conditions' => array(
+					'Category.name LIKE' => '%'.$term.'%'
+				),
+				'fields' => array('name', 'id', 'slug'),
+				'limit' => $limit,
+				'order' => 'Category.name',
+				'contain' => false
+			));
+	}
 }

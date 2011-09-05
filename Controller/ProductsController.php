@@ -25,16 +25,16 @@ class ProductsController extends AppController {
 		));
 		
 		if(!$product) {
-			$this->Session->setFlash('Invalid product');
-			$this->redirect(array('action' => 'index'));
+			throw new NotFoundException(__('Invalid Product'));
 		}
 		
 		// Get Threads, we need to paginate it
+		// @todo Use 2.0 paginator
 		$threads = $this->paginate('Thread', array('product_id' => $product['Product']['id']));
 		
 		// Is this in the users inventory?
 		if($this->userData) {
-			$this->set('inInventory', $this->Product->Inventory->isInInventory($product['Product']['id'], $this->userData['id']));
+			$this->set('inInventory', $this->Product->Inventory->has($product['Product']['id'], $this->userData['id']));
 		}
 		
 		$this->set(compact('product', 'category', 'threads'));
@@ -43,8 +43,8 @@ class ProductsController extends AppController {
 	
 	// Page for users to suggest products for us to cover
 	public function suggest() {
-		if(empty($this->data) && isset($this->params['url']['suggestion'])) {
-			$this->data['Product']['name'] = $this->params['url']['suggestion'];
+		if(empty($this->request->data) && isset($this->params['url']['suggestion'])) {
+			$this->request->data['Product']['name'] = $this->params['url']['suggestion'];
 		}
 	}
 	
@@ -56,25 +56,14 @@ class ProductsController extends AppController {
 	/** Ajax Actions **/
 	public function autocomplete() {
 		if ($this->request->is('ajax')) {
-			$term = $this->params['url']['q'];
-			$products = $this->Product->find('all', array(
-				'conditions' => array(
-					'Product.name LIKE' => '%'.$term.'%',
-				),
-				'fields' => array('name', 'logo', 'id', 'slug'),
-				'limit' => 7,
-				'order' => 'Product.name',
-				'contain' => false
-			));
+			$term = $this->request->query['q'];
+			$products = $this->Product->search($term);
+			$categories = $this->Product->search($term);
+			$categories = $this->Product->Category->search($term);
 			
-			$categories = $this->Product->Category->find('all', array(
-				'conditions' => array(
-					'Category.name LIKE' => '%'.$term.'%'
-				)
-			));
 			$this->set(compact('products', 'categories', 'term'));
 		} else {
-			$this->cakeError('error404');
+			throw NotFoundException(__('Page not found.'));
 		}
 	}
 	
@@ -90,18 +79,8 @@ class ProductsController extends AppController {
 			$top5Products = $this->Product->topByCategoryId($categoryId);
 			$this->set(compact('top5Category', 'top5Products'));
 		} else {
-			$this->cakeError('error404');
+			throw NotFoundException(__('Page not found.'));
 		}
-	}
-	
-	/** Comment Callback **/
-	public function callback_commentsAfterAdd($data) {
-		$this->Product->id = $data['modelId'];
-		$this->Product->Feed->add(array(
-			'product_id' => $data['modelId'],
-			'type' => 'comment',
-			'content' => '{user} commented on {product}'
-		));
 	}
 	
 	/** Admin Functions **/
@@ -110,30 +89,31 @@ class ProductsController extends AppController {
 		$this->set('products', $this->paginate());
 	}
 	
+	// @todo re-do this, not worth the fat controller
 	public function admin_edit($id = null) {
 		$this->Product->id = $id;
-		if($id && empty($this->data)) {
-			$this->data = $this->Product->read();
-			if(empty($this->data)) {
+		if($id && empty($this->request->data)) {
+			$this->request->data = $this->Product->read();
+			if(empty($this->request->data)) {
 				$this->Session->setFlash('Invalid product ID.');
 				$this->redirect(array('action' => 'index'));
 			}
 			
-			$this->set('title_for_layout','Edit '.$this->data['Product']['name']);
+			$this->set('title_for_layout','Edit '.$this->request->data['Product']['name']);
 			$this->set('pageAction', 'edit');
 		} else {
 			// Saving a product
-			if(!empty($this->data)) { //Saving
-				if($this->Product->save($this->data)) {
+			if(!empty($this->request->data)) { //Saving
+				if($this->Product->save($this->request->data)) {
 					if($id) {
-						$this->Session->setFlash('Changes made to '.$this->data['Product']['name'].' have been saved.');
+						$this->Session->setFlash('Changes made to '.$this->request->data['Product']['name'].' have been saved.');
 					} else {
-						$this->Session->setFlash($this->data['Product']['name'].' have been saved.');
+						$this->Session->setFlash($this->request->data['Product']['name'].' have been saved.');
 					}
-					$this->data = $this->Product->read();
+					$this->request->data = $this->Product->read();
 				}
 				
-				$this->set('title_for_layout','Edit '.$this->data['Product']['name']);
+				$this->set('title_for_layout','Edit '.$this->request->data['Product']['name']);
 				$this->set('pageAction', 'edit');
 			} else {
 				$this->set('title_for_layout', 'Add Product');

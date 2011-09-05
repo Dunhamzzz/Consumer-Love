@@ -42,7 +42,7 @@ class Inventory extends AppModel {
 	/**
 	 * Checks whether a product is in a users inventory
 	 */
-	public function isInInventory($productId, $userId) {
+	public function has($productId, $userId) {
 		return $this->find('first', array(
 			'conditions' => array(
 				'user_id' => $userId,
@@ -60,7 +60,7 @@ class Inventory extends AppModel {
 		// Check ProductID
 		$product = $this->Product->read('id', $productId);
 		if(!empty($product)) {
-			$check = $this->isInInventory($productId, $userId);
+			$check = $this->has($productId, $userId);
 			if(!empty($check)) {
 				// User already has an entry, so delete it.
 				$this->delete($check['Inventory']['id']);

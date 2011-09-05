@@ -74,6 +74,23 @@ class Product extends AppModel {
 		Cache::delete('product_slugs');
 	}
 	
+	/**
+	 * For searching, returns minimum data for search results
+	 * @param unknown_type $term
+	 * @param unknown_type $limit
+	 */
+	public function search($term, $limit = 10) {
+		return $this->find('all', array(
+			'conditions' => array(
+				'Product.name LIKE' => '%'.$term.'%',
+			),
+			'fields' => array('name', 'logo', 'id', 'slug', 'inventory_count'),
+			'limit' => $limit,
+			'order' => 'Product.name',
+			'contain' => false
+		));
+	}
+	
 	// Just returns a product row from a slug, so you can check it exists.
 	public function justGetProductBySlug($slug) {
 		return $this->find('first', array(

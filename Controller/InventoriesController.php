@@ -5,8 +5,6 @@ class InventoriesController extends AppController {
 		parent::beforeFilter();
 	}
 	
-	
-	
 	public function toggle($productId) {
 		$status = $this->Inventory->toggle($productId, $this->userData['id']);
 		if(!$this->request->is('ajax')) {

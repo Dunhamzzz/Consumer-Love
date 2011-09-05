@@ -14,14 +14,14 @@ class PostsController extends AppController {
 		}
 		
 		$save = false;
-		$this->Post->set($this->data);
-		if(!empty($this->data) && $this->Post->validates()) {
+		$this->Post->set($this->request->data);
+		if(!empty($this->request->data) && $this->Post->validates()) {
 			$save = true;
 		}
 		
 		// Check if we want a user to do a captcha
 		if(User::get('human_proven_count') < Configure::read('ProvenHuman')) {
-			if(!empty($this->data)) {
+			if(!empty($this->request->data)) {
 				if($this->Recaptcha->verify() && $save) {
 					$this->Auth->getModel()->increaseHumanProven();
 				} else {
@@ -34,11 +34,11 @@ class PostsController extends AppController {
 		}
 		
 		if($save) {
-			$this->data['Post']['user_id'] = $this->userData['User']['id'];
-			$this->data['Post']['user_ip'] = $this->RequestHandler->getClientIp();
+			$this->request->data['Post']['user_id'] = $this->userData['id'];
+			$this->request->data['Post']['user_ip'] = $this->RequestHandler->getClientIp();
 			
 			
-			if($postId = $this->Post->addPost($this->data)) {
+			if($postId = $this->Post->addPost($this->request->data)) {
 				// Redirect to thread and post
 				$this->redirect(array(
 					'controller' => 'threads',
@@ -62,10 +62,10 @@ class PostsController extends AppController {
 		}
 		
 		// Save
-		if (!empty($this->data)) {
+		if (!empty($this->request->data)) {
 			$this->Post->id = $id;
 		
-			if ($this->Post->save($this->data, true, array('content'))) {
+			if ($this->Post->save($this->request->data, true, array('content'))) {
 				$thread = $this->Post->Thread->getSlugsById($post['Thread']['id']);
 				
 				$this->redirect(array(
@@ -77,7 +77,7 @@ class PostsController extends AppController {
 				));
 			}
 		} else {
-			$this->data = $post;
+			$this->request->data = $post;
 		}
 
 		
