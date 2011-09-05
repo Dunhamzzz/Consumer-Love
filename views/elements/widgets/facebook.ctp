@@ -1,1 +1,0 @@
-<fb:like-box href="http://www.facebook.com/pages/Consumer-Love/227663683916560" width="220" show_faces="true" stream="false" header="false"></fb:like-box>
