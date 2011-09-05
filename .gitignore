@@ -3,3 +3,4 @@ logs/
 tmp/
 vendors/
 webroot/img/logos/
+webroot/phpinfo.php

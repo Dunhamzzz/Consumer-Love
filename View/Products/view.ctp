@@ -1,0 +1,51 @@
+<?php
+// Register Widgets
+$pageWidgets = array(
+	'product_meta' => array($product['Product']),
+	'product_submit' => array($product['Product'])
+);
+
+if(!empty($product['Tweet'])) {
+	$pageWidgets['twitter'] = array('tweets' => $product['Tweet']);
+}
+$this->set(compact('pageWidgets'));
+
+$this->Html->addCrumb($product['Product']['name']);
+?>
+<div id="product" class="product-section">
+<?php echo $this->Love->productImage($product, 128); ?>
+	<?php if(isset($userData)): ?>
+		<?php echo $this->Love->inventoryButton($product['Product']['id'], $inInventory); ?>
+	<?php endif; ?>
+	<h1><?php echo $product['Product']['name']; ?></h1>
+	<div id="product-description">
+		<p><?php echo nl2br($product['Product']['description_formatted'] ?: $product['Product']['description']); ?></p>
+	</div>
+</div>
+<div id="product-tabs">
+	<ul class="tabs">
+		<li><a href="#threads">Forum</a></li>
+		<li><a href="#reviews">Reviews</a></li>
+		<li><a href="#gallery">Gallery</a></li>
+	</ul>
+	<div id="reviews" class="product-section">
+		<h2><?php echo $product['Product']['name'];?> Reviews</h2>
+		<p>You can write what you think of <?php echo $product['Product']['name'];?> here, it can be long, short or just a rant!</p>
+		<?php if(isset($userData)): ?>
+		<?php else: ?>
+		<a class="guest">You must be logged in to add a review.</a>
+		<?php endif; ?>
+	</div>
+	<div id="threads" class="product-section">
+		<h2><?php echo $this->Link->forum($product['Product']['slug'], $product['Product']['name'] . ' Forum'); ?><?php echo $this->Link->newThread($product['Product']['id']);?></h2>
+		<p>Here is our discussion forum on all things about <?php echo $product['Product']['name']; ?>.</p>
+		<?php echo $this->element('forums/threads'); ?>
+	</div>
+	<div id="gallery">
+		<h2><?php echo $product['Product']['name'];?> Gallery</h2>
+		<p>Gallery goes here</p>
+	</div>
+</div>
+<div id="related">
+<h3>Related Products</h3>
+</div>

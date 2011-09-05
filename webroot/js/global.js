@@ -1,4 +1,10 @@
+if (top.location!= self.location) {
+	top.location = self.location.href;
+}
+
 $(function() {
+	
+	$('#product-tabs').tabs();
 	
 	// Placeholders
 	$('[placeholder]').focus(function() {
@@ -104,7 +110,7 @@ $(function() {
 				}, 200);
 
 			} else {
-				$suggestLanding.slideUp().empty();
+				$suggestLanding.slideUp('fast').empty();
 			}
 		}
 		
@@ -116,18 +122,18 @@ $(function() {
 		}
 		
 		if($(this).val().length) {
-			$suggestLanding.slideDown();
+			$suggestLanding.slideDown('fast');
 		}
 	})
 	
 	.blur(function() {
 		if(this.value.length) {
 			if(landingPersist == false) {
-				$suggestLanding.slideUp();
+				$suggestLanding.slideUp('fast');
 			}
 		} else {
 			$(this).val('Search for a product or brand').addClass('idle');
-			$suggestLanding.slideUp();
+			$suggestLanding.slideUp('fast');
 		}
 	})
 	
@@ -144,14 +150,10 @@ $(function() {
 	})
 	
 	$('.top5select').attr('autocomplete', 'off').change(function() {
-		var landing = $(this).next('div');
-		landing.fadeOut('fast');
-		$.ajax({
-			url: '/products/top5/'+$(this).val(),
-			dataType: 'html',
-			success: function(html) {
-				landing.fadeIn().html(html);
-			}
+		var $landing = $(this).next('div');
+		$landing.fadeOut('fast');
+		$landing.load('/products/top5/'+$(this).val() + ' .top5', function() {
+			$(this).fadeIn('fast');
 		});
 	});
 	
@@ -163,15 +165,23 @@ $(function() {
 	
 	// Category product shuffle
 	$('#product-paginate select').change(function(){
+		var $dest = $('.products-list');
 		$.ajax({
-			url: window.location.pathname+'.json',
+			url: window.location.pathname,
 			type: 'POST',
 			dataType: 'html',
 			data: $('#product-paginate').serialize(),
 			success: function(response) {
-				var e = $(response);
-				e.attr('id', 'products-dest').hide();
-				$('#products-list').append(e).quicksand($('#products-dest div'));
+				var $list = 
+				$(response)
+					.filter('.products-list')
+					.addClass('new-products')
+					.hide()
+					.insertAfter($dest)
+				;
+				
+				$dest.quicksand($('.new-products div'));
+				$list.remove();
 			}
 		});
 	});
@@ -180,7 +190,7 @@ $(function() {
 	if($('#signup').length) {
 		var usernameTimer = false;
 		
-		$('#signup #username').keyup(function(e) {
+		$('#signup .signup-username').keyup(function(e) {
 			if (e.keyCode > 40 || e.keyCode == 8) { //If a letter or backspace
 				if(this.value.length >= 2) {
 					$(this).addClass('loading');
@@ -192,10 +202,13 @@ $(function() {
 							type: 'get',
 							data: { 'username' : query },
 							dataType: 'text',
-							success: function(data) {
-								$('#username').removeClass('loading');
-								if(data) {
-									
+							context: $('.signup-username'),
+							success: function(taken) {
+								$(this).removeClass('loading');
+								if(taken == 0) {
+									$(this).addClass('valid').removeClass('invalid');
+								} else {
+									$(this).removeClass('valid').addClass('invalid');
 								}
 							}
 						});
@@ -206,6 +219,13 @@ $(function() {
 			
 		});
 	}
+	
+	// Product View Thread Form
+	$('#threads .thread-form').hide();
+	$('.show-thread-form').click(function(e) {
+		e.preventDefault();
+		$('#threads .thread-form').slideToggle();
+	});
 });
 
 //Text Area Expander
