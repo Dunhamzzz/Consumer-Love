@@ -21,7 +21,6 @@
  */
 
 App::uses('Controller', 'Controller');
-
 /**
  * This is a placeholder class.
  * Create the same file in app/app_controller.php
@@ -68,7 +67,6 @@ class AppController extends Controller {
 		if(!empty($userData)) {
 			
 			$this->userData = $userData;
-			Configure::write('User', $userData);
 			
 			// Allow stuff if admin
 			if($this->Auth->user('is_admin')) {
@@ -106,10 +104,15 @@ class AppController extends Controller {
         if($this->request->is('ajax')) {
 			//Configure::write('debug', 0);
 		}
+		
+		// Get Latest Posts
+		$this->loadModel('Post');
+		$this->Post = new Post();
+		$this->set('latestPosts', $this->Post->getLatest());
 	}
 	
 	public function beforeRender() {
-		$this->set('pageWidgets', array());
+		//$this->set('pageWidgets', array());
 	}
 	
 	public function isAuthorized() {

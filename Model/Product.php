@@ -76,8 +76,8 @@ class Product extends AppModel {
 	
 	/**
 	 * For searching, returns minimum data for search results
-	 * @param unknown_type $term
-	 * @param unknown_type $limit
+	 * @param string $term
+	 * @param int $limit
 	 */
 	public function search($term, $limit = 10) {
 		return $this->find('all', array(
@@ -91,8 +91,11 @@ class Product extends AppModel {
 		));
 	}
 	
-	// Just returns a product row from a slug, so you can check it exists.
-	public function justGetProductBySlug($slug) {
+	/**
+	 * Returns a product row from a slug.
+	 * @param string $slug
+	 */
+	public function getBySlug($slug) {
 		return $this->find('first', array(
 			'conditions' => array(
 				'slug' => $slug

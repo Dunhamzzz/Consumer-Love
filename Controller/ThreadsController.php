@@ -18,7 +18,7 @@ class ThreadsController extends AppController {
 	}
 	
 	public function all($productSlug) {
-		$product = $this->Thread->Product->justGetProductBySlug($productSlug);
+		$product = $this->Thread->Product->getBySlug($productSlug);
 		// @todo use 2.0 paginator
 		$threads = $this->paginate('Thread', array('product_id' => $product['Product']['id']));
 		
@@ -58,13 +58,17 @@ class ThreadsController extends AppController {
 	
 	public function view($productSlug, $threadSlug = null) {
 		// Get product, it should always exist thanks to our route
-		$product = $this->Thread->Product->justGetProductBySlug($productSlug);
+		$product = $this->Thread->Product->getBySlug($productSlug);
 		
 		if(empty($product)) {
 			throw new NotFoundException(__('Invalid Product.'));
 		}
 		
-		$thread = $this->Thread->getForViewing($threadSlug);
+		$thread = $this->Thread->getBySlug($threadSlug, $product['Product']['id']);
+		
+		if(empty($thread)) {
+			throw new NotFoundException(__('Invalid Thread'));
+		}
 		
 		//@todo use 2.0 paginator
 		$posts = $this->paginate('Post', array('thread_id' => $thread['Thread']['id']));

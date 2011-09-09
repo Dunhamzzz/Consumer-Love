@@ -57,27 +57,22 @@ class Inventory extends AppModel {
 	 * @return 0 for off, 1 for on, -1 for error
 	 */
 	public function toggle($productId, $userId) {
-		// Check ProductID
-		$product = $this->Product->read('id', $productId);
-		if(!empty($product)) {
-			$check = $this->has($productId, $userId);
-			if(!empty($check)) {
-				// User already has an entry, so delete it.
-				$this->delete($check['Inventory']['id']);
-				$status = 0;
-			} else {
-				// Not found, add it.
-				$this->create();
-				$inventory = array(
-					'Inventory' => array(
-						'user_id' => $userId,
-						'product_id' => $productId
-					)
-				);
-				$status = (bool) $this->save($inventory);
-			}
+		$check = $this->has($productId, $userId);
+		
+		if(!empty($check)) {
+			// User already has an entry, so delete it.
+			$this->delete($check['Inventory']['id']);
+			$status = 0;
 		} else {
-			$status = -1;
+			// Not found, add it.
+			$this->create();
+			$inventory = array(
+				'Inventory' => array(
+					'user_id' => $userId,
+					'product_id' => $productId
+				)
+			);
+			$status = (bool) $this->save($inventory);
 		}
 		
 		return $status;

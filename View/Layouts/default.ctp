@@ -16,7 +16,7 @@
 <?php
 	echo $this->Html->meta('icon');
 	echo $this->Html->script(array(
-		'https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js',
+		'https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js',
 		'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
 		'global'
 	));

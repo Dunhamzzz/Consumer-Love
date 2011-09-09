@@ -1,0 +1,68 @@
+<?php
+/* Post Fixture generated on: 2011-09-06 22:35:33 : 1315348533 */
+
+/**
+ * PostFixture
+ *
+ */
+class PostFixture extends CakeTestFixture {
+/**
+ * Import
+ *
+ * @var array
+ */
+	public $import = array('model' => 'Post');
+
+
+/**
+ * Records
+ *
+ * @var array
+ */
+	public $records = array(
+		array(
+			'id' => 'post-1',
+			'thread_id' => 'thread-1',
+			'user_id' => 'user-1',
+			'user_ip' => '80.7.15.114',
+			'content' => 'Really can\'t!',
+			'published' => 1,
+			'published_date' => '0000-00-00 00:00:00',
+			'created' => '2011-09-05 20:55:03',
+			'modified' => '2011-09-05 20:55:03'
+		),
+		array(
+			'id' => 'post-2',
+			'thread_id' => 'thread-1',
+			'user_id' => 'user-2',
+			'user_ip' => '80.7.15.114',
+			'content' => 'Gimme an answer!',
+			'published' => 1,
+			'published_date' => '0000-00-00 00:00:00',
+			'created' => '2011-09-05 21:00:29',
+			'modified' => '2011-09-05 21:00:29'
+		),
+		array(
+			'id' => 'post-3',
+			'thread_id' => 'thread-2',
+			'user_id' => 'user-1',
+			'user_ip' => '80.7.15.114',
+			'content' => 'Alternatives? Don\'t be silly!',
+			'published' => 1,
+			'published_date' => '0000-00-00 00:00:00',
+			'created' => '2011-09-06 20:00:17',
+			'modified' => '2011-09-06 20:00:17'
+		),
+		array(
+			'id' => 'post-4',
+			'thread_id' => 'thread-1',
+			'user_id' => 'user-1',
+			'user_ip' => '80.7.15.114',
+			'content' => 'first 10 char',
+			'published' => 1,
+			'published_date' => '2011-09-06 22:30:03',
+			'created' => '2011-09-06 20:01:48',
+			'modified' => '2011-09-06 22:30:03'
+		),
+	);
+}

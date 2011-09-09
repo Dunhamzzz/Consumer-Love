@@ -3,7 +3,3 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ index.php/$1 [QSA,L]
 
-AuthType Basic
-AuthName "Consumer Lovin'"
-AuthUserFile /srv/share/.htpasswd
-Require valid-user

@@ -17,12 +17,7 @@ class ProductsController extends AppController {
 	}
 
 	public function view($slug = null) {
-		$product = $this->Product->find('first', array(
-			'conditions' => array(
-				'Product.slug' => $slug
-			),
-			'contain' => array('Category')
-		));
+		$product = $this->Product->getBySlug($slug);
 		
 		if(!$product) {
 			throw new NotFoundException(__('Invalid Product'));
@@ -50,6 +45,12 @@ class ProductsController extends AppController {
 	
 	// Shows users who own a certain product
 	public function users($slug = null) {
+		$product = $this->Product->getBySlug($slug);
+		
+		if(!$product) {
+			throw new NotFoundException(__('Invalid Product'));
+		}
+		
 		
 	}
 	

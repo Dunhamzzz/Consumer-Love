@@ -5,15 +5,11 @@ class InventoriesController extends AppController {
 		parent::beforeFilter();
 	}
 	
-	public function toggle($productId) {
+	public function toggle($productId = null) {
 		$status = $this->Inventory->toggle($productId, $this->userData['id']);
 		if(!$this->request->is('ajax')) {
-			if($status < 0) {
-				$this->Session->setFlash('An Error occured processing your request.');
-			}
 			$this->redirect($this->referer());
 		}
 		$this->set(compact('status'));
 	}
-	
 }

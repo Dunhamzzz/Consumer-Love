@@ -1,3 +1,4 @@
+<h3><?php echo $this->Love->productImage($product, 32); ?><?php echo $product['Product']['name']; ?></h3>
 <dl>
 	<dt><a title="Click to find out how we work out a products popularity on Consumer Love">Popularity</a></dt>
 	<dd><?php echo $product['Product']['inventory_count'];?></dd>

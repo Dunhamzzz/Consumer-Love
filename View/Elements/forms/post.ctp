@@ -1,7 +1,10 @@
-<?php echo $this->Form->create('Post', array('action' => 'reply/'.$thread['Thread']['id'], 'class' => 'thread-form')); ?>
-<?php echo $this->Form->input('thread_id', array('type' => 'hidden', 'value' => $thread['Thread']['id'])); ?>
-<?php echo $this->Form->input('content', array('label' => 'Post A Reply')); ?>
-<?php if(isset($requireCaptcha)) {
+<?php
+echo $this->Form->create('Post', array('action' => 'reply', 'class' => 'thread-form'));
+echo $this->Form->input('id');
+echo $this->Form->input('thread_id', array('type' => 'hidden', 'value' => $thread['Thread']['id']));
+echo $this->Form->input('content', array('label' => false));
+if(isset($requireCaptcha)) {
 	echo $this->element('forms/recaptcha');
-} ?>
-<?php echo $this->Form->end('Post Reply'); ?>
+}
+echo $this->Form->submit('Save', array('class' => 'cta save'));
+echo $this->Form->end();

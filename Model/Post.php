@@ -26,13 +26,17 @@ class Post extends AppModel {
 		)
 	);
 	
-	public function addFirstPost($threadId, $data) {
+	public $actsAs = array(
+	);
+	
+	public function addFirst($threadId, $data) {
 		
 		$post = array(
 			'thread_id' => $threadId,
 			'user_id' => $data['user_id'],
 			'user_ip' => $data['user_ip'],
-			'content' => $data['content']
+			'content' => $data['content'],
+			'published' => 1
 		);
 		
 		$this->create();
@@ -41,28 +45,43 @@ class Post extends AppModel {
 		return $this->id;
 	}
 	
-	public function addPost($data) {
+	public function savePost($data) {
 		$this->set($data);
 		
 		if($this->validates()) {
 			
-			$this->create();
-			$this->save($data, false, array('thread_id', 'user_id', 'user_ip', 'content'));
+			// If being created
+			if(empty($data['Post']['id'])) {
+				$data['Post']['published'] = 1;
+			}
 			
-			$postId = $this->id;
+			$this->save($data, false, array('thread_id', 'user_id', 'user_ip', 'content', 'published'));
 			
-			// Set latest post info in thread
-			$this->Thread->id = $data['Post']['thread_id'];
-			$this->Thread->set(array(
-				'last_post_id' => $postId,
-				'last_user_id' => $data['Post']['user_id']
-			));
-			$this->Thread->save();
+			if(empty($data['Post']['id'])) {
+				// Set latest post info in thread
+				$this->Thread->id = $data['Post']['thread_id'];
+				$this->Thread->set(array(
+					'last_post_id' => $this->id,
+					'last_user_id' => $data['Post']['user_id']
+				));
+				$this->Thread->save();
+			}
 			
-			return $postId;
+			return $this->id;
 			
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * Get latest posts globally
+	 * @param int $limit
+	 */
+	public function getLatest($limit = 5) {
+		return $this->find('all', array(
+			'conditions' => array('Post.published' => 1),
+			'order' => 'Post.created DESC'
+		));
 	}
 }

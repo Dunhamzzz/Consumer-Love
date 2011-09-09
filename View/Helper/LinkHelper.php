@@ -88,7 +88,7 @@ class LinkHelper extends AppHelper {
 	
 	// A button to a new thread
 	public function newThread($productId) {
-		return $this->Html->link('Say Something', array(
+		return $this->Html->link('New Thread', array(
 			'controller' => 'threads', 'action' =>'create', $productId
 		),
 		array(

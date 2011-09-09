@@ -9,5 +9,6 @@ if(!empty($product['Tweet'])) {
 }
 $this->set(compact('pageWidgets'));
 ?>
-<p>Start a a new discussion thread on <?php echo $product['Product']['name'];?>.</p>
+<h1><?php echo $product['Product']['name'];?> Forum/Create Thread</h1>
+<p>Ask a question or start a new discussion thread about <?php echo $product['Product']['name'];?>.</p>
 <?php echo $this->element('forms/thread'); ?>

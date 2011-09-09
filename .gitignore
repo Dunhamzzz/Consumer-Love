@@ -4,3 +4,4 @@ tmp/
 vendors/
 webroot/img/logos/
 webroot/phpinfo.php
+webroot/test.php

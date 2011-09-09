@@ -1,4 +1,3 @@
-<?php echo $this->element('forms/thread'); ?>
 <ul class="threads">
 	<?php foreach($threads as $thread): ?>
 	<li title="<?php echo $thread['Post'][0]['content']; ?>">

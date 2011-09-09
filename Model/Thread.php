@@ -17,13 +17,13 @@ class Thread extends AppModel {
 	
 	public $actsAs = array(
 	// @todo work out why this breaks a save
-	/*	'Utils.Sluggable' => array(
+		'Utils.Sluggable' => array(
 			'label' => 'title',
 			'method' => 'multibyteSlug',
 			'separator' => '-',
 			'slug' => 'slug',
 			'length' => 150
-		) */
+		)
 	);
 	
 	public function add($data) {
@@ -36,7 +36,7 @@ class Thread extends AppModel {
 			
 			$threadId = $this->id;
 			$userId = $data['Thread']['user_id'];
-			$postId = $this->Post->addFirstPost($threadId, $data['Thread']);
+			$postId = $this->Post->addFirst($threadId, $data['Thread']);
 			
 			// Now update last post IDs etc
 			$this->set(array(
@@ -54,18 +54,17 @@ class Thread extends AppModel {
 		}
 	}
 	
-	public function getSlugsById($threadId) {
+	// Optionally accpets product ID to speed the find
+	public function getBySlug($slug, $productId = null) {
+		
+		$conditions = array('Thread.slug' => $slug);
+		
+		if(!is_null($productId)) {
+			$conditions['Thread.product_id'] = $productId;
+		}
+		
 		return $this->find('first', array(
-			'conditions' => array('Thread.id' => $threadId),
-			'fields' => array('Thread.title', 'Thread.slug', 'Product.slug')
-		));
-	}
-	
-	public function getForViewing($slug) {
-		return $this->find('first', array(
-			'conditions' => array(
-				'Thread.slug' => $slug
-			),
+			'conditions' => $conditions,
 			'contain' => array(
 				'Product', 'User', 'FirstPost'
 			)

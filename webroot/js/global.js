@@ -3,7 +3,7 @@ if (top.location!= self.location) {
 }
 
 $(function() {
-	
+		
 	$('#product-tabs').tabs();
 	
 	// Placeholders
@@ -223,9 +223,17 @@ $(function() {
 	// Product View Thread Form
 	$('#threads .thread-form').hide();
 	$('.show-thread-form').click(function(e) {
-		e.preventDefault();
-		$('#threads .thread-form').slideToggle();
+		if($('#threads .thread-form').length) {
+			e.preventDefault();
+			$('#threads .thread-form').slideToggle();
+		}
 	});
+	
+	$('.edit-post').click(function(e){
+		$('li#post-'+ $(this).data('id') + ' .post-content').load($(this).attr('href') + ' #PostReplyForm');
+		e.preventDefault();
+	});
+	
 });
 
 //Text Area Expander
