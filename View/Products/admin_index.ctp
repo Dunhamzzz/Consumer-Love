@@ -1,11 +1,14 @@
 <p>Here is a list of all the products/brands currently listed on Consumer Love.</p>
 <?php echo $this->element('pagination/basic'); ?>
 <table class="admin-table" cellpadding="0" cellspacing="0">
+<thead>
 <tr>
 		<th><?php echo $this->Paginator->sort('name');?></th>
 		<th>Categories</th>
 		<th><?php echo $this->Paginator->sort('description');?></th>
 </tr>
+</thead>
+<tbody>
 <?php foreach ($products as $product): ?>
 <tr>
 	<td class="title">
@@ -19,6 +22,7 @@
 	<td><?php echo $this->Text->truncate($product['Product']['description'], 40); ?></td>
 </tr>
 <?php endforeach; ?>
+</tbody>
 </table>
 <?php echo $this->element('pagination/basic'); ?>
 <p><?php

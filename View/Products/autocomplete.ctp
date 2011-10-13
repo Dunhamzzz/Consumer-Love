@@ -1,6 +1,7 @@
 <?php $escapedTerm = $this->Html->tag('strong', $term, array('escape' => true));?>
+<div class="speech-arrow"></div>
 <?php if(!empty($products)): ?>
-	<p><strong>Products</strong></p>
+	<p><strong>Matching Products</strong></p>
 	<ul class="suggestions">
 	<?php foreach($products as $product): ?>
 		<li><?php echo $this->Link->product($product, $this->Love->productImage($product).$product['Product']['name'], array('escape' => false));?></li>
@@ -8,7 +9,7 @@
 	</ul>
 <?php endif; ?>
 <?php if(!empty($categories)): ?>
-	<p><strong>Categories</strong></p>
+	<p><strong>Matching Categories</strong></p>
 	<ul class="suggestions basic">
 	<?php foreach($categories as $category): ?>
 		<li><?php echo $this->Love->categoryLink($category);?></li>

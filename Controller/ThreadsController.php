@@ -77,4 +77,11 @@ class ThreadsController extends AppController {
 		$this->set(compact('product', 'thread', 'posts'));
 	}
 	
+	/* Admin Actions */
+	public function admin_delete($id) {
+		if (!$this->request->is('post')) {
+			throw new MethodNotAllowedException();
+		}
+	}
+	
 }

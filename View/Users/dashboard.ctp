@@ -1,5 +1,14 @@
 <?php
-$pageWidgets = array('inventory' => array('inventory' => $latestInventory), 'top5');
+$pageWidgets = array();
+
+if(isset($latestInventory)) {
+	$pageWidgets['inventory'] = array('inventory' => $latestInventory);
+} else {
+	$pageWidgets['inventory_empty'] = array();
+}
+
+$pageWidgets['top5'] = array();
+
 $this->set(compact('pageWidgets'));
 ?>
 <h2>Your Activity Feed</h2>

@@ -1,0 +1,2 @@
+<h3>Your Inventory</h3>
+<p>Your inventory is empty! Get the most out of Consumer Love by adding products you find around the site. Try browsing our <a href="/categories">categories</a> or full product list.</p>

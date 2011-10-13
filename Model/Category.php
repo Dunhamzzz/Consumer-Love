@@ -25,9 +25,12 @@ class Category extends AppModel {
 	public $hasAndBelongsToMany = array('Product' => array('counterCache' => true));
 	
 	public function search($term, $limit = 10) {
+		// Prevent wildcard searches
+		$term = str_replace('%', ' ', $term);
+		
 		return $this->find('all', array(
 				'conditions' => array(
-					'Category.name LIKE' => '%'.$term.'%'
+					'Category.name LIKE ?' => '%'.$term.'%'
 				),
 				'fields' => array('name', 'id', 'slug'),
 				'limit' => $limit,

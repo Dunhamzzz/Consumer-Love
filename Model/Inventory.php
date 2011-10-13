@@ -14,9 +14,32 @@ class Inventory extends AppModel {
 	);
 	
 	/**
+	 * Removes a product from a users inventory
+	 * @param string $productId
+	 * @param string $userId
+	 */
+	public function remove($productId, $userId) {
+		return $this->deleteAll(array(
+			'product_id' => $productId,
+			'user_id' => $userId
+		));
+	}
+	
+	public function add($productId, $userId) {
+		$this->create();
+		$inventory = array(
+			'Inventory' => array(
+				'user_id' => $userId,
+				'product_id' => $productId
+			)
+		);
+		return $this->save($inventory);
+	}
+	
+	/**
 	 * Returns an id => data array of products in a users' inventory
 	 */
-	public function getInventory($userId, $limit = null) {
+	public function get($userId, $limit = null) {
 		$query = array(
 			'conditions' => array(
         		'Inventory.user_id' => $userId,
@@ -47,34 +70,62 @@ class Inventory extends AppModel {
 			'conditions' => array(
 				'user_id' => $userId,
 				'product_id' => $productId
-			),
-			'limit' => 1
+			)
 		));
 	}
 	
 	/**
 	 * Toggles an item in a users inventory
-	 * @return 0 for off, 1 for on, -1 for error
+	 * @return bool
 	 */
 	public function toggle($productId, $userId) {
 		$check = $this->has($productId, $userId);
 		
-		if(!empty($check)) {
-			// User already has an entry, so delete it.
-			$this->delete($check['Inventory']['id']);
-			$status = 0;
-		} else {
-			// Not found, add it.
-			$this->create();
-			$inventory = array(
-				'Inventory' => array(
-					'user_id' => $userId,
-					'product_id' => $productId
-				)
-			);
-			$status = (bool) $this->save($inventory);
+		if(empty($check)) {
+			return $this->add($productId, $userId);
 		}
 		
-		return $status;
+		// User already has an entry, so delete it.
+		$this->remove($productId, $userId);
+		return false;
+	}
+	
+	/**
+	 * Scores an owned product up or down
+	 * @param $inventory Inventory row.
+	 * @param $score string 'up' or 'down'.
+	 */
+	public function score($inventory, $score) {
+		
+		if($score == 'up') {
+			$score = 1;
+		} elseif($score == 'down') {
+			$score = -1; // Can't seem to save -1 as an int with Cake
+		} else {
+			throw new Exception('Invalid vote received.');
+		}
+		
+		$inventory['Inventory']['score'] = $score;
+		$inventory['Inventory']['score_date'] = date('Y-m-d');
+		
+		if(!$this->save($inventory['Inventory'], false, array('score', 'score_date'))) {
+			throw new DomainException('An internal error occured.');
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Returns all the users who have a product
+	 * @param string $productId
+	 * @return array
+	 */
+	public function haveProduct($productId) {
+		return $this->find('all', array(
+			'conditions' => array(
+				'product_id' => $productId
+			),
+			'contain' => array('User')
+		));
 	}
 }

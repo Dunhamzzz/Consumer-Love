@@ -42,12 +42,14 @@ class AppController extends Controller {
 					'authError' => 'You need to be logged in to access this location.',
 					'loginError' => 'Invalid login details',
 				)
-			)
+			),
+			'loginAction' => array('controller' => 'users', 'action' => 'login', 'admin' => false)
 		),
 		'RequestHandler',
-		'DebugKit.Toolbar',
+	//	'DebugKit.Toolbar',
 		'Cookie',
 		'Session',
+	//	'Security' // This breaks post edit form and is not so good for ajax.
 	);
 	
 	public $helpers = array(
@@ -94,9 +96,9 @@ class AppController extends Controller {
 					$userData['password']
 				);
 				
-				// Log them in!
+				// Log them in and refresh page
 				if(!empty($userData) && $this->Auth->login($userData['User'])) {
-					$this->redirect($this->Auth->redirect());
+					$this->redirect($this->request->here);
 				}
 			}
 		}

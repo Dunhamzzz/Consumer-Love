@@ -28,3 +28,6 @@ $this->Html->addCrumb('Forum', array('action' => 'all', 'productSlug' => $thread
 </div>
 <h2>Post a Reply</h2>
 <?php echo $this->element('forms/post'); ?>
+<?php if($userData['admin']): ?>
+<h2>Admin Controls</h2>
+<?php endif; ?>

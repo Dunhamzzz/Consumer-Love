@@ -9,13 +9,13 @@
 	</div>
 	<div class="post-content">
 		<p><?php echo nl2br($post['Post']['content']); ?></p>
-		<?php if(isset($userData) && $userData['id'] == $post['Author']['id'] || (isset($isAdmin) && $isAdmin == true)): ?>
-		<p>
-			<?php echo $this->Html->link('Edit',
-				array('controller' => 'posts', 'action' => 'edit', $post['Post']['id']),
-				array('class' => 'edit-post',' title' => 'edit', 'data-id' => $post['Post']['id'])
-			); ?>
-		<?php endif; ?>
-		</p>
 	</div>
+	<?php if(isset($userData) && $userData['id'] == $post['Author']['id'] || (isset($isAdmin) && $isAdmin == true)): ?>
+	<div class="post-options">
+		<?php echo $this->Html->link('Edit',
+			array('controller' => 'posts', 'action' => 'edit', $post['Post']['id']),
+			array('class' => 'edit-post',' title' => 'edit', 'data-id' => $post['Post']['id'])
+		); ?>
+	</div>
+	<?php endif; ?>
 </li>

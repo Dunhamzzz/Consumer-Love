@@ -14,6 +14,23 @@ class LinkHelper extends AppHelper {
 		);
 	}
 	
+	// Returns a link to a new item
+	public function news($news, $anchorText = false, $htmlAttrs = array()) {
+		$news = $this->extractRow('News', $news);
+		
+		$anchorText = $anchorText ?: $news['title'];
+		
+		return $this->Html->link(
+			$anchorText,
+			array(
+				'controller' => 'news',
+				'action' => 'view',
+				'admin' => false,
+				'newsSlug' => $news['slug']
+			)
+		);
+	}
+	
 	// Returns a link to a product
 	public function product($product, $anchorText = false, $htmlAttrs = array()) {
 		$product = $this->extractRow('Product', $product);

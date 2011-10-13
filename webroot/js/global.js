@@ -3,7 +3,27 @@ if (top.location!= self.location) {
 }
 
 $(function() {
-		
+	// This hides popped-up stuff, use with 
+	$(document.body).click(function() {
+	    $('.hide-on-body-click').hide();
+	    $('.nav-triangle').removeClass('on');
+	});
+
+	
+	// User options dropdown
+	$('.nav-triangle').click(function(e) {
+		$('#user-options').toggle();
+		$(this).toggleClass('on');
+		e.stopPropagation();
+	});
+	
+	$('#user-options').click(function(e){
+		e.stopPropagation();
+	});
+	
+	
+	
+	// Product Page Tabs	
 	$('#product-tabs').tabs();
 	
 	// Placeholders
@@ -46,19 +66,6 @@ $(function() {
 		});
 	}
 	
-	// Notifications
-	var $flashHolder = $('#flashses .message');
-	if($flashHolder.length) {
-		var $flash = $('<div class="flash">'+ $flashHolder.text()+'<span id="flash-dismiss">Dismiss</span></div>');
-		$('body').prepend($($flash).hide().slideDown());
-		$('#user-bar').css('margin-top', 30); //11 for padding + border;
-		
-		$('#flash-dismiss').click(function() {
-			$flash.slideUp();
-			$('#user-bar').css('margin-top', 0);
-		});
-	}
-	
 	// Toggle Inventory
 	$('.toggle-inventory').click(function(e) {
 		e.preventDefault();
@@ -70,14 +77,25 @@ $(function() {
 				if(response < 0) {
 					alert('Something went wrong while processing your request.');
 				} else {
+					var total = $('.num-products').text() * 1;
 					if(response == '0') {
 						$(this).removeClass('in');
+						$('.num-products').text(total - 1);
 					} else {
 						$(this).addClass('in');
+						$('.num-products').text(total + 1);
 					}
 				}
 			}
 		});
+	});
+	
+	$('#product .toggle-inventory').hover(function() {
+		if($(this).hasClass('in')) {
+			$('.toggle-text', this).text('Remove?');
+		}
+	},function() {
+		$('.toggle-text', this).text('Inventory');
 	});
 	
 	// Homepage
@@ -104,13 +122,13 @@ $(function() {
 						dataType: 'html',
 						success: function(data) {
 							$('#suggest').removeClass('loading');
-							$suggestLanding.html(data).slideDown();
+							$suggestLanding.html(data).fadeIn();
 						}
 					});
 				}, 200);
 
 			} else {
-				$suggestLanding.slideUp('fast').empty();
+				$suggestLanding.fadeOut('fast').empty();
 			}
 		}
 		
@@ -122,18 +140,18 @@ $(function() {
 		}
 		
 		if($(this).val().length) {
-			$suggestLanding.slideDown('fast');
+			$suggestLanding.fadeIn('fast');
 		}
 	})
 	
 	.blur(function() {
 		if(this.value.length) {
 			if(landingPersist == false) {
-				$suggestLanding.slideUp('fast');
+				$suggestLanding.fadeOut('fast');
 			}
 		} else {
 			$(this).val('Search for a product or brand').addClass('idle');
-			$suggestLanding.slideUp('fast');
+			$suggestLanding.fadeOut('fast');
 		}
 	})
 	

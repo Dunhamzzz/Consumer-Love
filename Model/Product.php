@@ -80,14 +80,36 @@ class Product extends AppModel {
 	 * @param int $limit
 	 */
 	public function search($term, $limit = 10) {
+		// Prevent wildcard searches
+		$term = str_replace('%', ' ', $term);
+		
 		return $this->find('all', array(
 			'conditions' => array(
-				'Product.name LIKE' => '%'.$term.'%',
+				'Product.name LIKE ?' => '%'.$term.'%',
 			),
 			'fields' => array('name', 'logo', 'id', 'slug', 'inventory_count'),
 			'limit' => $limit,
 			'order' => 'Product.name',
 			'contain' => false
+		));
+	}
+	
+	/**
+	 * Returns an array of related products. For now just grabs from the same categories.
+	 * @param string $productId
+	 */
+	public function related($productId, $limit = 10) {
+		return 1;
+		return $this->find('all', array(
+			'joins' => array(
+				'table' => 'categories_products',
+				'alias' => 'CategoriesProducts',
+				'type' => 'left',
+				'conditions' => array(
+					'CategoriesProducts.product_id => '
+				)
+			),
+			'limit' => $limit
 		));
 	}
 	
@@ -102,6 +124,19 @@ class Product extends AppModel {
 			),
 			'contain' => array('Category')
 		));
+	}
+	
+	// Same as above, but from ID
+	public function getById($id) {
+		return $this->find('first', array(
+			'conditions' => array(
+				'id' => $id
+			),
+			'contain' => array('Category')
+		));
+	}
+	
+	public function getInfoForMeta($conditions) {
 	}
 	
 	public function topByCategoryId($categoryId, $count = 5) {

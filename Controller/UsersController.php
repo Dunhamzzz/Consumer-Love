@@ -18,8 +18,10 @@ class UsersController extends AppController {
 		$title_for_layout = 'Consumer Love';
 		
 		if($this->Auth->user()) {
-			$inventory = $this->User->Inventory->getInventory($this->userData['id']);
-			$this->set('latestInventory', array_slice($inventory, 0, 12));
+			$inventory = $this->User->Inventory->get($this->userData['id']);
+			if(!empty($inventory)) {
+				$this->set('latestInventory', array_slice($inventory, 0, 15));
+			}
 			
 			if(!empty($inventory)) {
 				$Feed = ClassRegistry::init('Feed');
@@ -123,7 +125,7 @@ class UsersController extends AppController {
 			$this->cakeError('error404');
 		}
 		
-		$inventory = $this->User->Inventory->getInventory($user['User']['id'], 10);
+		$inventory = $this->User->Inventory->get($user['User']['id'], 10);
 		
 		$title_for_layout = $user['User']['username'];
 		$this->set(compact('title_for_layout', 'user'));
@@ -133,11 +135,11 @@ class UsersController extends AppController {
 		$user = $this->User->getBySlug($userSlug);
 		
 		if(empty($user)) {
-			$this->cakeError('error404');
+			throw new NotFoundException();
 		}
 		
 		if($user['User']['private_inventory'] != 1) {
-			$products = $this->paginate($this->User->Inventory, array('Inventory.user_id' => $user['User']['id']));//$this->User->Inventory->getInventory($user['User']['id'], 10);
+			$products = $this->paginate($this->User->Inventory, array('Inventory.user_id' => $user['User']['id']));//$this->User->Inventory->get($user['User']['id'], 10);
 		} else {
 			$this->set('privateInventory', true);
 		}

@@ -60,6 +60,7 @@ Router::connect('/:productSlug/forum/:threadSlug',
 	)
 );
 
+// Forum Route
 Router::connect('/:productSlug/forum',
 	array('controller' => 'threads', 'action' => 'all', 'plugin' => false),
 	array(
@@ -68,6 +69,24 @@ Router::connect('/:productSlug/forum',
 	)
 );
 
+// News
+Router::connect('/news/:newsSlug',
+	array('controller' => 'news', 'action' => 'view', 'plugin' => false),
+	array(
+		'pass' => array('newsSlug')
+	)
+);
+
+// Owners /inInventory Route
+Router::connect('/:productSlug/users',
+	array('controller' => 'products', 'action' => 'users', 'plugin' => false),
+	array(
+		'routeClass' => 'ProductRoute',
+		'pass' => array('productSlug')
+	)
+);
+
+// Product Main Slug
 Router::connect('/:productSlug',
 	array('controller' => 'products', 'action' => 'view', 'plugin' => false),
 	array(

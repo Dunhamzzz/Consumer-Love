@@ -9,7 +9,7 @@ class LoveHelper extends AppHelper {
 	
 	public function inventoryButton($productId, $inInventory = false) {
 		return $this->Html->link(
-			'<span class="icon"></span> Inventory',
+			'<span class="icon"></span> <span class="toggle-text">Inventory</span>',
 			array('controller' => 'inventories', 'action' => 'toggle', $productId),
 			array('class' => 'toggle-inventory cta'. ($inInventory ? ' in' : ''), 'escape' => false)
 		);
@@ -39,13 +39,12 @@ class LoveHelper extends AppHelper {
 		if($url) {
 			return '/img/logos/products/thumb/'.$size.'x'.$size.'/'.$product['logo'];
 		} else {
-			return '<span class="product-logo s'.$size.'">'.$this->Html->image(
-				'logos/products/thumb/'.$size.'x'.$size.'/'.$product['logo'],
-				array(
-					'alt' => $product['name'],
-					'title' => $product['name']
-				)
-			).'</span>';
+			return
+			'<span
+				class="product-logo s' . $size . '"
+				style="background-image: url(/img/logos/products/thumb/' . $size . 'x' . $size . '/' . $product['logo'] . ')"
+				title="' . $product['name'] . '">
+			</span>';
 		}
 	}
 		
