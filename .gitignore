@@ -5,3 +5,4 @@ vendors/
 webroot/img/logos/
 webroot/phpinfo.php
 webroot/test.php
+webroot/index.php

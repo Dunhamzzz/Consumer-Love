@@ -51,7 +51,7 @@ ini_set('display_errors', 'on');
  *
  */
 	if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-		define('CAKE_CORE_INCLUDE_PATH', '/srv/share/cakephp/2.0/lib');
+		define('CAKE_CORE_INCLUDE_PATH', '/Users/Dunham/Sites/share/cakephp/lib');
 	}
 
 /**
