@@ -46,7 +46,7 @@ class AppController extends Controller {
 			'loginAction' => array('controller' => 'users', 'action' => 'login', 'admin' => false)
 		),
 		'RequestHandler',
-	//	'DebugKit.Toolbar',
+		'DebugKit.Toolbar',
 		'Cookie',
 		'Session',
 	//	'Security' // This breaks post edit form and is not so good for ajax.
