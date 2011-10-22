@@ -15,7 +15,7 @@ $this->Html->addCrumb($product['Product']['name']);
 <div id="product" class="product-section">
 <?php echo $this->Love->productImage($product, 128); ?>
 	<?php if(isset($userData)): ?>
-		<?php echo $this->Love->inventoryButton($product['Product']['id'], $inventory); ?>
+		<?php echo $this->Love->inventoryButton($product['Product']['id'], $inInventory); ?>
 	<?php endif; ?>
 	<h1><?php echo $product['Product']['name']; ?></h1>
 	<div id="product-description">

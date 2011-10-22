@@ -21,7 +21,7 @@ class News extends AppModel {
 			'rule' => array('minLength', '10'),
 			'message' => 'The title must be at least 10 characters long.'
 		),
-		'content' => array(
+		'content_raw' => array(
 			'required' => true,
 			'allowEmpty' => false,
 			'rule' => array('minLength', '10'),
@@ -59,6 +59,10 @@ class News extends AppModel {
 	 */
 	public function add($newsData) {
 		$this->create();
+		
+		// @todo add formatting
+		$newsData['News']['content_formatted'] = $newsData['News']['content_raw'];
+		
 		$this->save($newsData);
 		
 		return $this->read();
