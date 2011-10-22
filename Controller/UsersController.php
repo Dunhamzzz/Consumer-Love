@@ -1,7 +1,7 @@
 <?php
 class UsersController extends AppController {
 	
-	public $uses = array('User', 'Product');
+	public $uses = array( 'Product');
 	
 	public $paginate = array(
 		'Inventory' => array(
@@ -18,14 +18,11 @@ class UsersController extends AppController {
 		$title_for_layout = 'Consumer Love';
 		
 		if($this->Auth->user()) {
-			$inventory = $this->User->Inventory->get($this->userData['id']);
-			if(!empty($inventory)) {
-				$this->set('latestInventory', array_slice($inventory, 0, 15));
-			}
+			if(!empty($this->userInventory)) {
+				$this->set('latestInventory', array_slice($this->userInventory, 0, 15));
 			
-			if(!empty($inventory)) {
 				$Feed = ClassRegistry::init('Feed');
-				$feeds = $Feed->getFeed(array_keys($inventory));
+				$feeds = $Feed->getFeed(array_keys($this->userInventory));
 			}
 			$this->set(compact('title_for_layout', 'feeds'));
 			

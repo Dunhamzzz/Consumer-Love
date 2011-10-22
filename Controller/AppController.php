@@ -64,8 +64,10 @@ class AppController extends Controller {
 		'Link'
 	);
 	
+	public $userInventory, $userData;
+	
 	public function beforeFilter() {
-		$userData = $this->Auth->user();
+		$userData = AuthComponent::user();
 		if(!empty($userData)) {
 			
 			$this->userData = $userData;
@@ -75,11 +77,16 @@ class AppController extends Controller {
         		$this->Auth->allow('*');
         	}
         	
-        	// Loader User model
+        	// Load User model
         	$this->loadModel($this->Auth->authenticate['Form']['userModel'], $userData['id']);
         	
         	// Update Last Activity
         	$this->User->updateLastActivity();
+
+			// Grab users Inventory
+			$this->loadModel('Inventory');
+			$this->userInventory = $this->Inventory->get(AuthComponent::user('id'));
+			$this->set('inventory', $this->userInventory);
         	
         	// Set view vars.
         	$this->set(compact('userData'));

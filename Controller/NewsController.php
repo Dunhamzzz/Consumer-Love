@@ -21,12 +21,6 @@ class NewsController extends AppController {
 		// Get product
 		$product = $this->News->Product->getById($news['News']['product_id']);
 		
-		// Is this in the users inventory?
-		// @todo put this in appcontroller?
-		if(AuthComponent::user()) {
-			$this->set('inventory', $this->News->Product->Inventory->has($product['Product']['id'], AuthComponent::user('id')));
-		}
-		
 		$title_for_layout = $news['News']['title'];
 		$this->set(compact('title_for_layout', 'news', 'product'));
 	}

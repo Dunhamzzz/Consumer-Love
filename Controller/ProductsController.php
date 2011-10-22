@@ -40,11 +40,11 @@ class ProductsController extends AppController {
 		
 		// Is this in the users inventory?
 		if($this->userData) {
-			$inventory = $this->Product->Inventory->has($product['Product']['id'], AuthComponent::user('id'));
-			if(!empty($inventory)) {
-				$this->request->data = $inventory;
+			$inInventory = $this->Product->Inventory->has($product['Product']['id'], AuthComponent::user('id'));
+			if(!empty($inInventory)) {
+				$this->request->data = $inInventory;
 			}
-			$this->set(compact('inventory'));
+			$this->set(compact('inInventory'));
 		}
 		
 		// Related Products
