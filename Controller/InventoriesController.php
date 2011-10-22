@@ -53,7 +53,7 @@ class InventoriesController extends AppController {
 		if(!$this->request->is('ajax')) {
 			throw new MethodNotAllowedException();
 		}
-		$this->Inventory->remove($productId, AuthComponent::user('id'));
+		$this->set('status', $this->Inventory->remove($productId, AuthComponent::user('id')));
 	}
 	
 	public function toggle($productId) {

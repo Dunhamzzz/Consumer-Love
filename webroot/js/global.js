@@ -8,7 +8,6 @@ $(function() {
 	    $('.hide-on-body-click').hide();
 	    $('.nav-triangle').removeClass('on');
 	});
-
 	
 	// User options dropdown
 	$('.nav-triangle').click(function(e) {
@@ -20,8 +19,6 @@ $(function() {
 	$('#user-options').click(function(e){
 		e.stopPropagation();
 	});
-	
-	
 	
 	// Product Page Tabs	
 	$('#product-tabs').tabs();
@@ -96,6 +93,23 @@ $(function() {
 		}
 	},function() {
 		$('.toggle-text', this).text('Inventory');
+	});
+	
+	// Inventory page remove
+	$('.inventory-options .remove').click(function(e) {
+		e.preventDefault();
+		$.ajax({
+			url: $(this).attr('href'),
+			dataType: 'text',
+			context: $(this),
+			success: function(response) {
+				if(response < 0) {
+					alert('Something went wrong while processing your request.');
+				} else {
+					$(this).closest('.product').fadeOut();
+				}
+			}
+		});
 	});
 	
 	// Homepage
