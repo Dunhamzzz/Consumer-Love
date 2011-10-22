@@ -1,0 +1,6 @@
+[submodule "Plugin/Upload"]
+	path = Plugin/Upload
+	url = git://github.com/josegonzalez/upload.git
+[submodule "Plugin/Utils"]
+	path = Plugin/Utils
+	url = https://github.com/CakeDC/utils.git
