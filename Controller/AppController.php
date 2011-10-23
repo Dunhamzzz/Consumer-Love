@@ -67,6 +67,10 @@ class AppController extends Controller {
 	public $userInventory, $userData;
 	
 	public function beforeFilter() {
+		
+		// Every page needs products model
+		$this->loadModel('Product');
+		
 		$userData = AuthComponent::user();
 		if(!empty($userData)) {
 			

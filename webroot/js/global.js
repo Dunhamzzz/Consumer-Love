@@ -226,6 +226,7 @@ $(function() {
 			if (e.keyCode > 40 || e.keyCode == 8) { //If a letter or backspace
 				if(this.value.length >= 2) {
 					$(this).addClass('loading');
+					$(this).removeClass('valid').removeClass('invalid');
 					clearTimeout(usernameTimer);
 					var query = this.value;
 					usernameTimer = setTimeout( function() {
@@ -237,7 +238,7 @@ $(function() {
 							context: $('.signup-username'),
 							success: function(taken) {
 								$(this).removeClass('loading');
-								if(taken == 0) {
+								if(taken == 1) {
 									$(this).addClass('valid').removeClass('invalid');
 								} else {
 									$(this).removeClass('valid').addClass('invalid');

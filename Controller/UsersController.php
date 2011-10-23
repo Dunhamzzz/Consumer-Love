@@ -1,8 +1,6 @@
 <?php
 class UsersController extends AppController {
 	
-	public $uses = array( 'Product');
-	
 	public $paginate = array(
 		'Inventory' => array(
 			'order' => 'Product.name'
@@ -155,10 +153,10 @@ class UsersController extends AppController {
 	
 	/* Ajax Actions */
 	public function checkUsername() {
-		if($this->isApiCall()) {
+		if($this->request->is('ajax')) {
 			$this->set('status', $this->User->checkUsernameAvailability($this->params['url']['username']));
 		} else {
-			$this->cakeError('error404');
+			throw new MethodNotAllowedException();
 		}
 	}
 	

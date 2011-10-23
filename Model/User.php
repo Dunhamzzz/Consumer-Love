@@ -3,8 +3,10 @@ class User extends AppModel {
 	public $displayField = 'username';
 	
 	public $hasMany = array(
-		'Comment',
-		'Inventory'
+		'Inventory',
+		'Thread',
+		'Post',
+		'Product'
 	);
 	
 	public $actsAs = array(
@@ -163,7 +165,11 @@ class User extends AppModel {
 	
 	// Returns 0/1 depending on username availability
 	public function checkUsernameAvailability($username) {
-		return (bool) $this->find('count', array('conditions' => array('username' => $username)));
+		// Check if it validates
+		$data = array('User' => array('username' => $username));
+		
+		$this->set($data);
+		return $this->validates(array('fieldList' => array('username')));
 	}
 	
 	public static function get($field = null) {

@@ -159,7 +159,7 @@ input, textarea {
 }
 
 input.loading {
-	background: #fff url('/img/icons/ajax-loader.gif') 99% center no-repeat;
+	background: #fff url('/img/icons/ajax-loader.gif') 98% center no-repeat;
 }
 
 .placeholder {
@@ -716,6 +716,14 @@ footer p {
 	
 }
 
+.signup-username.invalid {
+	background: #fff url(/img/icons/delete.png) no-repeat 180px center;
+}
+
+.signup-username.valid {
+	background: #fff url(/img/icons/tick.png) no-repeat 180px center;
+}
+
 .frontpage .signup-password {
 	float: right;
 }
@@ -777,13 +785,14 @@ footer p {
 }
 
 /** CTA **/
-.cta {
+.cta, input[type='submit'] {
 	border-radius: 4px;
 	display: inline-block;
 	padding: 6px 12px;
 	font-size: 16px;
 	color: #fff;
 	font-weight: normal;
+	cursor: pointer;
 	
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3); #000 1px 1px 1px;
 	
