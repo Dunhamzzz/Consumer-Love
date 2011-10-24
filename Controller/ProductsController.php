@@ -125,7 +125,7 @@ class ProductsController extends AppController {
 			$this->set('pageAction', 'edit');
 		} else {
 			// Saving a product
-			if(!empty($this->request->data)) { //Saving
+			if($this->request->is('postpublished')) { //Saving
 				if($this->Product->save($this->request->data)) {
 					if($id) {
 						$this->Session->setFlash('Changes made to '.$this->request->data['Product']['name'].' have been saved.');

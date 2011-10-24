@@ -1,6 +1,5 @@
-<?php echo $this->Form->create('Product',array('type' => 'file', 'action' => 'edit', 'class' => 'admin-form'));?>
-	<fieldset>
- 		<legend><?php echo ucfirst($pageAction);?> <?php echo $this->data['Product']['name'] ?: 'Product'; ?></legend>
+<h1><?php echo ucfirst($pageAction);?> <?php echo isset($this->data['Product']['name']) ? $this->data['Product']['name'] : 'Product'; ?></h1>
+<?php echo $this->Form->create('Product',array('type' => 'file', 'action' => 'edit', 'class' => 'admin-form writing'));?>
 	<?php
 		echo $this->Form->input('Category');
 		echo $this->Form->input('name');
@@ -10,7 +9,6 @@
 		echo $this->Form->input('twitter');
 		echo $this->Form->input('feed');
 	?>
-	</fieldset>
 <?php echo $this->Form->end('Save');?>
 <div class="admin-help">
 <?php if($pageAction == 'edit' && !empty($this->data['Product']['logo'])) {

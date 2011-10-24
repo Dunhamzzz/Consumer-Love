@@ -3,5 +3,5 @@
 <?php echo $this->Form->create('News', array('class' => 'writing'));?>
 	<?php echo $this->Form->input('product_id', array('type' => 'hidden')); ?>
 	<?php echo $this->Form->input('title', array('label' => __('Headline'))); ?>
-	<?php echo $this->Form->input('content_raw', array('label' => 'News')); ?>
+	<?php echo $this->Form->input('content_raw', array('label' => __('News'))); ?>
 <?php echo $this->Form->end('Submit'); ?>

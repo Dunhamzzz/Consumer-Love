@@ -37,12 +37,12 @@ class LoveHelper extends AppHelper {
 		$product = $this->extractProduct($product);
 		
 		if($url) {
-			return '/img/logos/products/thumb/'.$size.'x'.$size.'/'.$product['logo'];
+			return '/files/product/logo/'.$product['id'].'/'.$size.'x'.$size.'_'.$product['logo'];
 		} else {
 			return
 			'<span
 				class="product-logo s' . $size . '"
-				style="background-image: url(/img/logos/products/thumb/' . $size . 'x' . $size . '/' . $product['logo'] . ')"
+				style="background-image: url(/files/product/logo/'.$product['id'].'/'.$size.'x'.$size.'_'.$product['logo'] . ')"
 				title="' . $product['name'] . '">
 			</span>';
 		}

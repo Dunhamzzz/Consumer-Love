@@ -142,7 +142,7 @@ $(function() {
 				}, 200);
 
 			} else {
-				$suggestLanding.fadeOut('fast').empty();
+				$suggestLanding.fadeOut('fast');
 			}
 		}
 		

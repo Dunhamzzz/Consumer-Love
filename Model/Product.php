@@ -36,6 +36,18 @@ class Product extends AppModel {
 	public $hasMany = array('Inventory', 'Feed', 'Thread', 'News');
 	
 	public $actsAs = array(
+		'Upload.Upload' => array(
+			'logo' => array(
+				'thumbnailQuality' => 100,
+				'thumbsizes' => array(
+					'128x128' => '[128x128]',
+					'64x64' => '[64x64]',
+					'32x32' => '[32x32]'
+				),
+				'thumbnailMethod' => 'php',
+				'extensions' => array('.jpg', '.jpeg', '.png')
+			)
+		),
 	 /*   'MeioUpload' => array(
 			'logo' => array(
 				'dir' => 'img{DS}logos{DS}products',

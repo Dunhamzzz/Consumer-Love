@@ -2,7 +2,7 @@ Config/
 logs/
 tmp/
 vendors/
-webroot/img/logos/
+webroot/files/
 webroot/phpinfo.php
 webroot/test.php
 webroot/index.php

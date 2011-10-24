@@ -7,6 +7,7 @@ App::import('Utility', 'ClassRegistry');
 class ProductRoute extends CakeRoute {
 	
 	public function match($url) {
+		
 		if(!empty($url['productSlug']) && $this->_exists($url['productSlug'])) {
 			return parent::match($url);
 		}
@@ -23,12 +24,14 @@ class ProductRoute extends CakeRoute {
 	
 	protected function _exists($productSlug) {
 		$productSlugs = Cache::read('product_slugs');
+		
 		if(empty($productSlugs)) {
 			$products = ClassRegistry::init('Product')->find('all', array(
 				'fields' => 'slug',
 				'recursive' => -1,
-				'conditions' => array('active' => 1)
+				'conditions' => array('published' => 1)
 			));
+			
 			if(!empty($products)) {
 				$productSlugs = array_map(
 					'strtolower',
@@ -37,7 +40,7 @@ class ProductRoute extends CakeRoute {
 				Cache::write('product_slugs', $productSlugs);
 			}
 		}
-		
+
 		return in_array($productSlug, (array) $productSlugs);
 	}
 }

@@ -43,7 +43,7 @@ class Inventory extends AppModel {
 		$query = array(
 			'conditions' => array(
         		'Inventory.user_id' => $userId,
-				'Product.active' => 1
+				'Product.published' => 1
         	),
         	'order' => 'created ASC',
         	'fields' => array('Product.id', 'Product.name', 'Product.slug', 'Product.logo', 'Product.description_formatted', 'Inventory.created'),
