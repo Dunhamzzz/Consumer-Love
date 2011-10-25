@@ -4,32 +4,25 @@ class Product extends AppModel {
 	public $order = 'name';
 	
 	public $validate = array(
-		'category_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric')
-			),
-		),
 		'name' => array(
-			'required' => array(
+			'required_field' => array(
 				'rule' => 'notEmpty',
-				'required' => true,
-				'allowedEmpty' => false,
+				'allowEmpty' => false,
 				'message' => 'Product or service must have a name!'
 			),
 		),
 		'description' => array(
-			'required' => array(
+			'required_field' => array(
 				'rule' => 'notEmpty',
-				'required' => true,
-				'allowedEmpty' => false,
+				'allowEmpty' => false,
 				'message' => 'Please enter a description.'
 			)
 		),
-		'twitter' => array(
+	/*	'twitter' => array(
 			'rule' => 'validateTwitter',
 			'allowEmpty' => true,
 			'message' => 'This Twitter account is not valid.'
-		)
+		)*/
 	);
 
 	public $hasAndBelongsToMany = array('Category');
@@ -48,20 +41,6 @@ class Product extends AppModel {
 				'extensions' => array('.jpg', '.jpeg', '.png')
 			)
 		),
-	 /*   'MeioUpload' => array(
-			'logo' => array(
-				'dir' => 'img{DS}logos{DS}products',
-				'create_directory' => false,
-				'allowed_mime' => array('image/jpeg', 'image/pjpeg', 'image/png'),
-	            'allowed_ext' => array('.jpg', '.jpeg', '.png'),
-				 'thumbsizes' => array(
-	           		'128x128' => array('width' => 128, 'height' => 128),
-					'64x64' => array('width' => 64, 'height' => 64),
-					'32x32' => array('width' => 32, 'height' => 32),
-				),
-				'default' => 'default.png'
-			)
-		),*/
 		'Utils.Sluggable' => array(
 			'label' => 'name',
 			'method' => 'multibyteSlug',
@@ -69,10 +48,23 @@ class Product extends AppModel {
 		)
 	);
 	
+	public $findMethods = array('active' => true);
+
+	protected function _findActive($state, $query, $results = array()) {
+		if ($state == 'before') {
+			$query['conditions']['published'] = 1;
+			$query['conditions']['deleted'] = 0;
+			return $query;
+		}
+		
+		return $results;
+	}
+	
 	public function beforeSave() {
 		if(!empty($this->data['Product']['description'])) {
 			$this->data['Product']['description_formatted'] = $this->formatDescription($this->data['Product']['description']);
 		}
+
 		return true;
 	}
 	
@@ -87,21 +79,47 @@ class Product extends AppModel {
 	}
 	
 	/**
+	* Adds a product to the database.
+	* @return bool
+	*/
+	public function add($data) {
+
+		$this->set($data);
+		
+		if($this->validates()) {
+			$this->create();
+			return $this->save($data);
+		} else {
+			return false;
+		}
+	}
+	
+	public function update($data){
+		$this->set($data);
+		if($this->validates()) {
+			return $this->save($data, false);
+			
+		} else {
+			return false;
+		}
+	}
+	
+	/**
 	 * For searching, returns minimum data for search results
 	 * @param string $term
 	 * @param int $limit
 	 */
-	public function search($term, $limit = 10) {
+	public function search($term, $limit = 10, $order = 'name') {
 		// Prevent wildcard searches
 		$term = str_replace('%', ' ', $term);
 		
-		return $this->find('all', array(
+		return $this->find('active', array(
 			'conditions' => array(
 				'Product.name LIKE ?' => '%'.$term.'%',
 			),
 			'fields' => array('name', 'logo', 'id', 'slug', 'inventory_count'),
 			'limit' => $limit,
-			'order' => 'Product.name',
+			'order' => 'Product.' . $order,
 			'contain' => false
 		));
 	}
@@ -146,9 +164,6 @@ class Product extends AppModel {
 			),
 			'contain' => array('Category')
 		));
-	}
-	
-	public function getInfoForMeta($conditions) {
 	}
 	
 	public function topByCategoryId($categoryId, $count = 5) {

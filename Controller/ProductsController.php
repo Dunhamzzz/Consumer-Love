@@ -111,40 +111,45 @@ class ProductsController extends AppController {
 		$this->set('products', $this->paginate());
 	}
 	
-	// @todo re-do this, not worth the fat controller
-	public function admin_edit($id = null) {
-		$this->Product->id = $id;
-		if($id && empty($this->request->data)) {
-			$this->request->data = $this->Product->read();
-			if(empty($this->request->data)) {
-				$this->Session->setFlash('Invalid product ID.');
-				$this->redirect(array('action' => 'index'));
-			}
+	// Admin Add and Edit functions
+	public function admin_new() {
+		
+		if($this->request->is('post')) {
+			$this->request->data['Product']['published'] = 1;
+			$this->request->data['Product']['deleted'] = 0;
 			
-			$this->set('title_for_layout','Edit '.$this->request->data['Product']['name']);
-			$this->set('pageAction', 'edit');
-		} else {
-			// Saving a product
-			if($this->request->is('postpublished')) { //Saving
-				if($this->Product->save($this->request->data)) {
-					if($id) {
-						$this->Session->setFlash('Changes made to '.$this->request->data['Product']['name'].' have been saved.');
-					} else {
-						$this->Session->setFlash($this->request->data['Product']['name'].' have been saved.');
-					}
-					$this->request->data = $this->Product->read();
-				}
-				
-				$this->set('title_for_layout','Edit '.$this->request->data['Product']['name']);
-				$this->set('pageAction', 'edit');
-			} else {
-				$this->set('title_for_layout', 'Add Product');
-				$this->set('pageAction', 'add');
+			if($this->Product->add($this->request->data)) {
+				$this->Session->setFlash($this->request->data['Product']['name'].' have been saved.');
+				$this->redirect(array('action' => 'admin_edit', 'id' => $this->Product->id));
 			}
 		}
 		
+		$title_for_layout = 'Add Product';
 		$categories = $this->Product->Category->getAllThreaded(true);
-		$this->set(compact('categories'));
+		
+		$this->set(compact('categories', 'title_for_layout'));
+	}
+	
+	public function admin_edit($id = null) {
+		$this->Product->id = $id;
+		if(!$this->Product->exists()) {
+			throw new NotFoundException('Invalid product ID.');
+		}
+
+		if($this->request->is('put')) {
+			if($this->Product->update($this->request->data)) {
+				$this->Session->setFlash('Changes made to '.$this->request->data['Product']['name'].' have been saved.');
+			} else {
+				$this->Session->setFlash('Saving Failed.');
+			}
+		} else {
+			$this->request->data = $this->Product->read();	
+		}
+		
+		$title_for_layout = 'Edit '.$this->request->data['Product']['name'];
+		$categories = $this->Product->Category->getAllThreaded(true);
+		
+		$this->set(compact('categories', 'title_for_layout'));
 	}
 	
 	public function admin_delete($id) {
