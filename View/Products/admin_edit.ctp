@@ -1,4 +1,8 @@
-<h1><?php echo __('Edit %s', $this->request->data['Product']['name']); ?></h1>
+<?php
+
+$pageWidgets = array('product_admin' => array('product' => $this->request->data['Product']));
+$this->set(compact('pageWidgets'));
+?><h1><?php echo $this->Link->product($this->request->data, __('Edit %s', $this->request->data['Product']['name'])); ?></h1>
 <?php echo $this->element('forms/product'); ?>
 <div class="admin-help">
 <?php if(!empty($this->request->data['Product']['logo'])) {
