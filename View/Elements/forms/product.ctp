@@ -1,4 +1,4 @@
-<?php echo $this->Form->create('Product',array('type' => 'file', 'action' => 'edit', 'class' => 'admin-form writing'));?>
+<?php echo $this->Form->create('Product',array('type' => 'file', 'class' => 'admin-form writing'));?>
 <?php
 echo $this->Form->input('id');
 echo $this->Form->input('name');

@@ -120,7 +120,13 @@ class ProductsController extends AppController {
 			
 			if($this->Product->add($this->request->data)) {
 				$this->Session->setFlash($this->request->data['Product']['name'].' have been saved.');
-				$this->redirect(array('action' => 'admin_edit', 'id' => $this->Product->id));
+	
+				$this->redirect(array(
+					'controller' => 'products',
+					'action' => 'edit',
+					'admin' => true,
+					$this->Product->id
+				));
 			}
 		}
 		
