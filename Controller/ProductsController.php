@@ -105,8 +105,14 @@ class ProductsController extends AppController {
 		$this->set(compact('top5Category', 'top5Products'));
 	}
 	
-	/** Admin Functions **/
+	/** Admin Functions */
+	
+	// Product Dashboard
 	public function admin_index() {
+		
+	}
+	
+	public function admin_all() {
 		$this->set('title_for_layout', 'Manage Products');
 		$this->set('products', $this->paginate());
 	}
