@@ -89,4 +89,35 @@ class AppModel extends Model {
 	    }
 	    return $valid;
 	}
+	
+	/**
+	* Adds a model to the database.
+	* @return bool
+	*/
+	public function add($data) {
+
+		$this->set($data);
+		
+		if($this->validates()) {
+			$this->create();
+			return $this->save($data);
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	* Generic update method.
+	* @return bool
+	*/
+	public function update($data){
+		$this->set($data);
+		if($this->validates()) {
+			return $this->save($data, false);
+			
+		} else {
+			return false;
+		}
+	}
+	
 }

@@ -17,12 +17,7 @@ class Product extends AppModel {
 				'allowEmpty' => false,
 				'message' => 'Please enter a description.'
 			)
-		),
-	/*	'twitter' => array(
-			'rule' => 'validateTwitter',
-			'allowEmpty' => true,
-			'message' => 'This Twitter account is not valid.'
-		)*/
+		)
 	);
 
 	public $hasAndBelongsToMany = array('Category');
@@ -76,32 +71,6 @@ class Product extends AppModel {
 	public function afterDelete() {
 		parent::afterDelete();
 		Cache::delete('product_slugs');
-	}
-	
-	/**
-	* Adds a product to the database.
-	* @return bool
-	*/
-	public function add($data) {
-
-		$this->set($data);
-		
-		if($this->validates()) {
-			$this->create();
-			return $this->save($data);
-		} else {
-			return false;
-		}
-	}
-	
-	public function update($data){
-		$this->set($data);
-		if($this->validates()) {
-			return $this->save($data, false);
-			
-		} else {
-			return false;
-		}
 	}
 	
 	/**

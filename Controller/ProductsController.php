@@ -147,6 +147,8 @@ class ProductsController extends AppController {
 		if(!$this->Product->exists()) {
 			throw new NotFoundException('Invalid product ID.');
 		}
+		
+		$product = $this->Product->read();
 
 		if($this->request->is('put')) {
 			if($this->Product->update($this->request->data)) {
@@ -155,13 +157,13 @@ class ProductsController extends AppController {
 				$this->Session->setFlash('Saving Failed.');
 			}
 		} else {
-			$this->request->data = $this->Product->read();	
+			$this->request->data = 	$product;
 		}
 		
 		$title_for_layout = 'Edit '.$this->request->data['Product']['name'];
 		$categories = $this->Product->Category->getAllThreaded(true);
 		
-		$this->set(compact('categories', 'title_for_layout'));
+		$this->set(compact('categories', 'product', 'title_for_layout'));
 	}
 	
 	public function admin_delete($id) {

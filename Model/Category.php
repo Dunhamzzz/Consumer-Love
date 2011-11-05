@@ -10,14 +10,11 @@ class Category extends AppModel {
 	);
 	
 	public $validate = array(
-		'parent_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-			)
-		),
 		'name' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+			'required_field' => array(
+				'rule' => 'notEmpty',
+				'allowEmpty' => false,
+				'message' => 'Category must have a name!'
 			),
 		)
 	);
