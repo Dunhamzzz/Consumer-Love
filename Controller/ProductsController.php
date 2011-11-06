@@ -48,8 +48,12 @@ class ProductsController extends AppController {
 		}
 		
 		// Related Products
-		$related = $this->Product->related($product['Product']['id']);
-		
+		$related = $this->Product->find('related', array(
+			'product' => $product,
+			'conditions' => $this->Product->activeConditions()
+			
+		));
+		debug($related);
 		$canonical = '/' . $product['Product']['slug'];
 
 		$this->set('title_for_layout', $product['Product']['name'].' &hearts;');
@@ -138,8 +142,9 @@ class ProductsController extends AppController {
 		
 		$title_for_layout = 'Add Product';
 		$categories = $this->Product->Category->getAllThreaded(true);
+		$parents = array(0 => '[ No Parent ]') + $this->Product->getAllThreaded();
 		
-		$this->set(compact('categories', 'title_for_layout'));
+		$this->set(compact('categories', 'title_for_layout', 'parents'));
 	}
 	
 	public function admin_edit($id = null) {
@@ -162,8 +167,8 @@ class ProductsController extends AppController {
 		
 		$title_for_layout = 'Edit '.$this->request->data['Product']['name'];
 		$categories = $this->Product->Category->getAllThreaded(true);
-		
-		$this->set(compact('categories', 'product', 'title_for_layout'));
+		$parents = array(0 => '[ No Parent ]') + $this->Product->getAllThreaded(true);
+		$this->set(compact('categories', 'product', 'title_for_layout', 'parents'));
 	}
 	
 	public function admin_delete($id) {

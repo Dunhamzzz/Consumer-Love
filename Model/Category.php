@@ -1,5 +1,6 @@
 <?php
 class Category extends AppModel {
+	
 	public $actsAs = array(
 		'Utils.Sluggable' => array(
 			'label' => 'name',

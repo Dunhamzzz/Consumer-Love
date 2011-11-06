@@ -40,15 +40,32 @@ class Product extends AppModel {
 			'label' => 'name',
 			'method' => 'multibyteSlug',
 			'separator' => ''
-		)
+		),
 	);
 	
-	public $findMethods = array('active' => true);
+	public $findMethods = array('active' => true, 'related' => true);
 
 	protected function _findActive($state, $query, $results = array()) {
 		if ($state == 'before') {
-			$query['conditions']['published'] = 1;
-			$query['conditions']['deleted'] = 0;
+			$query['conditions'] = $this->activeConditions();
+			return $query;
+		}
+		
+		return $results;
+	}
+	
+	protected function _findRelated($state, $query, $results = array()) {
+		if($state == 'before') {
+			if(isset($query['product'])) {
+				// find products where parent_id is that product, or they share the same parent id.
+				$query['conditions']['parent_id'] = array($query['product']['Product']['id']);
+				
+				if(!empty($query['product']['Product']['parent_id'])) {
+					$query['conditions']['parent_id'][] = $query['product']['Product']['parent_id'];
+				}
+			}
+			
+			unset($query['product']);
 			return $query;
 		}
 		
@@ -71,6 +88,13 @@ class Product extends AppModel {
 	public function afterDelete() {
 		parent::afterDelete();
 		Cache::delete('product_slugs');
+	}
+	
+	/**
+	* Returns conditions for returning an active product
+	*/
+	public function activeConditions() {
+		return array('published' => 1, 'deleted' => 0);
 	}
 	
 	/**
