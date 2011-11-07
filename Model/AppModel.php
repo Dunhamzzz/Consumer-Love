@@ -53,7 +53,7 @@ class AppModel extends Model {
 	/**
 	 * Returns a threaded array (therefore allows for ordering etc)
 	 */
-	public function getAllThreaded($flatten = false) {
+	public function getAllThreaded($flatten = true) {
 		$data = $this->find('threaded', array(
 			'order' => $this->name.'.'.$this->displayField.' ASC',
 			'contain' => false

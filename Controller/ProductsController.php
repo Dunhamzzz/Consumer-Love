@@ -86,6 +86,7 @@ class ProductsController extends AppController {
 		if (!$this->request->is('ajax')) {
 			throw new MethodNotAllowedException();
 		}
+		
 		$term = $this->request->query['q'];
 		$products = $this->Product->search($term);
 		$categories = $this->Product->Category->search($term);
@@ -140,7 +141,7 @@ class ProductsController extends AppController {
 		}
 		
 		$title_for_layout = 'Add Product';
-		$categories = $this->Product->Category->getAllThreaded(true);
+		$categories = $this->Product->Category->getAllThreaded();
 		$parents = array(0 => '[ No Parent ]') + $this->Product->getAllThreaded();
 		
 		$this->set(compact('categories', 'title_for_layout', 'parents'));
@@ -165,7 +166,7 @@ class ProductsController extends AppController {
 		}
 		
 		$title_for_layout = 'Edit '.$this->request->data['Product']['name'];
-		$categories = $this->Product->Category->getAllThreaded(true);
+		$categories = $this->Product->Category->getAllThreaded();
 		$parents = array(0 => '[ No Parent ]') + $this->Product->getAllThreaded();
 		$this->set(compact('categories', 'product', 'title_for_layout', 'parents'));
 	}

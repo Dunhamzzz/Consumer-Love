@@ -24,7 +24,7 @@ class CategoriesController extends AppController {
 	}
 
 	public function index() {
-		$categories =  $this->Category->getAllThreaded();
+		$categories =  $this->Category->getAllThreaded(false);
 
 		$this->set(compact('categories'));
 	}
@@ -56,7 +56,7 @@ class CategoriesController extends AppController {
 	/** Admin Actions **/
 	
 	public function admin_index() {
-		$categories = $this->Category->getAllThreaded();
+		$categories = $this->Category->getAllThreaded(false);
 		
 		$title_for_layout = 'Manage Categories';
 		$this->set(compact('title_for_layout', 'categories'));
@@ -77,9 +77,9 @@ class CategoriesController extends AppController {
 		}
 		
 		$title_for_layout = 'Add Product';
-		$categories = $this->Product->Category->getAllThreaded(true);
+		$parents = $this->Product->Category->getAllThreaded();
 		
-		$this->set(compact('categories', 'title_for_layout'));
+		$this->set(compact('parents', 'title_for_layout'));
 	}
 
 	public function admin_edit($id = null) {
