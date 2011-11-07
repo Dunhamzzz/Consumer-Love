@@ -86,7 +86,6 @@ class ProductsController extends AppController {
 		if (!$this->request->is('ajax')) {
 			throw new MethodNotAllowedException();
 		}
-		
 		$term = $this->request->query['q'];
 		$products = $this->Product->search($term);
 		$categories = $this->Product->Category->search($term);

@@ -47,7 +47,7 @@ class Product extends AppModel {
 
 	protected function _findActive($state, $query, $results = array()) {
 		if ($state == 'before') {
-			$query['conditions'] = $this->activeConditions();
+			$query['conditions'] = array_merge($query['conditions'], $this->activeConditions());
 			return $query;
 		}
 		
