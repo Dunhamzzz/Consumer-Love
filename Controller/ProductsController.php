@@ -166,7 +166,7 @@ class ProductsController extends AppController {
 		
 		$title_for_layout = 'Edit '.$this->request->data['Product']['name'];
 		$categories = $this->Product->Category->getAllThreaded(true);
-		$parents = array(0 => '[ No Parent ]') + $this->Product->getAllThreaded(true);
+		$parents = array(0 => '[ No Parent ]') + $this->Product->getAllThreaded();
 		$this->set(compact('categories', 'product', 'title_for_layout', 'parents'));
 	}
 	
