@@ -24,7 +24,12 @@
 		<?php echo $this->Form->submit('Sign up', array('class' => 'cta signup-submit'));?>
 		<?php echo $this->Form->end(); ?>
 	</div>
-	<div class="showcase">
-		<p>Showcase goes here</p>
+	<h3 class="featuring">Featuring these products and more</h3>
+	<div id="showcase-wrapper">
+		<ul class="showcase">
+		<?php foreach($products as $product): ?>
+			<li><?php echo $this->Link->product($product, $this->Love->productImage($product, 64), array('escape' => false)); ?></li>
+		<?php endforeach; ?>
+		</ul>
 	</div>
 </div>

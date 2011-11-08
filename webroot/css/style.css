@@ -564,7 +564,7 @@ footer p {
 }
 
 .welcome #suggest {
-	font-size: 28px;
+	font-size: 27px;
 	background: #fff;
 }
 
@@ -609,6 +609,33 @@ footer p {
 
 .welcome #suggest-landing p.suggest-cta {
 	border-radius: 0 0 3px 3px;
+}
+
+.featuring {
+	margin: 10px 0;
+	clear: both;
+}
+
+#showcase-wrapper {
+	
+}
+
+.showcase {
+	overflow: hidden;
+	border-radius: 4px;
+	padding: 4px 24px;
+	background: #fff;
+	height: 64px;
+}
+
+.showcase li {
+	float: left;
+	width: 64px;
+	margin-right: 1px;
+}
+
+.showcase li:last-child {
+	border-right: none;
 }
 
 .suggestions {
@@ -666,6 +693,8 @@ footer p {
 	border-radius: 4px;
 	float: left;
 	width: 430px;
+	height: 285px;
+	margin-bottom: 15px;
 }
 
 .left-col {
@@ -673,10 +702,6 @@ footer p {
 
 .right-col {
 	margin-left: 20px;
-}
-
-.showcase {
-	clear: both;	
 }
 
 /* Welcome Page */

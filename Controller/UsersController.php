@@ -13,7 +13,7 @@ class UsersController extends AppController {
 	}
 	
 	public function dashboard() {
-		$title_for_layout = 'Consumer Love';
+		$title_for_layout = __('Consumer Love');
 		
 		if($this->Auth->user()) {
 			if(!empty($this->userInventory)) {
@@ -30,8 +30,15 @@ class UsersController extends AppController {
 			$this->set(compact('top5Products', 'top5Category', 'categories'));
 			
 		} else {
-			$this->set('disableSidebar', true);
-			$this->set(compact('title_for_layout'));
+			$products = $this->Product->find('active', array(
+				'conditions' => array(),
+				'recursive' => -1,
+				'order' => 'RAND()',
+				'limit' => 14
+			));
+			
+			$disableSidebar = true;
+			$this->set(compact('products', 'disableSidebar', 'title_for_layout'));
 			$this->render('welcome');
 		}
 	}
