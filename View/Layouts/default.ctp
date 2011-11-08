@@ -52,7 +52,7 @@
 			<nav id="user-options" class="hide-on-body-click">
 				<ul>
 					<li><?php echo $this->Link->user($userData, 'Your Profile'); ?></li>
-					<li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout')); ?></li>
+					<li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false)); ?></li>
 				</ul>
 			</nav>
 		</div>
