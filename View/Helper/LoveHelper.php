@@ -15,7 +15,7 @@ class LoveHelper extends AppHelper {
 		);
 	}
 	
-	// Retursn a link to a category
+	// Returns a link to a category
 	public function categoryLink($category, $anchorText = false, $htmlAttrs = array()) {
 		$category = $this->extractCategory($category);
 		$anchorText = $anchorText ?: $category['name'];
@@ -30,6 +30,25 @@ class LoveHelper extends AppHelper {
 			),
 			$htmlAttrs
 		);
+	}
+	
+	/** 
+	* Returns a string based on an integer. Use {n} to denote the string.
+	*/
+	public function plural($num, $none, $single, $plural) {
+		
+		switch($num) {
+			case 0:
+				$string = $none;
+				break;
+			case 1:
+				$string = $single;
+				break;
+			default:
+				$string = $plural;
+		}
+		
+		return str_replace('{n}', $num, $string);
 	}
 	
 	// Returns a product image

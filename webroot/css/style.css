@@ -619,6 +619,13 @@ footer p {
 .suggestions li {
 	overflow: hidden;
 	line-height: 32px;
+	padding: 1px 0;
+	border-bottom: 1px solid #a6a6a6;
+}
+
+.suggestions li:last-child {
+	border-bottom: none;
+	
 }
 
 .suggestions.basic li {
@@ -640,6 +647,12 @@ footer p {
 .suggestions li .product-logo {
 	float: left;
 	margin: 0 6px 0 3px;
+}
+
+.suggestions li .inventory-count {
+	float: right;
+	font-size: 10px;
+	color: #ddd;
 }
 
 #home h2 {

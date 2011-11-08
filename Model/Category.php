@@ -30,7 +30,7 @@ class Category extends AppModel {
 				'conditions' => array(
 					'Category.name LIKE ?' => '%'.$term.'%'
 				),
-				'fields' => array('name', 'id', 'slug'),
+				'fields' => array('name', 'id', 'slug', 'product_count'),
 				'limit' => $limit,
 				'order' => 'Category.name',
 				'contain' => false

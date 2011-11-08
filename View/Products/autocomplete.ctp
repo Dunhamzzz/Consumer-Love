@@ -1,18 +1,28 @@
 <?php $escapedTerm = $this->Html->tag('strong', $term, array('escape' => true));?>
 <div class="speech-arrow"></div>
 <?php if(!empty($products)): ?>
-	<p><strong>Matching Products</strong></p>
+	<p><strong><?php echo __('Matching Products'); ?></strong></p>
 	<ul class="suggestions">
 	<?php foreach($products as $product): ?>
-		<li><?php echo $this->Link->product($product, $this->Love->productImage($product).$product['Product']['name'], array('escape' => false));?></li>
+		<?php $inventoryCount = $this->Love->plural($product['Product']['inventory_count'], '', '1 user', '{n} users'); ?>
+		<li><?php echo $this->Link->product(
+				$product,
+				$this->Love->productImage($product).$product['Product']['name']. '<span class="inventory-count">' . $inventoryCount . '</span>',
+				array('escape' => false)
+			);?></li>
 	<?php endforeach; ?>
 	</ul>
 <?php endif; ?>
 <?php if(!empty($categories)): ?>
-	<p><strong>Matching Categories</strong></p>
+	<p><strong><?php echo __('Matching Categories'); ?></strong></p>
 	<ul class="suggestions basic">
-	<?php foreach($categories as $category): ?>
-		<li><?php echo $this->Love->categoryLink($category);?></li>
+	<?php foreach($categories as $category) : ?>
+		<?php $productCount = $this->Love->plural($category['Category']['product_count'], 'empty!', '1 product', '{n} products'); ?>
+		<li><?php echo $this->Love->categoryLink(
+				$category,
+				$category['Category']['name']. '<span class="inventory-count">' . $productCount . '</span>',
+				array('escape' => false)
+			);?></li>
 	<?php endforeach; ?>
 	</ul>
 <?php endif; ?>
