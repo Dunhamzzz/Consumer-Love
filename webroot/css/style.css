@@ -1164,6 +1164,36 @@ input.loveit {
 	border-color: #606c88;
 }
 
+/* User list */
+.users-list {
+	
+}
+
+.users-list li {
+	border-radius: 5px;
+	border: 1px solid #999;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+
+.users-list li a {
+	display: block;
+	line-height: 32px;
+}
+
+.users-list li .meta {
+	float: right;
+	color: #ccc;
+	font-style: italic;
+	font-size: 12px;
+}
+
+.users-list .gravatar {
+	float: left;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+
 /* Category Pages */
 #category-list {
 	overflow: hidden;
@@ -1208,6 +1238,7 @@ input.loveit {
 	background: #fff;
 	overflow: hidden;
 	width: 688px;
+	border-radius: 5px;
 }
 
 .products-list .product-logo {

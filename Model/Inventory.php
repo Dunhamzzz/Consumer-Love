@@ -125,6 +125,7 @@ class Inventory extends AppModel {
 			'conditions' => array(
 				'product_id' => $productId
 			),
+			'order' => array('User.username'),
 			'contain' => array('User')
 		));
 	}
