@@ -19,6 +19,7 @@ class Inventory extends AppModel {
 	 * @param string $userId
 	 */
 	public function remove($productId, $userId) {
+		
 		return $this->deleteAll(array(
 			'product_id' => $productId,
 			'user_id' => $userId
@@ -33,7 +34,12 @@ class Inventory extends AppModel {
 				'product_id' => $productId
 			)
 		);
-		return $this->save($inventory);
+
+		if($this->save($inventory)) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -87,7 +93,7 @@ class Inventory extends AppModel {
 		
 		// User already has an entry, so delete it.
 		$this->remove($productId, $userId);
-		return false;
+		return false; // This specifies the user no longer has the product
 	}
 	
 	/**

@@ -61,6 +61,7 @@ class InventoriesController extends AppController {
 			throw new MethodNotAllowedException();
 		}
 		$status = $this->Inventory->toggle($productId, AuthComponent::user('id'));
+	
 		$this->set(compact('status'));
 	}
 }

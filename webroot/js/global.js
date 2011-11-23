@@ -75,7 +75,7 @@ $(function() {
 					alert('Something went wrong while processing your request.');
 				} else {
 					var total = $('.num-products').text() * 1;
-					if(response == '0') {
+					if(response != '1') {
 						$(this).removeClass('in');
 						$('.num-products').text(total - 1);
 					} else {
