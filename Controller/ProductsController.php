@@ -53,7 +53,7 @@ class ProductsController extends AppController {
 			'conditions' => $this->Product->activeConditions()
 			
 		));
-		debug($related);
+		
 		$canonical = '/' . $product['Product']['slug'];
 
 		$this->set('title_for_layout', $product['Product']['name'].' &hearts;');
