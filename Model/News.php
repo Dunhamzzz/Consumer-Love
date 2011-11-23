@@ -30,6 +30,13 @@ class News extends AppModel {
 	);
 	
 	/**
+	* Fetches a users timeline
+	**/
+	public function timeline($userId) {
+		
+	}
+	
+	/**
 	 * Handles User submitted news.
 	 */
 	public function submit($newsData, $userId) {
