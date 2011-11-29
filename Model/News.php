@@ -31,9 +31,19 @@ class News extends AppModel {
 	
 	/**
 	* Fetches a users timeline
+	* @param $products array of product IDs
+	* @return array News
 	**/
-	public function timeline($userId) {
-		
+	public function timeline($products = array(), $limit = 20 ) {
+		return $this->find('all', array(
+			'conditions' => array(
+				'product_id' => $products,
+				'News.published' => 1,
+				'News.deleted' => 0
+			), 
+			'order' => array('News.created DESC'),
+			'limit' => $limit
+		));
 	}
 	
 	/**
@@ -69,8 +79,6 @@ class News extends AppModel {
 		
 		// @todo add formatting
 		$newsData['News']['content_formatted'] = $newsData['News']['content_raw'];
-		
-		$this->save($newsData);
 		
 		return $this->read();
 	}

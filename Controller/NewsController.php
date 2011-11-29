@@ -41,14 +41,17 @@ class NewsController extends AppController {
 			} catch(Exception $e) {
 				$this->setFlash($e->getMessage);
 			}
-			
+
 			if($news !== false) {
 				$this->Session->setFlash(__('Thanks for submiting your %s news.', htmlspecialchars($product['Product']['name'])));
 				$this->redirect(array('controller' => 'news', 'action' => 'view', 'newsSlug' => $news['News']['slug']));
 			}
 		}
 		
-		$title_for_layout = 'Submit ' . $product['Product']['name'] . ' News';
+		// For some reason the invalid fields won't register unless I do this
+		//$this->News->invalidFields();
+		
+		$title_for_layout = __('Submit %s News', $product['Product']['name']);
 		$this->set(compact('product', 'title_for_layout'));
 	}
 	

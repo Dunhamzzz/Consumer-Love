@@ -1242,6 +1242,12 @@ input.loveit {
 	border-radius: 5px;
 }
 
+.products-list .inventory-count {
+	float: right;
+	color: #999;
+	font-size: 12px;	
+}
+
 .products-list .product-logo {
 	float: left;
 	margin: 0 10px 10px 0;

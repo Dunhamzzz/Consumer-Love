@@ -19,17 +19,15 @@ class UsersController extends AppController {
 			if(!empty($this->userInventory)) {
 				$this->set('latestInventory', array_slice($this->userInventory, 0, 15));
 			
-				// $Feed = ClassRegistry::init('Feed');
-				// 				$feeds = $Feed->getFeed(array_keys($this->userInventory));
 				$News = ClassRegistry::init('News');
-				$news = $News->timeline($this->Auth->user('id'));
+				$this->set('news', $News->timeline(array_keys($this->userInventory)));
 			}
-			$this->set(compact('title_for_layout', 'feeds'));
+			
 			
 			$top5Products =  $this->Product->topByCategoryId(5);
 			$top5Category = $this->Product->Category->findById(5);
 			$categories = $this->Product->Category->getAllThreaded(true);
-			$this->set(compact('top5Products', 'top5Category', 'categories', 'news'));
+			$this->set(compact('title_for_layout', 'top5Products', 'top5Category', 'categories', 'news'));
 			
 		} else {
 			$products = $this->Product->find('active', array(
@@ -40,7 +38,7 @@ class UsersController extends AppController {
 			));
 			
 			$disableSidebar = true;
-			$this->set(compact('products', 'disableSidebar', 'title_for_layout'));
+			$this->set(compact('products', 'news', 'disableSidebar', 'title_for_layout'));
 			$this->render('welcome');
 		}
 	}
