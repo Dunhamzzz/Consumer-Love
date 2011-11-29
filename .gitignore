@@ -9,3 +9,4 @@ webroot/index.php
 .project
 .buildpath
 .settings/
+.idea/
