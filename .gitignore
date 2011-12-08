@@ -6,7 +6,4 @@ webroot/files/
 webroot/phpinfo.php
 webroot/test.php
 webroot/index.php
-.project
-.buildpath
-.settings/
-.idea/
+nbproject/

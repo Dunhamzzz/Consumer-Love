@@ -204,6 +204,24 @@ input.loading {
 	float: none;
 }
 
+/* Settings Form */
+form.settings {
+
+
+}
+
+.settings input {
+
+
+}
+
+
+.settings textarea {
+
+
+}
+
+
 .error-message {
 	color: #CD0A0A;
 }

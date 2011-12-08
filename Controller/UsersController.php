@@ -132,6 +132,10 @@ class UsersController extends AppController {
 		$title_for_layout = $user['User']['username'];
 		$this->set(compact('title_for_layout', 'user'));
 	}
+
+    public function settings() {
+
+    }
 	
 	public function inventory($userSlug = null) {
 		$user = $this->User->getBySlug($userSlug);
