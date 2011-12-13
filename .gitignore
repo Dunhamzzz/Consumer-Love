@@ -1,6 +1,6 @@
-Config/
+Config/database.php
 logs/
-tmp/
+tmp/*
 vendors/
 webroot/files/
 webroot/phpinfo.php
