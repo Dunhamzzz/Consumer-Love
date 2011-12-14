@@ -49,7 +49,7 @@ class NewsController extends AppController {
 		}
 		
 		// For some reason the invalid fields won't register unless I do this
-		//$this->News->invalidFields();
+		$this->News->invalidFields();
 		
 		$title_for_layout = __('Submit %s News', $product['Product']['name']);
 		$this->set(compact('product', 'title_for_layout'));

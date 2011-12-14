@@ -78,7 +78,9 @@ class News extends AppModel {
 		$this->create();
 		
 		// @todo add formatting
-		$newsData['News']['content_formatted'] = $newsData['News']['content_raw'];
+		$newsData['News']['content'] = htmlspecialchars($newsData['News']['content_raw']);
+                
+                $this->save($newsData);
 		
 		return $this->read();
 	}

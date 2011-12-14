@@ -16,10 +16,13 @@ $this->set(compact('pageWidgets'));
 <?php if(!empty($news)): ?>
 <div class="timeline">
 	<?php foreach($news as $newsItem): ?>
-	<article>
-		<?php echo $this->Link->news($newsItem); ?>
+	<article class="news-article">
+		<h2>
+                    <?php echo $this->Link->product($newsItem['Product'], $this->Love->productImage($newsItem['Product']), array('escape' => false, 'class' => 'news-logo')); ?>
+                    <?php echo $this->Link->news($newsItem); ?>
+                </h2>
+                <?php echo $newsItem['News']['content']; ?>
 		
-		<p class="news-product">Posted in <?php echo $this->Link->product($newsItem['Product'], $this->Love->productImage($newsItem['Product']) . ' ' . $newsItem['Product']['name'], array('escape' => false)); ?></p>
 		<?php //debug($newsItem); ?>
 	</article>
 	<?php endforeach; ?>
