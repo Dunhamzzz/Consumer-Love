@@ -18,7 +18,9 @@ $this->set(compact('pageWidgets'));
 	<?php foreach($news as $newsItem): ?>
 	<article>
 		<?php echo $this->Link->news($newsItem); ?>
-		<?php pr($newsItem); ?>
+		
+		<p class="news-product">Posted in <?php echo $this->Link->product($newsItem['Product'], $this->Love->productImage($newsItem['Product']) . ' ' . $newsItem['Product']['name'], array('escape' => false)); ?></p>
+		<?php //debug($newsItem); ?>
 	</article>
 	<?php endforeach; ?>
 </div>
