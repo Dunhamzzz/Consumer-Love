@@ -53,7 +53,7 @@ ini_set('display_errors', 1);
  *
  * Leaving this constant undefined will result in it being defined in Cake/bootstrap.php
  */
-	define('CAKE_CORE_INCLUDE_PATH', '/Users/Dunham/Sites/share/cakephp/lib');
+	//define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . 'lib');
 
 /**
  * Editing below this line should not be necessary.
@@ -68,6 +68,9 @@ if (!defined('WWW_ROOT')) {
 }
 
 if (!defined('CAKE_CORE_INCLUDE_PATH')) {
+	if (function_exists('ini_set')) {
+		ini_set('include_path', ROOT . DS . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
+	}
 	if (!include('Cake' . DS . 'bootstrap.php')) {
 		$failed = true;
 	}
@@ -81,7 +84,7 @@ if (!empty($failed)) {
 }
 
 if (Configure::read('debug') < 1) {
-	die(__d('cake', 'Debug setting does not allow access to this url.'));
+	die(__d('cake_dev', 'Debug setting does not allow access to this url.'));
 }
 
 require_once CAKE . 'TestSuite' . DS . 'CakeTestSuiteDispatcher.php';
