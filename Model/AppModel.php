@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Application model for Cake.
  *
@@ -31,93 +32,93 @@
  * @subpackage    cake.app
  */
 class AppModel extends Model {
-	public $actsAs = array('Containable');
-	
-	public function afterFind($results, $primary = false) {
-		if(!empty($results)) {
-			foreach($results as $i => $row) {
-				if(!empty($row[0])) {
-					foreach($row[0] as $field => $value) {
-						if(!empty($row[$this->alias][$field])) {
-							$field = 'total_'.$field;
-						}
-						$results[$i][$this->alias][$field] = $value;
-					}
-					unset($results[$i][0]);
-				}
-			}
-		}
-		return parent::afterFind($results, $primary);
-	}
-	
-	/**
-	 * Returns a threaded array (therefore allows for ordering etc)
-	 */
-	public function getAllThreaded($flatten = true) {
-		$data = $this->find('threaded', array(
-			'order' => $this->name.'.'.$this->displayField.' ASC',
-			'contain' => false
-		));
-		
-		if($flatten) {
-			$flatData = array();
-			foreach($data as $parent) {
-				$flatData[$parent[$this->alias]['id']] = $parent[$this->alias][$this->displayField];
-				if(!empty($parent['children'])) {
-					foreach($parent['children'] as $child) {
-						$flatData[$child[$this->alias]['id']] = ' - '.$child[$this->alias][$this->displayField];
-					}
-				}
-			}
-			
-			return $flatData;
-		}
-		
-		return $data;
-	}
-	
-	// http://bin.cakephp.org/saved/42156
-	protected function compare($value = array(), $options = array(), $rule = array()) {
-	    $value = is_array($value) ? current($value) : $value;
-	    if (is_array($options)) {
-	        $valid = $value == $this->data[$this->alias][$options[0]];
-	        if (!$valid) {
-	            $this->invalidate(empty($options[1]) ? $options[0] : $options[1], $rule['message']);
-	        }
-	    } else {
-	        $valid = $value == $options;
-	    }
-	    return $valid;
-	}
-	
-	/**
-	* Adds a model to the database.
-	* @return bool
-	*/
-	public function add($data) {
 
-		$this->set($data);
-		
-		if($this->validates()) {
-			$this->create();
-			return $this->save($data);
-		} else {
-			return false;
-		}
-	}
-	
-	/**
-	* Generic update method.
-	* @return bool
-	*/
-	public function update($data){
-		$this->set($data);
-		if($this->validates()) {
-			return $this->save($data, false);
-			
-		} else {
-			return false;
-		}
-	}
-	
+    public $actsAs = array('Containable');
+
+    public function afterFind($results, $primary = false) {
+        if (!empty($results)) {
+            foreach ($results as $i => $row) {
+                if (!empty($row[0])) {
+                    foreach ($row[0] as $field => $value) {
+                        if (!empty($row[$this->alias][$field])) {
+                            $field = 'total_' . $field;
+                        }
+                        $results[$i][$this->alias][$field] = $value;
+                    }
+                    unset($results[$i][0]);
+                }
+            }
+        }
+        return parent::afterFind($results, $primary);
+    }
+
+    /**
+     * Returns a threaded array (therefore allows for ordering etc)
+     */
+    public function getAllThreaded($flatten = true) {
+        $data = $this->find('threaded', array(
+            'order' => $this->name . '.' . $this->displayField . ' ASC',
+            'contain' => false
+                ));
+
+        if ($flatten) {
+            $flatData = array();
+            foreach ($data as $parent) {
+                $flatData[$parent[$this->alias]['id']] = $parent[$this->alias][$this->displayField];
+                if (!empty($parent['children'])) {
+                    foreach ($parent['children'] as $child) {
+                        $flatData[$child[$this->alias]['id']] = ' - ' . $child[$this->alias][$this->displayField];
+                    }
+                }
+            }
+
+            return $flatData;
+        }
+
+        return $data;
+    }
+
+    // http://bin.cakephp.org/saved/42156
+    protected function compare($value = array(), $options = array(), $rule = array()) {
+        $value = is_array($value) ? current($value) : $value;
+        if (is_array($options)) {
+            $valid = $value == $this->data[$this->alias][$options[0]];
+            if (!$valid) {
+                $this->invalidate(empty($options[1]) ? $options[0] : $options[1], $rule['message']);
+            }
+        } else {
+            $valid = $value == $options;
+        }
+        return $valid;
+    }
+
+    /**
+     * Adds a model to the database.
+     * @return bool
+     */
+    public function add($data) {
+
+        $this->set($data);
+
+        if ($this->validates()) {
+            $this->create();
+            return $this->save($data);
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Generic update method.
+     * @return bool
+     */
+    public function update($data) {
+        $this->set($data);
+        if ($this->validates()) {
+            return $this->save($data, false);
+        } else {
+            return false;
+        }
+    }
+
 }

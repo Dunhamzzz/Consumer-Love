@@ -131,10 +131,25 @@ class UsersController extends AppController {
     }
 
     public function settings() {
-        $this->request->data = $this->User->find('first', array(
-            'conditions' => array('id' => AuthComponent::user('id')),
-            'contain' => false
-        ));
+        if ($this->request->is('put')) {
+            $this->request->data['id'] = AuthComponent::user('id');
+
+            if ($this->User->updateProfile($this->request->data['User'])) {
+                $this->Session->setFlash('Profile settings updated.');
+            } else {
+                $this->invalidFields();
+                die('wht');
+            }
+        } else {
+            $this->request->data = $this->User->find('first', array(
+                'conditions' => array('id' => AuthComponent::user('id')),
+                'contain' => false
+            ));
+        }
+
+        $title_for_layout = 'Update Your Profile';
+
+        $this->set(compact('title_for_layout'));
     }
 
     public function inventory($userSlug = null) {
