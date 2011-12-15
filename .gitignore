@@ -4,6 +4,4 @@ tmp/*
 vendors/
 webroot/files/
 webroot/phpinfo.php
-webroot/test.php
-webroot/index.php
 nbproject/
