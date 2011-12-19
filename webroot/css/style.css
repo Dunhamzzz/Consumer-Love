@@ -1300,7 +1300,7 @@ input.loveit {
     width: 32px;
     height: 32px;
     border: 1px solid #fff;
-	border-radiusL 5px;
+	border-radius: 5px;
 }
 
 .product-icon-list a:hover {
