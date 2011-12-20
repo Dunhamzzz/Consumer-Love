@@ -117,6 +117,12 @@ class UsersController extends AppController {
         $this->set(compact('title_for_layout'));
     }
 
+    /**
+     * View a users profile.
+     * URL: /profiles/:userSlug
+     * 
+     * @param string $userSlug 
+     */
     public function view($userSlug = null) {
 
         $user = $this->User->getBySlug($userSlug);
@@ -133,8 +139,8 @@ class UsersController extends AppController {
     public function settings() {
         if ($this->request->is('put')) {
             $this->request->data['id'] = AuthComponent::user('id');
-
-            if ($this->User->updateProfile($this->request->data['User'])) {
+            
+            if ($this->User->updateProfile($this->request->data)) {
                 $this->Session->setFlash('Profile settings updated.');
             } else {
                 $this->invalidFields();
@@ -178,7 +184,6 @@ class UsersController extends AppController {
     }
 
     /* Ajax Actions */
-
     public function checkUsername() {
         if ($this->request->is('ajax')) {
             $this->set('status', $this->User->checkUsernameAvailability($this->params['url']['username']));
@@ -188,7 +193,6 @@ class UsersController extends AppController {
     }
 
     /* Admin Actions */
-
     public function admin_index() {
         $this->set('users', $this->paginate('User'));
     }

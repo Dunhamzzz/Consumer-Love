@@ -13,9 +13,15 @@
     'bio' => array(
         'after' => '<span>Write a few details about yourself to be dispalyed on your profile.</span>'
     ),
-    'dob' => array('label' => 'Date of Birth'),
+    'dob' => array(
+        'label' => 'Date of Birth',
+        'minYear' => date('Y') - 31,
+        'maxYear' => date('Y') + 90,
+        'dateFormat' => 'DMY'
+    ),
     'location',
-    'private_inventory' => array('label' => 'Keep your inventory private?')
+    'private_inventory' => array('label' => 'Private Inventory',
+        'after' => '<span>Tick here to keep your inventory hidden from other users of Consumer Love.</span>')
     
 ));?>
 <?php echo $this->Form->end('Save'); ?>
