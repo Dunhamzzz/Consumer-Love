@@ -72,14 +72,13 @@ class User extends AppModel {
             )
         )
     );
-    
+
     /**
      * A list of fields that can be updated by the user
      * @var type array
      */
     protected $_whiteListFields = array(
         'real_name', 'bio', 'dob', 'website', 'email', 'dob', 'location', 'private_inventory'
-        
     );
 
     public function beforeSave($options = array()) {
@@ -165,20 +164,31 @@ class User extends AppModel {
 
         $this->save($data, array('validate' => false));
     }
-    
+
     /**
      * Saves profile data.
      * @param type $data User row
      */
     public function updateProfile($data) {
         $this->read(null, $data['id']);
-        
+
         $this->set($data);
-        
-        if($this->validates()) {
+
+        if ($this->validates()) {
             return $this->save($data, false, $this->_whiteListFields);
         }
         return false;
+    }
+
+    /**
+     * Increments the profile_hits field if user is not current
+     */
+    public function profileHit($userId) {
+        if ($userId == AuthComponent::user('id')) {
+            return false;
+        }
+
+        $this->updateAll(array('User.profile_hits' => 'User.profile_hits + 1'), array('User.id' => $userId));
     }
 
     public function increaseHumanProven() {

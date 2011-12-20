@@ -76,6 +76,19 @@ class LoveHelper extends AppHelper {
 		
 		return $this->Text->toList($categoryList);
 	}
+        
+        /**
+         * Get age from dob mysql date
+         */
+        public function age($dob) {
+            $dob = strtotime($dob);
+            if($dob < 0) {
+                return false;
+            }
+            $t = time();
+            $age = ($dob < 0) ? ( $t + ($dob * -1) ) : $t - $dob;
+            return (int) floor($age/31536000);
+        }
 	
 	// Wrappers for extractRow()
 	private function extractUser($user) {

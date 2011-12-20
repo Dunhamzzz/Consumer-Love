@@ -130,6 +130,9 @@ class UsersController extends AppController {
             throw new NotFoundException();
         }
 
+        // Increment profile hits.
+        $this->User->profileHit($user['User']['id']);
+
         $inventory = $this->User->Inventory->get($user['User']['id'], 10);
 
         $title_for_layout = $user['User']['username'];
@@ -139,7 +142,7 @@ class UsersController extends AppController {
     public function settings() {
         if ($this->request->is('put')) {
             $this->request->data['id'] = AuthComponent::user('id');
-            
+
             if ($this->User->updateProfile($this->request->data)) {
                 $this->Session->setFlash('Profile settings updated.');
             } else {
@@ -150,7 +153,7 @@ class UsersController extends AppController {
             $this->request->data = $this->User->find('first', array(
                 'conditions' => array('id' => AuthComponent::user('id')),
                 'contain' => false
-            ));
+                    ));
         }
 
         $title_for_layout = 'Update Your Profile';
@@ -184,6 +187,7 @@ class UsersController extends AppController {
     }
 
     /* Ajax Actions */
+
     public function checkUsername() {
         if ($this->request->is('ajax')) {
             $this->set('status', $this->User->checkUsernameAvailability($this->params['url']['username']));
@@ -193,6 +197,7 @@ class UsersController extends AppController {
     }
 
     /* Admin Actions */
+
     public function admin_index() {
         $this->set('users', $this->paginate('User'));
     }
