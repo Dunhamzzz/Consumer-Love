@@ -81,12 +81,12 @@ class LoveHelper extends AppHelper {
          * Get age from dob mysql date
          */
         public function age($dob) {
-            $dob = strtotime($dob);
-            if($dob < 0) {
+            $dobStamp = strtotime($dob);
+            if($dob < 0 || $dob === '0000-00-00') {
                 return false;
             }
             $t = time();
-            $age = ($dob < 0) ? ( $t + ($dob * -1) ) : $t - $dob;
+            $age = ($dobStamp < 0) ? ( $t + ($dobStamp * -1) ) : $t - $dobStamp;
             return (int) floor($age/31536000);
         }
 	
