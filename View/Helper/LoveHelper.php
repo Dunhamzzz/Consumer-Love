@@ -5,7 +5,7 @@
  *
  */
 class LoveHelper extends AppHelper {
-	public $helpers = array('Html', 'Text');
+	public $helpers = array('Html', 'Text', 'Link');
 	
 	public function inventoryButton($productId, $inInventory = false) {
 		return $this->Html->link(
@@ -54,7 +54,7 @@ class LoveHelper extends AppHelper {
 	public function listProductCategories($product) {
 		$categoryList = array();
 		foreach($product['Category'] as $category) {
-			$categoryList[] = $this->categoryLink($category);
+			$categoryList[] = $this->Link->category($category);
 		}
 		
 		return $this->Text->toList($categoryList);

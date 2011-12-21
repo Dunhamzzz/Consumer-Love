@@ -135,7 +135,7 @@ class UsersController extends AppController {
 
         $inventory = $this->User->Inventory->get($user['User']['id'], 10);
 
-        $title_for_layout = $user['User']['username'];
+        $title_for_layout = $user['User']['username'] . __(' on Consumer Love');
         $this->set(compact('title_for_layout', 'user'));
     }
 

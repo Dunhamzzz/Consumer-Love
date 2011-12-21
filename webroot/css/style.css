@@ -45,41 +45,7 @@ table {
 }
 
 tr {
-    border-bottom: 1px solid #4D5471
-}
 
-tr:last-child {
-    border-bottom: none;
-}
-
-tr:last-child td:first-child {
-    border-radius: 0 0 0 5px;	
-}
-
-tr:last-child td:last-child {
-    border-radius: 0 0 5px 0;	
-}
-
-tr:hover {
-    background-color: #efefef;
-}
-
-th {
-    background-color: #4D5471;	
-    color: #fff;
-    text-align: center;
-}
-
-th:first-child {
-    border-radius: 5px 0 0 0;	
-}
-
-th:last-child {
-    border-radius:0 5px 0 0;	
-}
-
-th a {
-    color: #fff;	
 }
 
 a {
@@ -1552,19 +1518,17 @@ input.loveit {
 
 .user-column {
     float: left;
-    
+
 }
 
-.user-column dl {
-    
+.user-column.c1 {
+    margin-right: 15px;
 }
 
-.user-column dt {
-    
-}
-
-.user-column dd {
-    
+.user-column.c1 p {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
 }
 
 /* jQuery UI Theme */
@@ -1620,6 +1584,11 @@ input.loveit {
     width: 100%;
     background: #fff;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid #4D5471
+}
+
+.admin-table tr {
+    border-bottom: 1px solid #4D5471;
 }
 
 .admin-table th {
@@ -1635,7 +1604,6 @@ input.loveit {
     height: 32px;
     font-size: 12px;
 }
-
 
 .admin-table td.title {
     font-size: 16px;
@@ -1654,4 +1622,62 @@ input.loveit {
 .admin-form legend {
     font-size: 24px;
     font-weighT: bold;
+}
+
+.admin-table tr:last-child {
+    border-bottom: none;
+}
+
+.admin-table tr:last-child td:first-child {
+    border-radius: 0 0 0 5px;	
+}
+
+.admin-table tr:last-child td:last-child {
+    border-radius: 0 0 5px 0;	
+}
+
+.admin-table tr:hover {
+    background-color: #efefef;
+}
+
+.admin-table th {
+    background-color: #4D5471;	
+    color: #fff;
+    text-align: center;
+}
+
+.admin-table th:first-child {
+    border-radius: 5px 0 0 0;	
+}
+
+.admin-table th:last-child {
+    border-radius:0 5px 0 0;	
+}
+
+.admin-table th a {
+    color: #fff;	
+}
+
+/* Settings Table */
+/* Table for displaying settings */
+.settings-table {
+    border: 0;
+}
+
+.settings-table tr {
+    
+}
+
+.settings-table th {
+    padding-bottom: 10px;
+    color: #999;
+    font-size: 12px;
+    font-weight: normal;
+    background: none;
+    width: 80px;
+    text-align: left;
+}
+
+.settings-table td {
+    text-align: left;
 }
