@@ -14,24 +14,7 @@ class LoveHelper extends AppHelper {
 			array('class' => 'toggle-inventory cta'. ($inInventory ? ' in' : ''), 'escape' => false)
 		);
 	}
-	
-	// Returns a link to a category
-	public function categoryLink($category, $anchorText = false, $htmlAttrs = array()) {
-		$category = $this->extractCategory($category);
-		$anchorText = $anchorText ?: $category['name'];
-		
-		return $this->Html->link(
-			$anchorText,
-			array(
-				'controller' => 'categories',
-				'action' => 'view',
-				'admin' => false,
-				'slug' => $category['slug']
-			),
-			$htmlAttrs
-		);
-	}
-	
+
 	/** 
 	* Returns a string based on an integer. Use {n} to denote the string.
 	*/
