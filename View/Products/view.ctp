@@ -9,7 +9,6 @@ if(!empty($product['Tweet'])) {
 	$pageWidgets['twitter'] = array('tweets' => $product['Tweet']);
 }
 $this->set(compact('pageWidgets'));
-
 $this->Html->addCrumb($product['Product']['name']);
 ?>
 <div id="product" class="product-section">
