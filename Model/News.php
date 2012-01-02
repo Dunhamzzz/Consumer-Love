@@ -11,7 +11,7 @@ class News extends AppModel {
 		'Utils.Sluggable' => array(
 			'label' => 'title',
 			'method' => 'multibyteSlug',
-			'separator' => ''
+			'separator' => '-'
 		)
 	);
 	

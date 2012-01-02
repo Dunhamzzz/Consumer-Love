@@ -11,4 +11,7 @@ if(!empty($product['Tweet'])) {
 $this->set(compact('pageWidgets'));
 
 ?><h1><?php echo htmlspecialchars($news['News']['title']); ?></h1>
+<article class="news">
+    <p><?php echo nl2br($news['News']['content']); ?></p>
+</article>
 <?php pr($news); ?>
