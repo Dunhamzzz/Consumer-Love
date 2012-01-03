@@ -1,3 +1,4 @@
+
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
 {
     margin: 0;
@@ -500,7 +501,7 @@ footer p {
 #content {
     overflow: hidden;
     float: left;
-    width: 710px;
+    width: 630px;
     border-radius: 5px;
     margin: 10px 10px 10px 0;
     padding: 10px;
@@ -516,7 +517,7 @@ footer p {
 
 #side {
     float: right;
-    width: 220px;
+    width: 300px;
     margin-top: 10px;	
 }
 
@@ -961,6 +962,16 @@ input.cta {
 }
 
 /** Widgets **/ 
+.widget {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 279px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
 .widget h3 {
     text-indent: 0;
     font-weight: bold;
@@ -970,16 +981,6 @@ input.cta {
 
 .widget h3 span a {
     color: #8D9CBF;
-}
-
-.widget {
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #fff;
-    border-radius: 5px;
-    overflow: hidden;
-    width: 199px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .widget.guest_welcome {
@@ -995,6 +996,12 @@ input.cta {
     color: #CD0D00;
     padding: 0;
     font-size: 22px;
+}
+
+.widget.mpu {
+    padding: 0;
+    width: 300px;
+    line-height: 0;
 }
 
 .top5 {
