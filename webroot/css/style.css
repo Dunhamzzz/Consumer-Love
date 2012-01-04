@@ -19,7 +19,7 @@ body {
 }
 
 a {
-    color: #2D334D;	
+    color: #424C72;	
 }
 
 label,strong,b {
@@ -59,16 +59,20 @@ a:hover {
 }
 
 h1,h2,h3,h4,p,ul,ol {
-    margin-bottom: 10px;
+    margin-bottom: 0.5em;
+	line-height: 1.4em;
 }
 
 h1 {
     font-size: 25px;
 }
 
+h2 {
+	font-size: 20px;
+}
+
 h2, h3 {
     border-bottom: 2px solid #2D334D;
-    font-size: 25px;
     font-weight: bold;
     padding-bottom: 3px;
     color: #2D334D;
@@ -350,10 +354,14 @@ footer p {
 }
 
 #footer-links {
-    margin: 30px auto 30px;
+    margin: 1em auto 0.5em;
     width: 960px;
     overflow: hidden;
     color: #fff;
+}
+
+#footer-links a {
+	color: #fff;
 }
 
 #footer-links li {
@@ -361,7 +369,6 @@ footer p {
     font-family: 'Corben';
     width: 225px;
     margin: 0 10px;
-    font-size: 14px;
 }
 
 #footer-links li.first {
@@ -375,14 +382,15 @@ footer p {
 #footer-links .sub {
     border-top: 4px solid #4d5471;
     overflow: hidden;
-    margin-top: 15px;
-    padding-top: 20px;
+    margin-top: 0.5em;
+    padding-top: 0.5em;
 }
 
 #footer-links .sub li {
     font-family: Verdana;
     float: none;
     margin: 0;
+	font-size: 14px;
 }
 
 #breadcrumbs {
@@ -501,7 +509,7 @@ footer p {
 #content {
     overflow: hidden;
     float: left;
-    width: 630px;
+    width: 710px;
     border-radius: 5px;
     margin: 10px 10px 10px 0;
     padding: 10px;
@@ -517,7 +525,6 @@ footer p {
 
 #side {
     float: right;
-    width: 300px;
     margin-top: 10px;	
 }
 
@@ -968,7 +975,7 @@ input.cta {
     background: #fff;
     border-radius: 5px;
     overflow: hidden;
-    width: 279px;
+    width: 199px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 

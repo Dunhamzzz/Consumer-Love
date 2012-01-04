@@ -113,32 +113,17 @@
 	<?php endif; ?>
 </div></div>
 <footer>
-<?php if(0):?>
+
 	<div id="footer-links-wrapper">
 		<ul id="footer-links">
-			<li class="first">Popular Categories
+			<li class="first">About
 				<ul class="sub">
-					<li>nothing</li>
+					<li><?php echo $this->Html->link('About Us', '/pages/about'); ?></li>
 				</ul>
 			</li>
-			<li>Trending Today
-				<ul class="sub">
-					<li>nada</li>
-				</ul>
-			</li></li>
-			<li>Hot Forum Topics
-				<ul class="sub">
-					<li>diddly-squat</li>
-				</ul>
-			</li></li>
-			<li class="last">Latest Posts
-				<ul class="sub">
-					<li>not a lot</li>
-				</ul>
-			</li></li>
 		</ul>
 	</div>
-<?php endif; ?>
+
 	<p>Copyright &copy; 2011 consumerlove.org</p>
 	<p>Consumer Love is still in epic alpha! Some functionality is incomplete or may not work at all.</p>
 </footer>

@@ -18,7 +18,7 @@
 	<ul class="suggestions basic">
 	<?php foreach($categories as $category) : ?>
 		<?php $productCount = $this->Love->plural($category['Category']['product_count'], 'empty!', '1 product', '{n} products'); ?>
-		<li><?php echo $this->Love->categoryLink(
+		<li><?php echo $this->Link->category(
 				$category,
 				$category['Category']['name']. '<span class="inventory-count">' . $productCount . '</span>',
 				array('escape' => false)
