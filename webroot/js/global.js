@@ -3,6 +3,8 @@ if (top.location!= self.location) {
 }
 
 $(function() {
+        $('.showcase a, a[rel=twipsy]').tipsy({gravity: 's'});
+    
 	// This hides popped-up stuff, use with 
 	$(document.body).click(function() {
 	    $('.hide-on-body-click').hide();

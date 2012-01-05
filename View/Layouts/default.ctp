@@ -22,10 +22,12 @@
         echo $this->Html->script(array(
             'https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js',
             'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
+            'jquery.tipsy',
             'global'
         ));
         echo $this->Html->css(array(
             'http://fonts.googleapis.com/css?family=Copse|Corben:700&v2',
+            'tipsy',
             'style'
         ));
 
