@@ -60,7 +60,7 @@ a:hover {
 
 h1,h2,h3,h4,p,ul,ol {
     margin-bottom: 0.5em;
-	line-height: 1.4em;
+    line-height: 1.4em;
 }
 
 h1 {
@@ -68,7 +68,7 @@ h1 {
 }
 
 h2 {
-	font-size: 20px;
+    font-size: 20px;
 }
 
 h2, h3 {
@@ -361,7 +361,7 @@ footer p {
 }
 
 #footer-links a {
-	color: #fff;
+    color: #fff;
 }
 
 #footer-links li {
@@ -390,7 +390,7 @@ footer p {
     font-family: Verdana;
     float: none;
     margin: 0;
-	font-size: 14px;
+    font-size: 14px;
 }
 
 #breadcrumbs {
@@ -1679,7 +1679,7 @@ input.loveit {
 }
 
 .settings-table tr {
-    
+
 }
 
 .settings-table th {
