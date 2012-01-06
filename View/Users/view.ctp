@@ -53,3 +53,28 @@ $age = $this->Love->age($user['User']['dob']);
         <?php endif; ?>
     </p>
 </div>
+<div class="tabs-wrapper">
+    <div class="tab-list-wrapper">
+        <ul id="user-tabs" class="tabs">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#inventory">Inventory</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#forum">Discussions</a></li>
+        </ul>
+    </div>
+    <section id="overview">
+        <h2>Overview</h2>
+    </section>
+
+    <section id="inventory">
+        <h2>Inventory</h2>
+    </section>
+
+    <section id="news">
+        <h2>News Articles</h2>
+    </section>
+
+    <section id="forum">
+        <h2>Forum Posts</h2>
+    </section>
+</div>

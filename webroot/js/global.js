@@ -23,7 +23,7 @@ $(function() {
 	});
 	
 	// Product Page Tabs	
-	$('#product-tabs').tabs();
+	$('.tabs-wrapper').tabs();
 	
 	// Placeholders
 	$('[placeholder]').focus(function() {

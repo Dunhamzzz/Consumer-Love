@@ -57,6 +57,7 @@
                                     <li><?php echo $this->Link->user($userData, 'Your Profile'); ?></li>
                                     <li><?php echo $this->Link->inventory($userData, 'Your Inventory'); ?></li>
                                     <li><?php echo $this->Html->link('Settings', array('controller' => 'users', 'action' => 'settings', 'admin' => false)); ?> </li>
+                                    <li class="divider"></li>
                                     <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false)); ?></li>
                                 </ul>
                             </nav>

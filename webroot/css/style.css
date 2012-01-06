@@ -72,9 +72,7 @@ h2 {
 }
 
 h2, h3 {
-    border-bottom: 2px solid #2D334D;
     font-weight: bold;
-    padding-bottom: 3px;
     color: #2D334D;
     text-align: left;
 }
@@ -461,11 +459,16 @@ footer p {
     text-align: left;
     display: none;
     border-top: 0;
-    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    border-radius: 5px 0 5px 5px;
 }
 
 #user-options ul {
     margin: 0;
+}
+
+#user-options ul li.divider {
+    
 }
 
 #user #user-options a {
@@ -474,7 +477,7 @@ footer p {
     padding: 0;
     font-weight: normal;
     border-radius: 0;
-    padding: 2px 5px;
+    padding: 2px 8px;
     font-size: 90%;
     float: none;
 }
@@ -840,6 +843,7 @@ footer p {
     display: inline-block;
     padding: 6px 12px;
     font-size: 16px;
+    line-height: 16px;
     color: #fff;
     font-weight: normal;
     cursor: pointer;
@@ -1115,8 +1119,19 @@ h2 .cta {
     text-indent: 0;
 }
 
+.tab-list-wrapper {
+    border-bottom: 1px solid #999;
+    clear: both;
+    height: 31px;
+    margin-left: -10px;
+    width: 730px;
+    margin-bottom: 10px;
+}
+
 ul.tabs {
-    overflow: hidden;
+    float: left;
+    height: 32px;
+    margin-left: 10px;
 }
 
 ul.tabs li {
@@ -1126,6 +1141,24 @@ ul.tabs li {
 ul.tabs li a {
     display: block;
     padding: 4px 8px;
+    color: #999;
+}
+
+ul.tabs .ui-tabs-selected {
+    font-weight: bold;
+    border-style: solid;
+    border-color: #999 #999 #fff;
+    border-width: 1px;
+    border-radius: 5px 5px 0 0;
+}
+
+ul.tabs .ui-tabs-selected a {
+    color: #424C72;
+    font-size: 18px;
+}
+
+.ui-tabs-panel {
+    clear: both;
 }
 
 .love {
@@ -1534,6 +1567,10 @@ input.loveit {
     text-align: center;
     color: #999;
     font-size: 14px;
+}
+
+#user-tabs {
+    clear: both;
 }
 
 /* jQuery UI Theme */
