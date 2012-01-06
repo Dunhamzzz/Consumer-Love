@@ -55,6 +55,7 @@
                             <nav id="user-options" class="hide-on-body-click">
                                 <ul>
                                     <li><?php echo $this->Link->user($userData, 'Your Profile'); ?></li>
+                                    <li><?php echo $this->Link->inventory($userData, 'Your Inventory'); ?></li>
                                     <li><?php echo $this->Html->link('Settings', array('controller' => 'users', 'action' => 'settings', 'admin' => false)); ?> </li>
                                     <li><?php echo $this->Html->link('Logout', array('controller' => 'users', 'action' => 'logout', 'admin' => false)); ?></li>
                                 </ul>
@@ -73,9 +74,6 @@
                 <ul id="menu"<?php echo isset($hideNav) ? ' style="display: none;' : ' class="show"'; ?>>
                     <li><?php echo $this->Html->link('Todays Activity', '/'); ?></li>
                     <li><?php echo $this->Html->link('Browse Categories', array('controller' => 'categories', 'action' => 'index', 'admin' => false, 'plugin' => false, 'escape' => false)); ?></li>
-                    <?php if (isset($userData)): ?>
-                        <li><?php echo $this->Link->inventory($userData, 'Your Inventory'); ?></li>
-<?php endif; ?>
                 </ul>
             </div>
         </nav>

@@ -5,7 +5,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     padding: 0;
     border: 0;
     font-size: 100%;
-    font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
+    font-family: Arial; /* Lucida Sans Unicode, Lucida Grande, sans-serif; */
     vertical-align: baseline;
 }
 
@@ -1279,16 +1279,7 @@ input.loveit {
     float: left;
     width: 32px;
     height: 32px;
-    border: 1px solid #fff;
-    border-radius: 5px;
-}
-
-.product-icon-list a:hover {
-    border-color: #333;
-}
-
-.product-icon-list a .product-logo {
-    border-radius: 5px;
+    padding: 1px;
 }
 
 .inventory-list .product-logo {

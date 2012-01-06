@@ -3,7 +3,7 @@ if (top.location!= self.location) {
 }
 
 $(function() {
-        $('.showcase a, a[rel=twipsy]').tipsy({gravity: 's'});
+        $('.showcase a, a[rel=tipsy], .product-icon-list a').tipsy({gravity: 's'});
     
 	// This hides popped-up stuff, use with 
 	$(document.body).click(function() {
