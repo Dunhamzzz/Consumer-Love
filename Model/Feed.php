@@ -5,7 +5,7 @@ class Feed extends AppModel {
 	
 	public function add($data) {
 		$this->save(array(
-			'user_id' => User::get('id') ?: null,
+			'user_id' => User::get('id') ? User::get('id') : null,
 			'product_id' => $data['product_id'],
 			'type' => $data['type'],
 			'content' => $data['content'],

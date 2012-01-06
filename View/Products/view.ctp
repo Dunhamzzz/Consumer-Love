@@ -18,7 +18,7 @@ $this->Html->addCrumb($product['Product']['name']);
 	<?php endif; ?>
 	<h1><?php echo $product['Product']['name']; ?></h1>
 	<div id="product-description">
-		<p><?php echo nl2br($product['Product']['description_formatted'] ?: $product['Product']['description']); ?></p>
+		<p><?php echo nl2br($product['Product']['description_formatted'] ? $product['Product']['description_formatted'] : $product['Product']['description']); ?></p>
 	</div>
 </div>
 <div id="product-tabs">

@@ -17,7 +17,7 @@ class LinkHelper extends AppHelper {
     public function news($news, $anchorText = false, $htmlAttrs = array()) {
         $news = $this->extractRow('News', $news);
 
-        $anchorText = $anchorText ? : $news['title'];
+        $anchorText = $anchorText ? $anchorText : $news['title'];
 
         return $this->Html->link(
                         $anchorText, array(
@@ -32,7 +32,7 @@ class LinkHelper extends AppHelper {
     // Returns a link to a product
     public function product($product, $anchorText = false, $htmlAttrs = array()) {
         $product = $this->extractRow('Product', $product);
-        $anchorText = $anchorText ? : $product['name'];
+        $anchorText = $anchorText ? $anchorText : $product['name'];
 
         return $this->Html->link(
                         $anchorText, array(
@@ -48,7 +48,7 @@ class LinkHelper extends AppHelper {
     public function user($user, $anchorText = false, $htmlAttrs = array()) {
         $user = $this->extractRow('User', $user);
 
-        $anchorText = $anchorText ? : $user['username'];
+        $anchorText = $anchorText ? $anchorText : $user['username'];
         return $this->Html->link($anchorText, array(
                     'controller' => 'users',
                     'action' => 'view',
@@ -75,7 +75,7 @@ class LinkHelper extends AppHelper {
 
     public function category($category, $anchorText = false, $htmlAttrs = array()) {
         $category = $this->extractRow('Category', $category);
-        $anchorText = $anchorText ? : $category['name'];
+        $anchorText = $anchorText ? $anchorText : $category['name'];
 
         return $this->Html->link($anchorText, array(
                     'controller' => 'categories',
