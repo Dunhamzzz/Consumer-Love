@@ -12,7 +12,7 @@ echo $this->Form->inputs(array(
     ),
     'website',
     'bio' => array(
-        'after' => '<span>Write a few details about yourself to be dispalyed on your profile.</span>'
+        'after' => '<span>Write a few details about yourself to be displayed on your profile.</span>'
     ),
     'dob' => array(
         'label' => 'Date of Birth',
