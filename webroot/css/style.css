@@ -652,6 +652,11 @@ footer p {
     border-right: none;
 }
 
+.showcase a {
+	display: block;
+	width: 64px;
+}
+
 .suggestions {
     margin: 0;
     border-bottom: 1px solid #797D90;
