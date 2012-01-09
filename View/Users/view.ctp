@@ -64,6 +64,17 @@ $age = $this->Love->age($user['User']['dob']);
     </div>
     <section id="overview">
         <h2>Overview</h2>
+        <div id="latest-love" class="page-widget">
+            <?php if (!empty($latestLove)): ?>
+                <ul class="product-list">
+                    <?php foreach ($latestLove as $product): ?>
+                        <li><? debug($product); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+
+            <?php endif; ?>
+        </div>
     </section>
 
     <section id="inventory">

@@ -184,7 +184,7 @@ class User extends AppModel {
      * Increments the profile_hits field if user is not current
      */
     public function profileHit($userId) {
-        if ($userId == AuthComponent::user('id')) {
+        if (AuthComponent::user('id') && $userId == AuthComponent::user('id')) {
             return false;
         }
 
@@ -203,19 +203,4 @@ class User extends AppModel {
         $this->set($data);
         return $this->validates(array('fieldList' => array('username')));
     }
-
-    public static function get($field = null) {
-        $user = Configure::read('User');
-        if (empty($user) || (!empty($field) && !array_key_exists($field, $user))) {
-            return false;
-        }
-
-        return!empty($field) ? $user[$field] : $user;
-    }
-
-    // Connects a username-less user to their existing User row on their email address
-    public function connectFacebook() {
-        
-    }
-
 }
