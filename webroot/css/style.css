@@ -1076,6 +1076,10 @@ input.cta {
     margin-bottom: 20px;
 }
 
+#product-description {
+	min-height: 72px;
+}
+
 #product .toggle-inventory {
     float: right;
     margin: 0 0 10px 10px;
