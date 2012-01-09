@@ -51,7 +51,7 @@ class Inventory extends AppModel {
                 'Inventory.user_id' => $userId,
                 'Product.published' => 1
             ),
-            'order' => 'created ASC',
+            'order' => 'created DESC',
             'fields' => array('Product.id', 'Product.name', 'Product.slug', 'Product.logo', 'Product.description_formatted', 'Inventory.created'),
             'contain' => 'Product'
         );
