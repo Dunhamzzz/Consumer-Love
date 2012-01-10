@@ -21,6 +21,7 @@ foreach($path as $breadcrumb) {
 	Sort By:
 	<select name="sort" >
 		<option value="Product.name">Name</option>
+		<option value="Product.inventory_count">Users</option>
 	</select>
 	<select name="order">
 		<option value="asc">Asc.</option>
