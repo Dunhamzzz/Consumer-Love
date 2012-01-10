@@ -136,18 +136,4 @@ class Inventory extends AppModel {
                 ));
     }
 
-    /**
-     * Gets a users latest love votes 
-     */
-    public function getLatestLove($userId, $limit = 5) {
-        return $this->find('all', array(
-            'conditions' => array(
-                'user_id' => $userId,
-                'score' => 1
-            ),
-            'contain' => array('Product'),
-            'limit' => $limit
-        ));
-    }
-    
 }
