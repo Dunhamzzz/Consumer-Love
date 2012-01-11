@@ -6,6 +6,7 @@ foreach($path as $breadcrumb) {
 }
 
 ?>
+<h1><?php echo $category['Category']['name'];?></h1>
 <?php if(!empty($category['ChildCategory'])): ?>
 <h2>Sub-Categories</h2>
 <ul>
@@ -29,4 +30,6 @@ foreach($path as $breadcrumb) {
 	</select>
 </form>
 <?php echo $this->element('products/list'); ?>
+<?php else: ?>
+    <p>There are currently no products listed in <?php echo $category['Category']['name'];?>!</p>
 <?php endif; ?>
