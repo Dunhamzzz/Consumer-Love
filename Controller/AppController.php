@@ -63,10 +63,12 @@ class AppController extends Controller {
         'Love',
         'Link'
     );
+
     /**
      * Stores user data for each request
      */
-    public $userInventory, $userData;
+    public $userInventory;
+    public $userData;
 
     public function beforeFilter() {
 
