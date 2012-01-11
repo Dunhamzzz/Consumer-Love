@@ -24,9 +24,7 @@ class CategoriesController extends AppController {
     }
 
     public function index() {
-        $categories = $this->Category->getAllThreaded(false);
-
-        $this->set(compact('categories'));
+        $this->set('categories', $this->Category->getAllThreaded(false));
     }
 
     public function view($slug) {
@@ -36,20 +34,22 @@ class CategoriesController extends AppController {
             throw new NotFoundException(__('Invalid category'));
         }
 
-        $path = $this->Category->getPath($category['Category']['id']);
+        $this->set('category', $category);
+        $this->set('path', $this->Category->getPath($category['Category']['id']));
 
         // Make custom method
         if (isset($this->params['data']['sort'], $this->params['data']['order'])) {
             $this->paginate['Product']['order'] = array($this->params['data']['sort'] => $this->params['data']['order']);
         }
 
-
-        // @todo use 2.0 paginator
-        $products = $this->paginate($this->Category->Product, array(
-            'CategoryFilter.category_id' => $category['Category']['id']
-                ));
-
-        $this->set(compact('category', 'products', 'path'));
+        // Paginate list of products
+        $conditions = array_merge(
+               array('CategoryFilter.category_id' => $category['Category']['id']),
+               array($this->Category->Product->activeConditions())
+        );
+       
+        $this->set('products', $this->paginate($this->Category->Product, $conditions));
+        
         $this->set('title_for_layout', $category['Category']['name']);
     }
 
