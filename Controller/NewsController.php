@@ -2,6 +2,12 @@
 
 class NewsController extends AppController {
 
+    public function beforeFilter() {
+
+        $this->Auth->allow('view');
+
+        parent::beforeFilter();
+    }
     
     public function index($productSlug) {
         $product = $this->News->Product->getBySlug($productSlug);
