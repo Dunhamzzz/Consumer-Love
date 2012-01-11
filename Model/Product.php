@@ -104,8 +104,7 @@ class Product extends AppModel {
         $term = str_replace('%', ' ', $term);
 
         $conditions = array_merge(
-                array('Product.name LIKE ?' => '%' . $term . '%'),
-                $this->activeConditions()
+                array('Product.name LIKE ?' => '%' . $term . '%'), $this->activeConditions()
         );
 
         return $this->find('active', array(
@@ -118,24 +117,51 @@ class Product extends AppModel {
     }
 
     /**
-     * Returns an array of related products. For now just grabs from the same categories.
+     * Returns an array of related products.
+     * Products are classed as related if they share the same parent, are a child of, or are in the same category.
      * @param string $productId
      */
     public function related($productId, $limit = 10) {
-        return 1;
         return $this->find('all', array(
-                    'joins' => array(
-                        'table' => 'categories_products',
-                        'alias' => 'CategoriesProducts',
-                        'type' => 'left',
-                        'conditions' => array(
-                            'CategoriesProducts.product_id => '
-                        )
-                    ),
-                    'limit' => $limit
-                ));
+            'joins' => array(
+                'table' => 'categories_products',
+                'alias' => 'CategoriesProducts',
+                'type' => 'left',
+                'conditions' => array(
+                    'CategoriesProducts.product_id = Product.Id',
+                    
+                )
+            ),
+            'limit' => $limit
+        ));
     }
 
+    /*
+$options['joins'] = array(
+	array('table' => 'books_tags',
+		'alias' => 'BooksTag',
+		'type' => 'inner',
+		'conditions' => array(
+			'Books.id = BooksTag.books_id'
+		)
+	),
+	array('table' => 'tags',
+		'alias' => 'Tag',
+		'type' => 'inner',
+		'conditions' => array(
+			'BooksTag.tag_id = Tag.id'
+		)
+	)
+);
+
+$options['conditions'] = array(
+	'Tag.tag' => 'Novel'
+);
+
+$books = $Book->find('all', $options);
+    
+     */
+    
     /**
      * Returns a product row from a slug.
      * @param string $slug

@@ -120,9 +120,9 @@ class AppController extends Controller {
         }
 
         // Get Latest Posts
-        $this->loadModel('Post');
-        $this->Post = new Post();
-        $this->set('latestPosts', $this->Post->getLatest());
+       // $this->loadModel('Post');
+       // $this->Post = new Post();
+       // $this->set('latestPosts', $this->Post->getLatest());
     }
 
     public function beforeRender() {
