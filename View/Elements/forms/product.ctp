@@ -8,5 +8,9 @@ echo $this->Form->input('Category');
 echo $this->Form->input('logo', array('type' => 'file'));
 echo $this->Form->input('website_url');
 echo $this->Form->input('twitter');
-echo $this->Form->end('Save');
 ?>
+<fieldset>
+    <p><em>Other options</em></p>
+    <?php echo $this->Form->input('published'); ?>
+</fieldset>
+<?php echo $this->Form->end('Save'); ?>
