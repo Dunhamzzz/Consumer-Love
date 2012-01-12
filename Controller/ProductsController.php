@@ -49,12 +49,9 @@ class ProductsController extends AppController {
         }
 
         // Related Products
-        $related = $this->Product->find('related', array(
-            'product' => $product,
-            'conditions' => $this->Product->activeConditions()
-                ));
+        $this->set('related', $this->Product->related($product));
 
-        $canonical = '/' . $product['Product']['slug'];
+        $this->set('canonical', '/' . $product['Product']['slug']);
 
         $this->set('title_for_layout', $product['Product']['name'] . ' &hearts;');
         $this->set(compact('product', 'category', 'threads', 'canonical', 'related', 'news'));

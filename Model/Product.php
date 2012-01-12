@@ -118,50 +118,47 @@ class Product extends AppModel {
 
     /**
      * Returns an array of related products.
-     * Products are classed as related if they share the same parent, are a child of, or are in the same category.
-     * @param string $productId
+     * Products are classed as related if they share the same parent, are the parent/a child of, or are in the same category.
+     * @param array $productData
      */
-    public function related($productId, $limit = 10) {
+    public function related($productData, $limit = 10) {
         return $this->find('all', array(
-            'joins' => array(
-                'table' => 'categories_products',
-                'alias' => 'CategoriesProducts',
-                'type' => 'left',
-                'conditions' => array(
-                    'CategoriesProducts.product_id = Product.Id',
+            'conditions' => array(
+                'OR' => array(
+                    array('Product.parent_id' => $productData['Product']['parent_id']),
+                    array('Product.parent_id' => $productData['Product']['id']),
+                    array('Product.id' => $productData['Product']['parent_id'])
                     
-                )
+                ),
+                'Product.id <>' => $productData['Product']['id']
             ),
-            'limit' => $limit
+            'contain' => array('Category'),
+            'group' => 'Product.id'
         ));
+        
+            $sql = "
+SELECT  `products` . * 
+FROM  `products` ,  `categories_products` 
+WHERE (
+ `categories_products`.`product_id` =  `products`.`id` 
+AND  `categories_products`.`category_id` 
+IN (
+
+SELECT  `category_id` 
+FROM  `categories_products` 
+WHERE  `categories_products`.`product_id` =  '4dde9f7a-f060-49cb-bcc3-55c06d4ac163'
+)
+)
+OR  `products`.`parent_id` =  '4dde9f7a-f060-49cb-bcc3-55c06d4ac163'
+OR  `products`.`parent_id` =  '4dde9f7a-b88c-41fb-ae8d-55c06d4ac163'
+OR  `products`.`id` =  '4dde9f7a-b88c-41fb-ae8d-55c06d4ac163'
+GROUP BY  `products`.`id` 
+LIMIT 0 , 30
+";
+    
+        
     }
 
-    /*
-$options['joins'] = array(
-	array('table' => 'books_tags',
-		'alias' => 'BooksTag',
-		'type' => 'inner',
-		'conditions' => array(
-			'Books.id = BooksTag.books_id'
-		)
-	),
-	array('table' => 'tags',
-		'alias' => 'Tag',
-		'type' => 'inner',
-		'conditions' => array(
-			'BooksTag.tag_id = Tag.id'
-		)
-	)
-);
-
-$options['conditions'] = array(
-	'Tag.tag' => 'Novel'
-);
-
-$books = $Book->find('all', $options);
-    
-     */
-    
     /**
      * Returns a product row from a slug.
      * @param string $slug

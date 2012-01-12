@@ -73,4 +73,5 @@ $this->Html->addCrumb($product['Product']['name']);
         <h2><?php echo $product['Product']['name']; ?> Gallery</h2>
         <p>Gallery goes here</p>
     </div>
+    <?php debug($related); ?>
 </div>
