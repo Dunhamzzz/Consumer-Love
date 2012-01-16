@@ -121,19 +121,23 @@ class Product extends AppModel {
      * Products are classed as related if they share the same parent, are the parent/a child of, or are in the same category.
      * @param array $productData
      */
-    public function related($productData, $limit = 10) {
+    public function related($productData, $limit = 4) {
+        
+        $conditions = array(
+            'OR' => array(array('Product.parent_id' => $productData['Product']['id'])), // Children of product),
+            'Product.id <>' => $productData['Product']['id']
+        );
+        
+        if(!empty($product['parent_id'])) {
+            $conditions['OR'][] = array('Product.parent_id' => $productData['Product']['parent_id']); // Siblings
+            $conditions['OR'][] = array('Product.id' => $productData['Product']['parent_id']); // Parent of product
+        }
+        
         return $this->find('all', array(
-            'conditions' => array(
-                'OR' => array(
-                    array('Product.parent_id' => $productData['Product']['parent_id']),
-                    array('Product.parent_id' => $productData['Product']['id']),
-                    array('Product.id' => $productData['Product']['parent_id'])
-                    
-                ),
-                'Product.id <>' => $productData['Product']['id']
-            ),
+            'conditions' => $conditions,
             'contain' => array('Category'),
-            'group' => 'Product.id'
+            'group' => 'Product.id',
+            'limit' => $limit
         ));
         
             $sql = "

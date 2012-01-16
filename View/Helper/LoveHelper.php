@@ -35,7 +35,7 @@ class LoveHelper extends AppHelper {
     }
 
     // Returns a product image
-    public function productImage($product, $size = 32, $url = false, $htmlAttrs = array()) {
+    public function productImage($product, $size = 32, $url = false) {
         $product = $this->extractProduct($product);
 
         if ($url) {

@@ -1343,6 +1343,12 @@ input.loveit {
     padding: 1px;
 }
 
+.product-list-medium {
+    float: left;
+    padding: 10px;
+    
+}
+
 .inventory-list .product-logo {
     margin: 0 10px 0 0;
 }
