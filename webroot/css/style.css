@@ -1163,7 +1163,6 @@ ul.tabs {
 
 ul.tabs li {
     float: left;
-    border-bottom: 1px solid #999;
 }
 
 ul.tabs li a {
