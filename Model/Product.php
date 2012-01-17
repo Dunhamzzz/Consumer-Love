@@ -40,29 +40,11 @@ class Product extends AppModel {
             'separator' => ''
         ),
     );
-    public $findMethods = array('active' => true, 'related' => true);
+    public $findMethods = array('active' => true);
 
     protected function _findActive($state, $query, $results = array()) {
         if ($state == 'before') {
             $query['conditions'] = array_merge($query['conditions'], $this->activeConditions());
-            return $query;
-        }
-
-        return $results;
-    }
-
-    protected function _findRelated($state, $query, $results = array()) {
-        if ($state == 'before') {
-            if (isset($query['product'])) {
-                // find products where parent_id is that product, or they share the same parent id.
-                $query['conditions']['parent_id'] = array($query['product']['Product']['id']);
-
-                if (!empty($query['product']['Product']['parent_id'])) {
-                    $query['conditions']['parent_id'][] = $query['product']['Product']['parent_id'];
-                }
-            }
-
-            unset($query['product']);
             return $query;
         }
 

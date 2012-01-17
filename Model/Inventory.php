@@ -4,7 +4,11 @@ class Inventory extends AppModel {
 
     public $belongsTo = array(
         'Product' => array(
-            'counterCache' => true
+            'counterCache' => array(
+                'inventory_count' => true,
+                'love_count' => array('Inventory.score' => 1),
+                'hate_count' => array('Inventory.score' => -1)
+            )
         ),
         'User' => array(
             'counterCache' => true
