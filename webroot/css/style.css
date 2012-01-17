@@ -1096,7 +1096,6 @@ input.cta {
 }
 
 #product-description {
-	min-height: 72px;
 }
 
 #product .toggle-inventory {
@@ -1164,6 +1163,7 @@ ul.tabs {
 
 ul.tabs li {
     float: left;
+    border-bottom: 1px solid #999;
 }
 
 ul.tabs li a {
@@ -1178,11 +1178,16 @@ ul.tabs .ui-tabs-selected {
     border-color: #999 #999 #fff;
     border-width: 1px;
     border-radius: 5px 5px 0 0;
+    height: 30px;
 }
 
 ul.tabs .ui-tabs-selected a {
     color: #424C72;
     font-size: 18px;
+}
+
+ul.tabs .ui-state-hover a {
+    color: #424C72
 }
 
 .ui-tabs-panel {
@@ -1638,7 +1643,7 @@ input.loveit {
 }
 
 .ui-dialog-content {
-    padding: 10px;	
+    padding: 10px;
 }
 
 .ui-tabs-hide {
