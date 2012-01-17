@@ -125,7 +125,8 @@ class Product extends AppModel {
         
         $conditions = array(
             'OR' => array(array('Product.parent_id' => $productData['Product']['id'])), // Children of product),
-            'Product.id <>' => $productData['Product']['id']
+            'Product.id <>' => $productData['Product']['id'],
+            'Product.published' => 1
         );
         
         if(!empty($product['parent_id'])) {
