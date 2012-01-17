@@ -17,11 +17,11 @@ $this->Html->addCrumb($product['Product']['name'].' Forum');
 ?>
  
 <p>
-	Welcome to our <?php echo $product['Product']['name'];?> forum, where you can post discussions, questions and queries - and hopefully get them answered!
+	Welcome to our <?php echo $this->Link->product($product);?> forum, where you can post discussions, questions and queries - and hopefully get them answered!
 </p>
 <?php echo $this->element('forms/thread'); ?>
 <?php if(!empty($threads)): ?>
-	<?php echo $this->element('forums/threads'); ?>
+    <?php echo $this->element('forums/threads'); ?>
 <?php else: ?>
 <p>There are no threads yet.</p>
 <?php endif; ?>

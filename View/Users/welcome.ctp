@@ -20,18 +20,18 @@
         ?>
         <h3>Not part of Consumer Love? <em>Join Today!</em></h3>
         <p>Loads of people already have!</p>
-        <?php echo $this->Form->input('username', array('placeholder' => 'Username', 'class' => 'signup-username')); ?>
-        <?php echo $this->Form->input('password', array('placeholder' => 'Password', 'class' => 'signup-password')); ?>
+        <?php echo $this->Form->input('username', array('placeholder' => 'Username', 'class' => 'signup-username', 'id' => 'welcome-username')); ?>
+        <?php echo $this->Form->input('password', array('placeholder' => 'Password', 'class' => 'signup-password', 'id' => 'welcome-password')); ?>
         <?php echo $this->Form->input('email', array('placeholder' => 'Email', 'class' => 'signup-email')); ?>
-<?php echo $this->Form->submit('Sign up', array('class' => 'cta signup-submit')); ?>
-<?php echo $this->Form->end(); ?>
+        <?php echo $this->Form->submit('Sign up', array('class' => 'cta signup-submit')); ?>
+        <?php echo $this->Form->end(); ?>
     </div>
     <h3 class="featuring">Featuring these products and more</h3>
     <div id="showcase-wrapper">
         <ul class="showcase">
             <?php foreach ($products as $product): ?>
-                <li><?php echo $this->Link->product($product, $this->Love->productImage($product, 64), array('title' => $product['Product']['name'],'escape' => false)); ?></li>
-<?php endforeach; ?>
+                <li><?php echo $this->Link->product($product, $this->Love->productImage($product, 64), array('title' => $product['Product']['name'], 'escape' => false)); ?></li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>
