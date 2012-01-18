@@ -4,3 +4,6 @@
 [submodule "Plugin/Utils"]
 	path = Plugin/Utils
 	url = https://github.com/CakeDC/utils.git
+[submodule "Plugin/Recaptcha"]
+	path = Plugin/Recaptcha
+	url = https://github.com/CakeDC/recaptcha.git
