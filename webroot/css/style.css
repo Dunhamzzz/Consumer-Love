@@ -910,9 +910,6 @@ input.cta {
 .toggle-inventory {
     display: inline-block;
     border: 1px solid #ccc;
-    background-color: #71BA13;
-    background-image: url(/img/icons/package_add.png);
-    background-position: 5px center;
     font-size: 16px;
     color: #666;
     text-shadow: none;
