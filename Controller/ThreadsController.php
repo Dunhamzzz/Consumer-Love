@@ -29,7 +29,7 @@ class ThreadsController extends AppController {
 
     public function create($productId = null) {
         // Check Product
-        $this->Thread->Product->id = $productId ? : $this->request->data['Thread']['product_id'];
+        $this->Thread->Product->id = $productId ? $productId : $this->request->data['Thread']['product_id'];
 
         if (!$this->Thread->Product->exists()) {
             throw new NotFoundException(__('Invalid Product.'));

@@ -59,11 +59,13 @@ class LinkHelper extends AppHelper {
     }
 
     // Links to a forum
-    public function forum($productSlug, $anchorText = 'Forum', $htmlAttrs = array()) {
+    public function forum($productSlug, $anchorText = null, $htmlAttrs = array()) {
         if (is_array($productSlug)) {
             $product = $this->extractRow('Product', $productSlug);
             $productSlug = $product['slug'];
         }
+
+        $anchorText = $anchorText ? $anchorText : $product['name'] . ' Forum';
 
         return $this->Html->link($anchorText, array(
                     'controller' => 'threads',
@@ -87,10 +89,12 @@ class LinkHelper extends AppHelper {
 
     // To a Thread
     public function thread($thread, $htmlAttrs = array()) {
-        return $this->Html->link($thread['Thread']['title'], array(
+        $thread = $this->extractRow('Thread', $thread);
+
+        return $this->Html->link($thread['title'], array(
                     'controller' => 'threads',
                     'action' => 'view',
-                    'threadSlug' => $thread['Thread']['slug'],
+                    'threadSlug' => $thread['slug'],
                     'productSlug' => $thread['Product']['slug']
                         ), $htmlAttrs);
     }

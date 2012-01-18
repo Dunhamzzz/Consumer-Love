@@ -309,7 +309,6 @@ form.settings {
     padding: 0 5px;
     line-height: 1.2;
     min-height: 10px;
-    margin-top: 41px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -422,7 +421,6 @@ footer p {
     background: #2D334D;
     color: #fff;
     font-size: 90%;
-    position: fixed;
     top: 0;
     width: 100%;
     height: 41px;
@@ -487,7 +485,7 @@ footer p {
 }
 
 #user-options ul li.divider {
-    
+
 }
 
 #user #user-options a {
@@ -672,8 +670,8 @@ footer p {
 }
 
 .showcase a {
-	display: block;
-	width: 64px;
+    display: block;
+    width: 64px;
 }
 
 .suggestions {
@@ -1350,7 +1348,7 @@ input.loveit {
 .product-list-medium {
     float: left;
     padding: 10px;
-    
+
 }
 
 .inventory-list .product-logo {
@@ -1553,7 +1551,7 @@ input.loveit {
 
 .post-content {
     margin-left: 200px;
-    padding: 10px;
+    padding: 0 10px 10px;
 }
 
 .edit-post {
@@ -1673,7 +1671,9 @@ input.loveit {
 
 .admin-table th {
     padding: 5px;
-
+    background-color: #2D334D;
+    color: #fff;
+    text-align: center;
 }
 
 .admin-table td {
@@ -1718,12 +1718,6 @@ input.loveit {
 
 .admin-table tr:hover {
     background-color: #efefef;
-}
-
-.admin-table th {
-    background-color: #4D5471;	
-    color: #fff;
-    text-align: center;
 }
 
 .admin-table th:first-child {

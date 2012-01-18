@@ -86,6 +86,19 @@ $age = $this->Love->age($user['User']['dob']);
     </section>
 
     <section id="forum">
-        <h2>Forum Posts</h2>
+        <h2>Latest Forum Posts</h2>
+        <?php if (!empty($latestPosts)): ?>
+        <ul>
+            <?php foreach ($latestPosts as $post): ?>
+            <li>
+                <blockquote><?php echo $post['Post']['content']; ?></blockquote>
+                on <?php echo $this->Link->thread($post['Thread']); ?>
+                in <?php echo $this->Link->forum($post['Thread'], $post['Thread']['Product']['name']); ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+        <?php else: ?>
+            <p><em><?php echo $user['User;']['name']; ?> has not participated in our forum yet.</em></p>
+        <?php endif; ?>
     </section>
 </div>

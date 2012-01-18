@@ -135,8 +135,11 @@ class UsersController extends AppController {
 
         $inventory = $this->User->Inventory->get($user['User']['id'], 10);
 
-        $title_for_layout = $user['User']['username'] . __(' on Consumer Love');
-        $this->set(compact('title_for_layout', 'user', 'inventory', 'latestLove'));
+        // Get Latest Posts
+        $this->set('latestPosts', $this->User->getLatestPosts($user['User']['id']));
+
+        $this->set('title_for_layout', $user['User']['username'] . __(' on Consumer Love'));
+        $this->set(compact('user', 'inventory', 'latestLove'));
     }
 
     public function settings() {

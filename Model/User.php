@@ -203,4 +203,15 @@ class User extends AppModel {
         $this->set($data);
         return $this->validates(array('fieldList' => array('username')));
     }
+
+    // Gets latest posts by user
+    public function getLatestPosts($userId, $limit = 10) {
+        return $this->Post->find('all', array(
+            'conditions' => array(
+                'Post.user_id' => $userId
+            ),
+            'contain' => array('Thread' => array('Product')),
+            'limit' => $limit
+        ));
+    }
 }

@@ -36,6 +36,7 @@ class AppModel extends Model {
     public $actsAs = array('Containable');
 
     public function afterFind($results, $primary = false) {
+        /* Needs documenting
         if (!empty($results)) {
             foreach ($results as $i => $row) {
                 if (!empty($row[0])) {
@@ -49,6 +50,7 @@ class AppModel extends Model {
                 }
             }
         }
+         */
         return parent::afterFind($results, $primary);
     }
 
