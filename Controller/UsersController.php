@@ -134,8 +134,6 @@ class UsersController extends AppController {
         $this->User->profileHit($user['User']['id']);
 
         $inventory = $this->User->Inventory->get($user['User']['id'], 10);
-        
-        $latestLove = $this->User->Inventory->getLatestLove($user['User']['id']);
 
         $title_for_layout = $user['User']['username'] . __(' on Consumer Love');
         $this->set(compact('title_for_layout', 'user', 'inventory', 'latestLove'));
