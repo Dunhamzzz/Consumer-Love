@@ -120,7 +120,7 @@ h3 {
 
 /* Forms */
 input, textarea {
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #a6a6a6;
     color: #000;
     font-family: Lucida Sans, Verdana;
@@ -139,8 +139,14 @@ input.loading {
     margin-bottom: 15px;	
 }
 
+.input.checkbox {
+    overflow: hidden;
+}
+
 .input.checkbox input {
     vertical-align: top;
+    width: auto;
+    float: left;
 }
 
 .input label {
@@ -148,6 +154,27 @@ input.loading {
     float: left;
     font-size: 16px;
     margin: 0 5px 5px;
+}
+
+.input.text label, .input.email label, .input.password label {
+    width: 160px;
+    line-height: 41px;
+}
+
+input.form-error {
+    border-color: #CD0A0A;
+}
+
+.input .error-message {
+    color: #CD0A0A;
+}
+
+input.invalid {
+    background: #fff url(/img/icons/delete.png) no-repeat 98% center;
+}
+
+input.valid {
+    background: #fff url(/img/icons/tick.png) no-repeat 98% center;
 }
 
 .submit {
@@ -226,10 +253,6 @@ form.settings {
 
 .settings input[type=submit] {
     width: auto;
-}
-
-.error-message {
-    color: #CD0A0A;
 }
 
 .flash-holder {
@@ -786,17 +809,6 @@ footer p {
     width: 185px;
 }
 
-.frontpage .signup-username {
-
-}
-
-.signup-username.invalid {
-    background: #fff url(/img/icons/delete.png) no-repeat 180px center;
-}
-
-.signup-username.valid {
-    background: #fff url(/img/icons/tick.png) no-repeat 180px center;
-}
 
 .frontpage .signup-password {
     float: right;
@@ -1373,25 +1385,9 @@ input.loveit {
 }
 
 /* Signup Form */
-#signup-wrapper {
-    width: 400px;
-}
 
 #signup-wrapper input {
     width: 386px	
-}
-
-#signup-wrapper .checkbox input {
-    width: auto;
-    float: left;	
-}
-
-#signup-wrapper .submit {
-
-}
-
-#signup input, #login input {
-    padding: 10px;
 }
 
 #signup .cta {

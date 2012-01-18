@@ -227,10 +227,10 @@ $(function() {
     });
 	
     // Signup Check Username
-    if($('#signup').length) {
+    if($('.signup-username').length) {
         var usernameTimer = false;
 		
-        $('#signup .signup-username').keyup(function(e) {
+        $('.signup-username').keyup(function(e) {
             if (e.keyCode > 40 || e.keyCode == 8) { //If a letter or backspace
                 if(this.value.length >= 2) {
                     $(this).addClass('loading');

@@ -23,22 +23,18 @@ class User extends AppModel {
                 'allowedEmpty' => false,
                 'on' => 'create',
                 'message' => 'Please enter a username.',
-                'last' => true
             ),
             'username_alpha' => array(
                 'rule' => 'alphaNumeric',
                 'message' => 'Your username may only contain letters and numbers.',
-                'last' => true
             ),
             'unique_username' => array(
                 'rule' => array('isUnique', 'username'),
                 'message' => 'Unfortunately this username has already been taken.',
-                'last' => true
             ),
             'username_min' => array(
                 'rule' => array('minLength', 3),
                 'message' => 'Your username must be at least 3 characters long.',
-                'last' => true
             )
         ),
         'email' => array(
@@ -46,24 +42,22 @@ class User extends AppModel {
                 'required' => true,
                 'rule' => 'notEmpty',
                 'message' => 'Please enter an email address.',
-                'last' => true,
                 'on' => 'create'
             ),
             'email_isValid' => array(
                 'rule' => array('email', true),
                 'message' => 'Please enter a valid email address.',
-                'last' => true
             ),
             'email_isUnique' => array(
                 'rule' => array('isUnique', 'email'),
                 'message' => 'This email is already in use.',
-                'last' => true
             ),
         ),
         'password' => array(
             'password_required' => array(
-                'rule' => array('emptyPassword', array('password_confirm')),
+                'rule' => 'notEmpty',
                 'message' => 'Please enter a valid password.',
+                'on' => 'create',
                 'last' => true
             ),
             'password_confirmed' => array(
@@ -126,15 +120,6 @@ class User extends AppModel {
             return $this->save($postData, false);
         }
         return false;
-    }
-
-    // Check password is empty http://bin.cakephp.org/saved/42156
-    public function emptyPassword($value = array(), $options = array(), $rule = array()) {
-        if ($this->compare($value, Security::hash('', null, true))) {
-            $this->invalidate($options[0], $rule['message']);
-            return false;
-        }
-        return true;
     }
 
     // Check passwords match
@@ -207,11 +192,12 @@ class User extends AppModel {
     // Gets latest posts by user
     public function getLatestPosts($userId, $limit = 10) {
         return $this->Post->find('all', array(
-            'conditions' => array(
-                'Post.user_id' => $userId
-            ),
-            'contain' => array('Thread' => array('Product')),
-            'limit' => $limit
-        ));
+                    'conditions' => array(
+                        'Post.user_id' => $userId
+                    ),
+                    'contain' => array('Thread' => array('Product')),
+                    'limit' => $limit
+                ));
     }
+
 }

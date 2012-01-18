@@ -37,8 +37,8 @@ class UsersController extends AppController {
                 'limit' => 14
                     ));
 
-            $disableSidebar = true;
-            $this->set(compact('products', 'news', 'disableSidebar', 'title_for_layout'));
+            $this->set('disableSidebar', true);
+            $this->set(compact('products', 'title_for_layout'));
             $this->render('welcome');
         }
     }
@@ -56,7 +56,7 @@ class UsersController extends AppController {
                 $this->Session->setFlash('Your account has been created, please login below.');
                 $this->redirect(array('action' => 'login'));
             } else {
-                $this->Session->setFlash('Your account could not be created, please correct the errors below.', $this->Auth->flashElement, array(), 'auth');
+                $this->Session->setFlash('Your account could not be created, please correct the errors below.');
             }
         }
 

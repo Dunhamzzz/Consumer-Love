@@ -10,14 +10,14 @@ $this->set('disableDistractions', true);
 	'legend' => false,
 	'fieldset' => false,
 	'username' => array(
-		'label' => false,
 		'placeholder' =>'Username',
 		'autocomplete' => 'off',
 		'id' => 'username',
+                'class' => 'signup-username'
 	),
-	'password' => array('label' => false, 'placeholder' => 'password', 'autocomplete' => 'off', 'id' => false),
-	'password_confirm' => array('label' => false, 'type' => 'password'),
-	'email' => array('label' => false, 'placeholder' => 'Email', 'type' => 'email'),
+	'password' => array('placeholder' => 'password', 'autocomplete' => 'off', 'id' => false),
+	'password_confirm' => array('label' => 'Confirm Password', 'type' => 'password'),
+	'email' => array('placeholder' => 'Email', 'type' => 'email'),
 	'tos' => array('label' => 'Terms and Conditions')
 	));
 	echo $this->Form->submit('Sign Up', arraY('class' => 'cta'));
