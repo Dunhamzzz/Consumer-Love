@@ -3,16 +3,15 @@
     <head>
         <meta charset="utf-8" />
         <title><?php echo $title_for_layout; ?></title>
-        <meta property="og:title" content="Consumer Love" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://consumerlove.org" />
-        <meta property="og:image" content="" />
-        <meta property="og:site_name" content="Consumer Love" />
-        <meta property="fb:admins" content="505549054" />
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+        <script type="text/javascript">
+        if (typeof jQuery == 'undefined') {
+            document.write(unescape("%3Cscript src='/js/jquery-1.7.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+        }
+        </script>
+                
         <link rel="shortcut icon" href="/favicon.ico">
         <?php
         if (isset($canonical)) {
@@ -20,7 +19,6 @@
         }
 
         echo $this->Html->script(array(
-            'https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js',
             'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
             'jquery.tipsy',
             'global'
