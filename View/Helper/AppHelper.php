@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Application level View Helper
  *
@@ -21,6 +22,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 App::uses('Helper', 'View');
+
 /**
  * This is a placeholder class.
  * Create the same file in app/app_helper.php
@@ -32,26 +34,27 @@ App::uses('Helper', 'View');
  * @subpackage    cake.cake
  */
 class AppHelper extends Helper {
-	
-	// Extracts row
-	protected function extractRow($key, $array) {
-		if(array_key_exists($key, $array)) {
-			return $array[$key];
-		} else {
-			return $array;
-		}
-	}
-	
-	protected function getViewVars($var) {
-		if(!isset($this->_viewVars)) {
-			$View = ClassRegistry::getObject('View');
-			$this->_viewVars = $View->viewVars;
-		}
-		
-		if(array_key_exists($var, $this->_viewVars)) {
-			return $this->_viewVars[$var];
-		}
-		
-		return false;
-	}
+
+    // Extracts row
+    protected function extractRow($key, $array) {
+        if (array_key_exists($key, $array)) {
+            return $array[$key];
+        } else {
+            return $array;
+        }
+    }
+
+    protected function getViewVars($var) {
+        if (!isset($this->_viewVars)) {
+            $View = ClassRegistry::getObject('View');
+            $this->_viewVars = $View->viewVars;
+        }
+
+        if (array_key_exists($var, $this->_viewVars)) {
+            return $this->_viewVars[$var];
+        }
+
+        return false;
+    }
+
 }

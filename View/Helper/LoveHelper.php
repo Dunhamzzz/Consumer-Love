@@ -36,7 +36,7 @@ class LoveHelper extends AppHelper {
 
     // Returns a product image
     public function productImage($product, $size = 32, $url = false) {
-        $product = $this->extractProduct($product);
+        $product = $this->extractRow('Product', $product);
 
         if ($url) {
             return '/files/product/logo/' . $product['id'] . '/' . $size . 'x' . $size . '_' . $product['logo'];
@@ -69,19 +69,6 @@ class LoveHelper extends AppHelper {
         $t = time();
         $age = ($dobStamp < 0) ? ( $t + ($dobStamp * -1) ) : $t - $dobStamp;
         return (int) floor($age / 31536000);
-    }
-
-    // Wrappers for extractRow()
-    private function extractUser($user) {
-        return $this->extractRow('User', $user);
-    }
-
-    private function extractProduct($product) {
-        return $this->extractRow('Product', $product);
-    }
-
-    private function extractCategory($category) {
-        return $this->extractRow('Category', $category);
     }
 
 }
