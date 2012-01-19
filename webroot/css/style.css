@@ -1127,8 +1127,11 @@ input.cta {
 }
 
 .product_meta dl {
-    color: #999;
     font-size: 12px;
+}
+
+.product-meta dd {
+    color: #999;
 }
 
 dt a {
@@ -1138,7 +1141,6 @@ dt a {
 .product_meta dl dd {
     padding-left: 10px;	
     margin: 2px 0 5px;
-    color: #000;
 }
 
 #product-tabs {
