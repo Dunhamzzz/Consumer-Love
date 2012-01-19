@@ -6,8 +6,8 @@
     <dl>
         <dt><a title="Click to find out how we work out a products popularity on Consumer Love">Popularity</a></dt>
         <?php if($product['Product']['inventory_count'] > 0) :?>
-            <dd class="num-love"><?php echo($product['Product']['love_count'] / $product['Product']['inventory_count'] *100); ?>% Love it</dd>
-            <dd class="num-hate"><?php echo($product['Product']['hate_count'] / $product['Product']['inventory_count'] *100); ?>% Hate it</dd>
+            <dd class="num-love"><?php echo round($product['Product']['love_count'] / $product['Product']['inventory_count'] *100); ?>% Love it</dd>
+            <dd class="num-hate"><?php echo round($product['Product']['hate_count'] / $product['Product']['inventory_count'] *100); ?>% Hate it</dd>
             <dd><?php echo($product['Product']['inventory_count'] - $product['Product']['love_count'] -$product['Product']['hate_count']);?> Indifferent</dd>
         <?php else: ?>
         <dd><em>No Users!</em></dd>
