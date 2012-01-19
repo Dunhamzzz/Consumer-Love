@@ -28,7 +28,7 @@ $(function() {
     $('.tabs-wrapper').tabs();
 	
     // Placeholders
-    $('[placeholder]').focus(function() {
+    /*$('[placeholder]').focus(function() {
         var input = $(this);
         if (input.val() == input.attr('placeholder')) {
             input.val('');
@@ -47,7 +47,7 @@ $(function() {
                 input.val('');
             }
         })
-    });
+    });*/
 	
     // Login/Register Dialog
     var $loginBox = $('#register-login');
@@ -155,8 +155,10 @@ $(function() {
     })
 	
     .focus(function() {
+        $(this).removeClass('idle');
+        
         if($(this).val() == 'Search for a product or brand') {
-            $(this).val('').removeClass('idle');
+            $(this).val('')
         }
 		
         if($(this).val().length) {
@@ -173,10 +175,7 @@ $(function() {
             $(this).val('Search for a product or brand').addClass('idle');
             $suggestLanding.fadeOut('fast');
         }
-    })
-	
-    // Turn autocomplete off and close chain.
-    .attr('autocomplete', 'off');
+    });
 	
     // Keep the suggestions box open
     $suggestLanding.mouseover( function() {

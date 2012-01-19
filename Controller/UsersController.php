@@ -10,7 +10,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('dashboard', 'signup', 'checkUsername', 'view');
+        $this->Auth->allow('dashboard', 'signup', 'checkUsername', 'view', 'inventory');
     }
 
     public function dashboard() {

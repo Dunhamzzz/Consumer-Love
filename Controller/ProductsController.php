@@ -23,7 +23,7 @@ class ProductsController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'view', 'autocomplete', 'top5');
+        $this->Auth->allow('index', 'view', 'autocomplete', 'top5', 'users');
     }
 
     public function view($slug = null) {

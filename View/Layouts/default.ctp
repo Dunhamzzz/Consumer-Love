@@ -19,6 +19,7 @@
         }
 
         echo $this->Html->script(array(
+            'modernizr-2.0.6',
             'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
             'jquery.tipsy',
             'global'
