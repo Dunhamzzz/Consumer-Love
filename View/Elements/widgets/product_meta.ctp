@@ -5,7 +5,13 @@
     <?php endif; ?>
     <dl>
         <dt><a title="Click to find out how we work out a products popularity on Consumer Love">Popularity</a></dt>
-        <dd>N/A in beta</dd>
+        <?php if($product['Product']['inventory_count'] > 0) :?>
+            <dd class="num-love"><?php echo($product['Product']['love_count'] / $product['Product']['inventory_count'] *100); ?>% Love it</dd>
+            <dd class="num-hate"><?php echo($product['Product']['hate_count'] / $product['Product']['inventory_count'] *100); ?>% Hate it</dd>
+            <dd><?php echo($product['Product']['inventory_count'] - $product['Product']['love_count'] -$product['Product']['hate_count']);?> Indifferent</dd>
+        <?php else: ?>
+        <dd><em>No Users!</em></dd>
+        <?php endif; ?>
         <dt>Users</dt>
         <dd><?php
     echo $this->Html->link($product['Product']['inventory_count'], array('controller' => 'products', 'action' => 'users', 'productSlug' => $product['Product']['slug']), array('class' => 'num-products'));

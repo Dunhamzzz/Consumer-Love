@@ -64,7 +64,7 @@ $this->Html->addCrumb($product['Product']['name']);
     </div>
     <div id="threads" class="product-section">
         <h2><?php echo $this->Link->forum($product['Product']['slug'], $product['Product']['name'] . ' Forum'); ?><?php echo $this->Link->newThread($product['Product']['id']); ?></h2>
-        <p>Here are the lastest discussions in our <?php echo $this->Link->forum($product['Product']['slug'], $product['Product']['name'] . ' forum'); ?>.</p>
+        <p>Here are the latest discussions in our <?php echo $this->Link->forum($product['Product']['slug'], $product['Product']['name'] . ' forum'); ?>.</p>
         <?php echo $this->element('forms/thread'); ?>
         <?php echo $this->element('forums/threads'); ?>
         <p><?php echo $this->Link->forum($product['Product']['slug'], 'View All Threads'); ?></p>
