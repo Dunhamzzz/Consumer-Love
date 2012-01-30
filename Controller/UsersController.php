@@ -14,7 +14,7 @@ class UsersController extends AppController {
     }
 
     public function dashboard() {
-        $title_for_layout = __('Consumer Love');
+        $this->set('title_for_layout', __('Consumer Love'));
 
         if ($this->Auth->user()) {
             if (!empty($this->userInventory)) {
@@ -25,10 +25,10 @@ class UsersController extends AppController {
             }
 
 
-            $top5Products = $this->Product->topByCategoryId(5);
-            $top5Category = $this->Product->Category->findById(5);
-            $categories = $this->Product->Category->getAllThreaded(true);
-            $this->set(compact('title_for_layout', 'top5Products', 'top5Category', 'categories', 'news'));
+            $this->set('top5Products', $this->Product->topByCategoryId(5));
+            $this->set('top5Category', $this->Product->Category->findById(5));
+            $this->set('categories', $this->Product->Category->getAllThreaded(true));
+
         } else {
             $products = $this->Product->find('active', array(
                 'conditions' => array(),
@@ -43,6 +43,11 @@ class UsersController extends AppController {
         }
     }
 
+    /**
+     * User Signup action
+     *
+     * URL: /signup/
+     */
     public function signup() {
         if ($this->Auth->user()) {
             $this->Session->setFlash('You are already registered and logged in!');
@@ -64,6 +69,11 @@ class UsersController extends AppController {
         $this->set('title_for_layout', 'Consumer Love / Sign up');
     }
 
+    /**
+     * User Login action
+     *
+     * URL: /login
+     */
     public function login() {
         // 2.0 Auth login
         if ($this->request->is('post')) {
@@ -89,7 +99,7 @@ class UsersController extends AppController {
                     $this->Cookie->delete('User');
                 }
 
-                return $this->redirect($this->Auth->redirect());
+                $this->redirect($this->Auth->redirect());
             } else {
                 $this->Session->setFlash($this->Auth->loginError, $this->Auth->flashElement, array(), 'auth');
             }
@@ -100,7 +110,7 @@ class UsersController extends AppController {
             $this->redirect($this->Auth->redirect());
         }
 
-        $this->set('title_for_layout', 'Consumer Love / Login');
+        $this->set('title_for_layout', __('Consumer Love / Login'));
     }
 
     // Page for people to merge their accounts and setup username
@@ -112,9 +122,7 @@ class UsersController extends AppController {
                 $this->redirect('/');
             }
         }
-        $title_for_layout = 'Your Account';
-
-        $this->set(compact('title_for_layout'));
+        $this->set('title_for_layout', __('Your Account'));
     }
 
     /**
@@ -133,15 +141,22 @@ class UsersController extends AppController {
         // Increment profile hits.
         $this->User->profileHit($user['User']['id']);
 
-        $inventory = $this->User->Inventory->get($user['User']['id'], 10);
+        // Get Inventory
+        $this->set('inventory', $this->User->Inventory->get($user['User']['id'], 10));
 
         // Get Latest Posts
         $this->set('latestPosts', $this->User->getLatestPosts($user['User']['id']));
 
-        $this->set('title_for_layout', $user['User']['username'] . __(' on Consumer Love'));
-        $this->set(compact('user', 'inventory', 'latestLove'));
+        $this->set('title_for_layout',  __('%s on Consumer Love', $user['User']['username']));
+
+        $this->set(compact('user', 'latestLove'));
     }
 
+    /**
+     * Settings page where users can edit their profile
+     *
+     * URL: /users/settings
+     */
     public function settings() {
         if ($this->request->is('put')) {
             $this->request->data['id'] = AuthComponent::user('id');
@@ -159,9 +174,7 @@ class UsersController extends AppController {
                     ));
         }
 
-        $title_for_layout = 'Update Your Profile';
-
-        $this->set(compact('title_for_layout'));
+        $this->set('title_for_layout', __('Update Your Profile'));
     }
 
     public function inventory($userSlug = null) {
@@ -190,7 +203,6 @@ class UsersController extends AppController {
     }
 
     /* Ajax Actions */
-
     public function checkUsername() {
         if ($this->request->is('ajax')) {
             $this->set('status', $this->User->checkUsernameAvailability($this->params['url']['username']));
