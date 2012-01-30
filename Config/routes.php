@@ -86,6 +86,12 @@ Router::connect('/:productSlug/users',
 	)
 );
 
+// Forum root
+// Forum Route
+Router::connect('/forums',
+	array('controller' => 'users', 'action' => 'forums', 'plugin' => false)
+);
+
 // Product Main Slug
 Router::connect('/:productSlug',
 	array('controller' => 'products', 'action' => 'view', 'plugin' => false),

@@ -10,7 +10,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('dashboard', 'signup', 'checkUsername', 'view', 'inventory');
+        $this->Auth->allow('dashboard', 'signup', 'checkUsername', 'view', 'inventory', 'forums');
     }
 
     public function dashboard() {
@@ -111,6 +111,22 @@ class UsersController extends AppController {
         }
 
         $this->set('title_for_layout', __('Consumer Love / Login'));
+    }
+
+     /**
+     * Displays a list of forums to user, otherwise, most popular forums
+     * Potentially doesn't belong here
+     */
+    public function forums() {
+
+        if($this->Auth->user()) {
+            // Get list of forums for inventory
+            
+        } else {
+            // Get most popular forums
+            
+        }
+
     }
 
     // Page for people to merge their accounts and setup username
