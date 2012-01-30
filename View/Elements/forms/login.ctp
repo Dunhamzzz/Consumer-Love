@@ -4,7 +4,7 @@ echo $this->Form->inputs(array(
 	'legend' => false,
 	'fieldset' => false,
 	'username' => array('label' => false, 'placeholder' => 'Username / Email', 'maxlength' => false),
-	'password' => array('label' => false, 'placeholder' => 'password'),
+	'password' => array('label' => false, 'placeholder' => '********'),
 	'remember' => array('type' => 'checkbox', 'label' => 'Remember')
 ));
 

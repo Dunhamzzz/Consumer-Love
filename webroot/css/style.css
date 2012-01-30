@@ -127,7 +127,7 @@ input.loading {
     background: #fff url('/img/icons/ajax-loader.gif') 98% center no-repeat;
 }
 
-.placeholder {
+.placeholder, input::-webkit-input-placeholder, input:-moz-placeholder {
     color: #aaa;	
 }
 
@@ -178,6 +178,7 @@ input[type=submit] {
     font-size: 16px;
     color: #666;
     text-shadow: none;
+    border-radius: 5px;
 
     background: #ffffff; /* Old browsers */
     background: -moz-linear-gradient(top, #ffffff 0%, #f3f3f3 50%, #ededed 51%, #ffffff 100%); /* FF3.6+ */
@@ -573,7 +574,6 @@ footer p {
 }
 
 #content {
-    overflow: hidden;
     float: left;
     width: 710px;
     border-radius: 5px;
