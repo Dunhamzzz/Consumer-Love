@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routes configuration
  *
@@ -26,7 +27,6 @@
  * its action cralled 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
-
 Router::connect('/', array('controller' => 'users', 'action' => 'dashboard'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
@@ -36,79 +36,56 @@ Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'
 // Login/Signup
 Router::connect('/signup', array('controller' => 'users', 'action' => 'signup'));
 Router::connect('/login', array('controller' => 'users', 'action' => 'login'));
-	
+
 // Profile Routes
 // inventory
-Router::connect('/profiles/:userSlug/inventory',
-	array('controller' => 'users', 'action' => 'inventory'),
-	array('pass' => array('userSlug'))
+Router::connect('/profiles/:userSlug/inventory', array('controller' => 'users', 'action' => 'inventory'), array('pass' => array('userSlug'))
 );
 
 // Profile
-Router::connect('/profiles/:userSlug',
-	array('controller' => 'users', 'action' => 'view'),
-	array('pass' => array('userSlug'))
-);
-
-// Products
-App::import('Lib', 'ProductRoute');
-Router::connect('/forum/:productSlug/:threadSlug',
-	array('controller' => 'threads', 'action' => 'view', 'plugin' => false),
-	array(
-		'routeClass' => 'ProductRoute',
-		'pass' => array('productSlug', 'threadSlug')
-	)
-);
-
-// Forum Route
-Router::connect('/forum/:productSlug',
-	array('controller' => 'threads', 'action' => 'all', 'plugin' => false),
-	array(
-		'routeClass' => 'ProductRoute',
-		'pass' => array('productSlug')
-	)
-);
-
-// News
-Router::connect('/news/:newsSlug',
-	array('controller' => 'news', 'action' => 'view', 'plugin' => false),
-	array(
-		'pass' => array('newsSlug')
-	)
-);
-
-// Owners /inInventory Route
-Router::connect('/:productSlug/users',
-	array('controller' => 'products', 'action' => 'users', 'plugin' => false),
-	array(
-		'routeClass' => 'ProductRoute',
-		'pass' => array('productSlug')
-	)
-);
-
-// Forum root
-// Forum Route
-Router::connect('/forums',
-	array('controller' => 'users', 'action' => 'forums', 'plugin' => false)
-);
-
-// Product Main Slug
-Router::connect('/:productSlug',
-	array('controller' => 'products', 'action' => 'view', 'plugin' => false),
-	array(
-		'routeClass' => 'ProductRoute',
-		'pass' => array('productSlug')
-	)
+Router::connect('/profiles/:userSlug', array('controller' => 'users', 'action' => 'view'), array('pass' => array('userSlug'))
 );
 
 // Categories
 Router::connect(
-	'/categories/:slug',
-	array('controller' => 'categories', 'action' => 'view'),
-	array(
-		'pass' => array('slug'),
-		'slug' => '[a-z0-9-]+'
-	)
+        '/categories/:slug', array('controller' => 'categories', 'action' => 'view'), array(
+    'pass' => array('slug'),
+    'slug' => '[a-z0-9-]+'
+        )
+);
+
+// Forums
+// Forum root
+Router::connect('/forums', array('controller' => 'users', 'action' => 'forums', 'plugin' => false)
+);
+
+// Products Forum
+Router::connect('/forum/:productSlug', array('controller' => 'threads', 'action' => 'all', 'plugin' => false), array('pass' => array('productSlug'))
+);
+// Product Thread
+Router::connect('/forum/:productSlug/:threadSlug', array('controller' => 'threads', 'action' => 'view', 'plugin' => false), array('pass' => array('productSlug', 'threadSlug'))
+);
+
+// News
+Router::connect('/news/:newsSlug', array('controller' => 'news', 'action' => 'view', 'plugin' => false), array(
+    'pass' => array('newsSlug')
+        )
+);
+
+// Grab product custom route for /productSlug urls
+App::import('Lib', 'ProductRoute');
+// Owners /inInventory Route
+Router::connect('/:productSlug/users', array('controller' => 'products', 'action' => 'users', 'plugin' => false), array(
+    'routeClass' => 'ProductRoute',
+    'pass' => array('productSlug')
+        )
+);
+
+// Product Main Slug
+Router::connect('/:productSlug', array('controller' => 'products', 'action' => 'view', 'plugin' => false), array(
+    'routeClass' => 'ProductRoute',
+    'pass' => array('productSlug')
+        )
 );
 
 Router::parseExtensions('json');
@@ -117,10 +94,10 @@ Router::parseExtensions('json');
  * Load all plugin routes.  See the CakePlugin documentation on
  * how to customize the loading of plugin routes.
  */
-	CakePlugin::routes();
+CakePlugin::routes();
 
 /**
  * Load the CakePHP default routes. Remove this if you do not want to use
  * the built-in default routes.
  */
-	require CAKE . 'Config' . DS . 'routes.php';
+require CAKE . 'Config' . DS . 'routes.php';
