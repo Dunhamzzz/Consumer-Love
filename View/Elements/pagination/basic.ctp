@@ -1,4 +1,6 @@
-<p class="pagination">
+<?php
+$this->Paginator->options(array('update' => '#content'));
+?><p class="pagination">
 	<?php echo $this->Paginator->prev('<< previous', array(), null, array('class'=>'disabled'));?>
  | 	<?php echo $this->Paginator->numbers();?>
  |

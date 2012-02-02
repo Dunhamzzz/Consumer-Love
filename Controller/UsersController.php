@@ -4,7 +4,8 @@ class UsersController extends AppController {
 
     public $paginate = array(
         'Inventory' => array(
-            'order' => 'Product.name'
+            'order' => 'Product.name',
+            'limit' => 10
         )
     );
 
@@ -158,7 +159,7 @@ class UsersController extends AppController {
         $this->User->profileHit($user['User']['id']);
 
         // Get Inventory
-        $this->set('inventory', $this->User->Inventory->get($user['User']['id'], 10));
+        $this->set('inventory', $this->User->Inventory->get($user['User']['id'], 8));
 
         // Get Latest Posts
         $this->set('latestPosts', $this->User->getLatestPosts($user['User']['id']));

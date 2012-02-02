@@ -578,7 +578,7 @@ footer p {
     width: 710px;
     border-radius: 5px;
     margin: 10px 10px 10px 0;
-    padding: 10px;
+    padding: 10px 10px 0;
     background: #fff;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
@@ -1057,6 +1057,7 @@ input.cta {
     color: #CD0D00;
     padding: 0;
     font-size: 22px;
+    font-family: 'Courier New',Courier,monospace;
 }
 
 .widget.mpu {
@@ -1368,10 +1369,26 @@ ul.tabs .ui-state-hover a {
     padding: 1px;
 }
 
+.product-list-medium-wrapper {
+    width: 598px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
 .product-list-medium {
     float: left;
     padding: 10px;
+    text-align: center;
+}
 
+.product-list-medium h4 {
+    margin-bottom: 0;
+}
+
+.product-list-medium p {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 0;
 }
 
 .inventory-list .product-logo {
@@ -1593,13 +1610,19 @@ ul.tabs .ui-state-hover a {
 }
 
 /* User Profiles */
+
+
+#bio {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
 .profile-title {
     border-bottom: 1px solid #999;
 }
 
 .user-column {
     float: left;
-
 }
 
 .user-column.c1 {
@@ -1609,11 +1632,8 @@ ul.tabs .ui-state-hover a {
 .user-column.c1 p {
     text-align: center;
     color: #999;
-    font-size: 14px;
-}
-
-#user-tabs {
-    clear: both;
+    font-size: 11px;
+    margin-bottom: 5px;
 }
 
 /* jQuery UI Theme */

@@ -3,55 +3,57 @@
 $age = $this->Love->age($user['User']['dob']);
 ?>
 <h1 class="profile-title"><?php echo $user['User']['username']; ?></h1>
-<div class="user-column c1">
-    <?php echo $this->Gravatar->image($user['User']['email'], array('size' => 128, 'class' => 'gravatar')); ?>
-    <p>Joined <?php echo $this->Time->timeAgoInWords($user['User']['created']); ?></p>
-    <p><?php echo number_format($user['User']['profile_hits']); ?> profile views.</p>
-</div>
-<div class="user-column c2">
-    <table class="settings-table">
-        <tr>
-            <?php if (!empty($user['User']['real_name'])): ?>
-                <th>Real Name</th>
-                <td><?php echo $user['User']['real_name']; ?></td>
-            </tr>
-        <?php endif; ?>
-
-        <?php if ($age): ?>
+<div id="bio">
+    <div class="user-column c1">
+        <?php echo $this->Gravatar->image($user['User']['email'], array('size' => 128, 'class' => 'gravatar')); ?>
+        <p>Joined <?php echo $this->Time->timeAgoInWords($user['User']['created']); ?></p>
+        <p><?php echo number_format($user['User']['profile_hits']); ?> profile views.</p>
+    </div>
+    <div class="user-column c2">
+        <table class="settings-table">
             <tr>
-                <th>Age</th>
-                <td><?php echo $age; ?></td>
+                <?php if (!empty($user['User']['real_name'])): ?>
+                    <th>Real Name</th>
+                    <td><?php echo $user['User']['real_name']; ?></td>
+                </tr>
+            <?php endif; ?>
 
-            </tr>
-        <?php endif; ?>
+            <?php if ($age): ?>
+                <tr>
+                    <th>Age</th>
+                    <td><?php echo $age; ?></td>
 
-        <?php if (!empty($user['User']['location'])): ?>
+                </tr>
+            <?php endif; ?>
+
+            <?php if (!empty($user['User']['location'])): ?>
+                <tr>
+                    <th>Location</th>
+                    <td><?php echo $user['User']['location']; ?></td>
+                </tr>
+            <?php endif; ?>
+
+            <?php if (!empty($user['User']['website'])): ?>
+                <tr>
+                    <th>Website</th>
+                    <td><?php echo $this->Html->link($user['User']['website'], $user['User']['website'], array('class' => 'external')); ?></td>
+                </tr>
+            <?php endif; ?>
             <tr>
-                <th>Location</th>
-                <td><?php echo $user['User']['location']; ?></td>
+                <th>Last Seen</th>
+                <td><?php echo $this->Time->timeAgoInWords($user['User']['last_activity']); ?></td>
             </tr>
-        <?php endif; ?>
-
-        <?php if (!empty($user['User']['website'])): ?>
-            <tr>
-                <th>Website</th>
-                <td><?php echo $this->Html->link($user['User']['website'], $user['User']['website'], array('class' => 'external')); ?></td>
-            </tr>
-        <?php endif; ?>
-        <tr>
-            <th>Last Seen</th>
-            <td><?php echo $this->Time->timeAgoInWords($user['User']['last_activity']); ?></td>
-        </tr>
-    </table>
-</div>
-<div class="user-column c3">
-    <p class="user-bio">
-        <?php if (!empty($user['User']['bio'])): ?>
-            <?php echo $user['User']['bio'] ?>
-        <?php else: ?>
-            <em>No bio entered.</em>
-        <?php endif; ?>
-    </p>
+        </table>
+    </div>
+    <div class="user-column c3">
+        <p class="user-bio">
+            <?php if (!empty($user['User']['bio'])): ?>
+                <?php echo $user['User']['bio'] ?>
+            <?php else: ?>
+                <em>No bio entered.</em>
+            <?php endif; ?>
+        </p>
+    </div>
 </div>
 <div class="tabs-wrapper">
     <div class="tab-list-wrapper">
@@ -78,7 +80,17 @@ $age = $this->Love->age($user['User']['dob']);
     </section>
 
     <section id="inventory">
-        <h2>Inventory</h2>
+        <h2><?php echo $this->Link->inventory($user, __('Inventory (%s)', $user['User']['inventory_count']), array('escape' => false)); ?></h2>
+        <?php if (!empty($inventory)): ?>
+            <div class="product-list-medium-wrapper">
+                <?php foreach ($inventory as $product): ?>
+                    <?php echo $this->element('products/medium_list', array('product' => $product)); ?>
+                <?php endforeach; ?>
+            </div>
+        <p><?php echo $this->Link->inventory($user, __('View all %s products in %ss inventory', $user['User']['inventory_count'], $user['User']['username']), array('escape' => false)); ?></p>
+        <?php else: ?>
+            <p><?php echo $user['User']['username']; ?> has nothing in their inventory yet!</p>
+        <?php endif; ?>
     </section>
 
     <section id="news">
@@ -88,15 +100,15 @@ $age = $this->Love->age($user['User']['dob']);
     <section id="forum">
         <h2>Latest Forum Posts</h2>
         <?php if (!empty($latestPosts)): ?>
-        <ul>
-            <?php foreach ($latestPosts as $post): ?>
-            <li>
-                <blockquote><?php echo $post['Post']['content']; ?></blockquote>
-                on <?php echo $this->Link->thread($post['Thread']); ?>
-                in <?php echo $this->Link->forum($post['Thread'], $post['Thread']['Product']['name']); ?>
-            </li>
-            <?php endforeach; ?>
-        </ul>
+            <ul>
+                <?php foreach ($latestPosts as $post): ?>
+                    <li>
+                        <blockquote><?php echo $post['Post']['content']; ?></blockquote>
+                        on <?php echo $this->Link->thread($post['Thread']); ?>
+                        in <?php echo $this->Link->forum($post['Thread'], $post['Thread']['Product']['name']); ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         <?php else: ?>
             <p><em><?php echo $user['User;']['name']; ?> has not participated in our forum yet.</em></p>
         <?php endif; ?>

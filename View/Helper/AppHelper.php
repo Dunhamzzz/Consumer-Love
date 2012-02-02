@@ -36,7 +36,7 @@ App::uses('Helper', 'View');
 class AppHelper extends Helper {
 
     // Extracts row
-    protected function extractRow($key, $array) {
+    public function extractRow($key, $array) {
         if (array_key_exists($key, $array)) {
             return $array[$key];
         } else {
