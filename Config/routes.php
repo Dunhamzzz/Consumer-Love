@@ -52,7 +52,7 @@ Router::connect('/profiles/:userSlug',
 
 // Products
 App::import('Lib', 'ProductRoute');
-Router::connect('/:productSlug/forum/:threadSlug',
+Router::connect('/forum/:productSlug/:threadSlug',
 	array('controller' => 'threads', 'action' => 'view', 'plugin' => false),
 	array(
 		'routeClass' => 'ProductRoute',
@@ -61,7 +61,7 @@ Router::connect('/:productSlug/forum/:threadSlug',
 );
 
 // Forum Route
-Router::connect('/:productSlug/forum',
+Router::connect('/forum/:productSlug',
 	array('controller' => 'threads', 'action' => 'all', 'plugin' => false),
 	array(
 		'routeClass' => 'ProductRoute',
