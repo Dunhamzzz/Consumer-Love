@@ -7,3 +7,6 @@
 [submodule "Plugin/Recaptcha"]
 	path = Plugin/Recaptcha
 	url = https://github.com/CakeDC/recaptcha.git
+[submodule "Plugin/DebugKit"]
+	path = Plugin/DebugKit
+	url = https://github.com/cakephp/debug_kit.git
