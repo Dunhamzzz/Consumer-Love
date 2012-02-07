@@ -19,8 +19,11 @@ class Product extends AppModel {
             )
         )
     );
+
     public $hasAndBelongsToMany = array('Category');
+
     public $hasMany = array('Inventory', 'Feed', 'Thread', 'News');
+
     public $actsAs = array(
         'Upload.Upload' => array(
             'logo' => array(
@@ -197,6 +200,37 @@ LIMIT 0 , 30
         $formattedDescription = str_replace($matches[0], $linkedWords, $description);
 
         return $formattedDescription;
+    }
+
+     /**
+     * Updates a products total post
+      * @param array $post Post data from $this->data
+     */
+    public function updateForumData($post) {
+
+        // Find Product from thread
+        $thread = $this->Thread->find('first', array(
+            'conditions' => array('Thread.id' => $post['Post']['thread_id']),
+            'fields' => 'product_id',
+            'contain' => false
+        ));
+
+        $this->id = $thread['Thread']['product_id'];
+
+        // Update last Post
+        $this->saveField('last_post_id', $post['Post']['id']);
+
+        // Update Total post count
+        $postData = $this->Thread->find('all', array(
+            'fields' => array('SUM(Thread.post_count) AS total'),
+            'conditions' => array(
+                'Thread.product_id' => $this->id
+            ),
+            'contain' => false
+        ));
+
+        $this->saveField('post_count', $postData[0][0]['total']);
+
     }
 
 }
