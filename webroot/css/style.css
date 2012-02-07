@@ -204,6 +204,7 @@ input[type=submit]:hover {
 .submit {
     text-align: center;
     overflow: hidden;
+    margin-bottom: 10px;
 }
 
 /* Writing Forms */
@@ -222,6 +223,7 @@ input[type=submit]:hover {
 .writing .input label {
     clear: both;
     float: none;
+    line-height: inherit;
 }
 
 .writing fieldset {
@@ -920,22 +922,6 @@ footer p {
 
 input.cta {
     cursor: pointer;
-    border: 0;
-}
-
-.cta.reply {
-    /*	background-image: url(/img/icons/comment_add.png);
-            background-position: 5px center;
-            text-indent: 18px;*/
-}
-
-.new-thread {
-    float: right;	
-    font-size: 16px;
-    background-image: url(/img/icons/comments_add.png);
-    background-position: 8px center;
-    text-indent: 24px;
-    margin: 10px 0 20px 0;
 }
 
 .toggle-inventory {

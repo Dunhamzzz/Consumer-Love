@@ -12,14 +12,20 @@ class PostsController extends AppController {
         if ($this->request->is('post')) {
             $threadId = $this->request->data['Post']['thread_id'];
         }
+        
         $thread = $this->Post->Thread->find('first', array(
             'conditions' => array('Thread.id' => $threadId),
-            'contain' => array('Product')
-                ));
-
+            'contain' => false
+        ));
+        
         if (empty($thread)) {
             throw new NotFoundException(__('Invalid Thread'));
         }
+        
+        // Get product separately for view/widgets
+        $product = $this->Product->getById($thread['Thread']['product_id']);
+        $thread['Product'] = $product['Product'];
+        
 
         $save = false;
         $this->Post->set($this->request->data);
@@ -58,9 +64,9 @@ class PostsController extends AppController {
             }
         }
 
-        $title_for_layout = 'Reply To Thread';
+        $this->set('title_for_layout', __('Reply To Thread'));
 
-        $this->set(compact('thread', 'title_for_layout'));
+        $this->set(compact('thread', 'product'));
     }
 
     public function edit($postId) {
@@ -97,8 +103,8 @@ class PostsController extends AppController {
             $this->request->data = $post;
         }
 
-        $title_for_layout = __('Edit Your Post');
-        $this->set(compact('title_for_layout', 'post', 'thread'));
+        $this->set('title_for_layout', __('Edit Your Post'));
+        $this->set(compact('post', 'thread'));
     }
 
 }

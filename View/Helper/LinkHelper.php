@@ -19,13 +19,13 @@ class LinkHelper extends AppHelper {
 
         $anchorText = $anchorText ? $anchorText : $news['title'];
 
-        return $this->Html->link(
-                        $anchorText, array(
-                    'controller' => 'news',
-                    'action' => 'view',
-                    'admin' => false,
-                    'newsSlug' => $news['slug']
-                        )
+        return $this->Html->link($anchorText, array(
+                'controller' => 'news',
+                'action' => 'view',
+                'admin' => false,
+                'newsSlug' => $news['slug']
+            ),
+            $htmlAttrs
         );
     }
 
@@ -89,12 +89,11 @@ class LinkHelper extends AppHelper {
 
     // To a Thread
     public function thread($thread, $htmlAttrs = array()) {
-        $thread = $this->extractRow('Thread', $thread);
 
-        return $this->Html->link($thread['title'], array(
+        return $this->Html->link($thread['Thread']['title'], array(
                     'controller' => 'threads',
                     'action' => 'view',
-                    'threadSlug' => $thread['slug'],
+                    'threadSlug' => $thread['Thread']['slug'],
                     'productSlug' => $thread['Product']['slug']
                         ), $htmlAttrs);
     }

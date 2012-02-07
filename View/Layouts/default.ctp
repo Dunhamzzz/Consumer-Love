@@ -4,14 +4,14 @@
         <meta charset="utf-8" />
         <title><?php echo $title_for_layout; ?></title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        
+
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
         <script type="text/javascript">
-        if (typeof jQuery == 'undefined') {
-            document.write(unescape("%3Cscript src='/js/jquery-1.7.1.min.js' type='text/javascript'%3E%3C/script%3E"));
-        }
+            if (typeof jQuery == 'undefined') {
+                document.write(unescape("%3Cscript src='/js/jquery-1.7.1.min.js' type='text/javascript'%3E%3C/script%3E"));
+            }
         </script>
-                
+
         <link rel="shortcut icon" href="/favicon.ico">
         <?php
         if (isset($canonical)) {
@@ -42,7 +42,8 @@
             <div class="container">
                 <a href="/" id="site-title" rel="home">Consumer Love <span class="heart"> &hearts;</span></a>
                 <?php if (!isset($disableSidebar))
-                    echo $this->element('search'); ?>
+                    echo $this->element('search');
+                ?>
                 <div id="user">
                         <?php if (isset($userData)): ?>
                         <div class="username">
@@ -102,6 +103,7 @@
                                 $pageWidgets['admin'] = false;
                             }
                         } else {
+                            // Put guest welcome on top
                             array_unshift($pageWidgets, 'guest_welcome');
                         }
                         foreach ($pageWidgets as $widget => $vars):
@@ -109,9 +111,9 @@
                                 $widget = $vars;
                             ?>
                             <div class="widget <?php echo $widget; ?>">
-                        <?php echo $this->element('widgets/' . $widget, (array) $vars); ?>
+                            <?php echo $this->element('widgets/' . $widget, (array) $vars); ?>
                             </div>
-    <?php endforeach; ?>
+                    <?php endforeach; ?>
                     </div>
 <?php endif; ?>
             </div></div>
@@ -140,10 +142,10 @@
                 <div>
                     <h3>Login</h3>
                     <p class="footnote">Login to your existing account.</p>
-            <?php echo $this->element('forms/login'); ?>
+    <?php echo $this->element('forms/login'); ?>
                 </div>
             </div>
-<?php endif; ?>
+        <?php endif; ?>
 <?php echo $this->Js->writeBuffer(); ?>
     </body>
 </html>

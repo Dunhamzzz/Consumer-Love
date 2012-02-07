@@ -1,3 +1,4 @@
+<?php $this->set('pageWidgets', array('product_meta')); ?>
 <h1>Submit <?php echo $this->Link->product($product); ?> News</h1>
 <p>Use this form to report upcoming news about <?php echo $this->Link->product($product); ?> and improve your Consumer Love score.</p>
 <?php echo $this->Form->create('News', array('class' => 'writing'));?>

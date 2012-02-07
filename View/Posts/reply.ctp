@@ -1,12 +1,12 @@
 <?php
 // Register Widgets
-$pageWidgets = array(
-	'product_meta' => array($thread['Product'])
-);
-$this->set(compact('pageWidgets'));
+$this->set('pageWidgets', array(
+    'product_meta' => array('product' => $product)
+));
 ?>
+<h1>Reply to Thread</h1>
 <p>
-	You are replying to the thread <em><?php echo $this->Link->thread($thread); ?></em>
- for <?php echo $this->Link->Product($thread['Product']); ?>.
+    You are replying to the thread <em><?php echo $this->Link->thread($thread); ?></em>
+    for <?php echo $this->Link->Product($product); ?>.
 </p>
 <?php echo $this->element('forms/post'); ?>

@@ -16,8 +16,8 @@ echo $this->Form->inputs(array(
     ),
     'dob' => array(
         'label' => 'Date of Birth',
-        'minYear' => date('Y') - 31,
-        'maxYear' => date('Y') + 90,
+        'minYear' => date('Y') - 80,
+        'maxYear' => date('Y'),
         'dateFormat' => 'DMY'
     ),
     'location',
