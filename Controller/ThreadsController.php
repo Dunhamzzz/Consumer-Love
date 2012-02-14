@@ -23,7 +23,7 @@ class ThreadsController extends AppController {
         // @todo use 2.0 paginator
         $threads = $this->paginate('Thread', array('product_id' => $product['Product']['id']));
 
-        $title_for_layout = $product['Product']['name'] . ' Forum';
+        $this->set('title_for_layout', __('%s Forum', $product['Product']['name']));
         $this->set(compact('product', 'threads', 'title_for_layout'));
     }
 
@@ -53,8 +53,8 @@ class ThreadsController extends AppController {
             }
         }
 
-        $title_for_layout = 'New Thread';
-        $this->set(compact('product', 'title_for_layout'));
+        $this->set('title_for_layout', __('New Thread'));
+        $this->set('product', $product);
     }
 
     public function view($productSlug, $threadSlug = null) {
@@ -72,14 +72,13 @@ class ThreadsController extends AppController {
         }
 
         //@todo use 2.0 paginator
-        $posts = $this->paginate('Post', array('thread_id' => $thread['Thread']['id']));
+        $this->set('posts', $this->paginate('Post', array('thread_id' => $thread['Thread']['id'])));
 
         $this->set('title_for_layout', $thread['Thread']['title']);
-        $this->set(compact('product', 'thread', 'posts'));
+        $this->set(compact('product', 'thread'));
     }
 
     /* Admin Actions */
-
     public function admin_delete($id) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();

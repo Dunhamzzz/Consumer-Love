@@ -15,11 +15,13 @@ $this->Html->addCrumb('Forum', array('action' => 'all', 'productSlug' => $thread
 ?>
 <h2><?php echo $thread['Thread']['title']; ?></h2>
 <p class="thread-description">Posted in our <?php echo $this->Link->forum($thread['Product']['slug'], $thread['Product']['name'].' forum');?>.</p>
+<?php echo $this->element('pagination/basic'); ?>
 <ul class="posts">
 <?php foreach($posts as $post): ?>
 	<?php echo $this->element('forums/postbit', array('post' => $post)); ?>
 <?php endforeach; ?>
 </ul>
+<?php echo $this->element('pagination/basic'); ?>
 <div class="post-actions">
 	<?php echo $this->Html->link('Reply',
 		array('controller' => 'posts', 'action' => 'reply', $thread['Thread']['id']),

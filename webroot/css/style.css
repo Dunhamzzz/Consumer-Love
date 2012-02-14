@@ -207,6 +207,15 @@ input[type=submit]:hover {
     margin-bottom: 10px;
 }
 
+::-webkit-input-placeholder {
+    color: #414141;
+    -webkit-transition: color 0.15s;
+}
+
+:focus::-webkit-input-placeholder {
+    color: #e2e2e2;
+}​
+
 /* Writing Forms */
 .writing input[type=text], .writing textarea {
     width: 678px;	
