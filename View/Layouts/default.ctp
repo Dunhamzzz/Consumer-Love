@@ -74,6 +74,7 @@
             <div class="container">
                 <ul id="menu"<?php echo isset($hideNav) ? ' style="display: none;' : ' class="show"'; ?>>
                     <li><?php echo $this->Html->link('Todays Activity', '/'); ?></li>
+					<li><a href="/forums">Forums</a></li>
                     <li><?php echo $this->Html->link('Browse Categories', array('controller' => 'categories', 'action' => 'index', 'admin' => false, 'plugin' => false, 'escape' => false)); ?></li>
                 </ul>
             </div>
