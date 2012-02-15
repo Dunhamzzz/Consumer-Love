@@ -126,7 +126,7 @@ class AppController extends Controller {
     }
 
     public function beforeRender() {
-        $this->set('pageWidgets', array('facebook' => null));
+        $this->set('pageWidgets', array());
     }
 
     public function isAuthorized() {

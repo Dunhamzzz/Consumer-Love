@@ -4,7 +4,12 @@
         <meta charset="utf-8" />
         <title><?php echo $title_for_layout; ?></title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
+        <meta property="og:title" content="Consumer Love" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://consumerlove.org" />
+        <meta property="og:image" content="" />
+        <meta property="og:site_name" content="Consumer Love" />
+        <meta property="fb:admins" content="505549054" />
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
         <script type="text/javascript">
             if (typeof jQuery == 'undefined') {
@@ -38,6 +43,14 @@
         <![endif]-->
     </head>
     <body>
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=221050134590343";
+        fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
         <div id="user-bar">
             <div class="container">
                 <a href="/" id="site-title" rel="home">Consumer Love <span class="heart"> &hearts;</span></a>
@@ -94,19 +107,18 @@
                     <?php if (!isset($disableSidebar)): ?>
                     <div id="side">
                         <?php
-                        if (!isset($pageWidgets)) {
-                            $pageWidgets = array();
-                        }
-
                         // Setup Widgets
                         if (isset($userData)) {
                             if ($userData['admin'] == true) {
-                                $pageWidgets['admin'] = false;
+                                $pageWidgets['admin'] = array();
                             }
                         } else {
                             // Put guest welcome on top
                             array_unshift($pageWidgets, 'guest_welcome');
                         }
+                        
+                        // Put facebook on the end
+                        $pageWidgets['facebook'] = array();
                         foreach ($pageWidgets as $widget => $vars):
                             if (is_int($widget))
                                 $widget = $vars;
