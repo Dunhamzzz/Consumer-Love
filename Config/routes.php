@@ -56,7 +56,7 @@ Router::connect(
 
 // Forums
 // Forum root
-Router::connect('/forums', array('controller' => 'users', 'action' => 'forums', 'plugin' => false)
+Router::connect('/forums', array('controller' => 'threads', 'action' => 'forums', 'plugin' => false)
 );
 
 // Products Forum

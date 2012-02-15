@@ -56,7 +56,18 @@ class Inventory extends AppModel {
                 'Product.published' => 1
             ),
             'order' => 'created DESC',
-            'fields' => array('Product.id', 'Product.name', 'Product.slug', 'Product.logo', 'Product.description_formatted', 'Inventory.created', 'Product.inventory_count'),
+            'fields' => array(
+                'Product.id',
+                'Product.name',
+                'Product.slug',
+                'Product.logo',
+                'Product.description_formatted',
+                'Inventory.created',
+                'Product.inventory_count',
+                'Product.thread_count',
+                'Product.love_count',
+                'Product.hate_count'
+            ),
             'contain' => 'Product'
         );
 

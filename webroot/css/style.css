@@ -1593,6 +1593,10 @@ ul.tabs .ui-state-hover a {
     padding-bottom: 5px;
 }
 
+.news-article:last-of-type {
+    border-bottom: none;
+}
+
 .news-article h2 {
     border: 0;
     font-size: 125%;

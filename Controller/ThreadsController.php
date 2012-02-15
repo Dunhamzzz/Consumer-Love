@@ -10,21 +10,24 @@ class ThreadsController extends AppController {
         'Post' => array(
             'limit' => 10,
             'order' => 'Post.created ASC'
+        ),
+        'Product' => array(
+            'limit' => 20,
+            'order' => 'Product.post_count DESC'
         )
     );
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('all', 'view'));
+        $this->Auth->allow(array('all', 'view', 'forums'));
     }
 
     public function all($productSlug) {
         $product = $this->Thread->Product->getBySlug($productSlug);
-        // @todo use 2.0 paginator
-        $threads = $this->paginate('Thread', array('product_id' => $product['Product']['id']));
+        $this->set('threads', $this->paginate('Thread', array('product_id' => $product['Product']['id'])));
 
         $this->set('title_for_layout', __('%s Forum', $product['Product']['name']));
-        $this->set(compact('product', 'threads', 'title_for_layout'));
+        $this->set(compact('product'));
     }
 
     public function create($productId = null) {
@@ -77,11 +80,34 @@ class ThreadsController extends AppController {
         $this->set('title_for_layout', $thread['Thread']['title']);
         $this->set(compact('product', 'thread'));
     }
+    
+    
+     /**
+     * Displays a list of forums to user, otherwise, most popular forums
+     * URL: /forums
+     */
+    public function forums() {
+
+        if($this->Auth->user()) {
+            // Get list of products from inventory
+            $this->set('forums', $this->paginate('Product', array(
+                'Product.id' => array_keys($this->userInventory)
+            )));
+            
+            $this->set('title_for_layout', __('Your Forums'));
+        } else {
+            // Get most popular forums
+            $this->set('title_for_layout', __('Consumer Love Forums'));
+        }
+
+    }
 
     /* Admin Actions */
     public function admin_delete($id) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
+        } else {
+            
         }
     }
 

@@ -93,7 +93,7 @@ class AppController extends Controller {
 
             // Grab users Inventory
             $this->loadModel('Inventory');
-            $this->userInventory = $this->Inventory->get(AuthComponent::user('id'));
+            $this->userInventory = $this->Inventory->get($this->Auth->user('id'));
             $this->set('inventory', $this->userInventory);
 
             // Set view vars.
