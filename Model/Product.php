@@ -217,9 +217,6 @@ LIMIT 0 , 30
 
         $this->id = $thread['Thread']['product_id'];
 
-        // Update last Post
-        $this->saveField('last_post_id', $post['Post']['id']);
-
         // Update Total post count
         $postData = $this->Thread->find('all', array(
             'fields' => array('SUM(Thread.post_count) AS total'),
@@ -229,7 +226,11 @@ LIMIT 0 , 30
             'contain' => false
         ));
 
-        $this->saveField('post_count', $postData[0][0]['total']);
+        $this->save(array(
+            'last_post_id' => $post['Post']['id'],
+            'last_post_date' => date('Y-m-d H:i:s'),
+            'post_count' => $postData[0][0]['total']
+        ));
 
     }
 
