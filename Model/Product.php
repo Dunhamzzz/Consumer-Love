@@ -23,6 +23,10 @@ class Product extends AppModel {
     public $hasAndBelongsToMany = array('Category');
 
     public $hasMany = array('Inventory', 'Feed', 'Thread', 'News');
+    
+    public $hasOne = array(
+        
+    );
 
     public $actsAs = array(
         'Upload.Upload' => array(
@@ -43,6 +47,7 @@ class Product extends AppModel {
             'separator' => ''
         ),
     );
+    
     public $findMethods = array('active' => true);
 
     protected function _findActive($state, $query, $results = array()) {

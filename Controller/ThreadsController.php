@@ -13,7 +13,8 @@ class ThreadsController extends AppController {
         ),
         'Product' => array(
             'limit' => 20,
-            'order' => 'Product.post_count DESC'
+            'order' => 'Product.post_count DESC',
+			'contain' => array('Category')
         )
     );
 
@@ -50,7 +51,7 @@ class ThreadsController extends AppController {
 
             if ($this->Thread->add($this->request->data)) {
                 $this->Session->setFlash('Your thread has been saved successfully.');
-                $this->redirect(array('controller' => 'products', 'action' => 'view', $product['Product']['slug']));
+                $this->redirect(array('controller' => 'products', 'action' => 'view', 'productSlug' => $product['Product']['slug']));
             } else {
                 $this->Session->setFlash('Please correct the errors below.');
             }

@@ -1,10 +1,16 @@
 <h1><?php echo $title_for_layout; ?></h1>
 <?php echo $this->element('pagination/basic'); ?>
-<ul id="forum-listing">
+<table id="forum-listing">
 <?php foreach ($forums as  $product): ?>
-    <li><?php echo $this->Link->forum($product); ?>
-        <?php pr($product); ?>
-    </li>
+	<tr>
+	    <td>
+			<?php echo $this->Link->forum($product, $this->Love->productImage($product) . $product['Product']['name'], array('escape' => false)); ?>
+			</td>
+			<td>
+	       		<?php ?>
+		</td>
+	    </td>
+	</tr>
 <?php endforeach; ?>
-</ul>
+</table>
 <?php echo $this->element('pagination/basic'); ?>
