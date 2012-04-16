@@ -78,27 +78,14 @@ class UsersController extends AppController {
     public function login() {
         // 2.0 Auth login
         if ($this->request->is('post')) {
-            // Try to login
-            $user = $this->User->login(
-                    $this->request->data['User']['username'], AuthComponent::password($this->request->data['User']['password'])
-            );
+            if ($this->Auth->login()) {
 
-            if (!empty($user)) {
-                $this->Auth->login($user['User']);
-
+                $user = $this->Auth->user();
+                
                 // Update last login
-                $this->User->id = $user['User']['id'];
+                $this->User->id = $user['id'];
                 $this->User->saveField('last_login', date('Y-m-d H:i:s'));
                 $this->Session->setFlash('You have successfully logged in.');
-
-                if (!empty($this->request->data['User']['remember'])) {
-                    $this->Cookie->write('User', array_intersect_key(
-                                    $user['User'], array('username' => null, 'password' => null)
-                            ), true, '1 year');
-                } elseif ($this->Cookie->read('User') != null) {
-                    // Delete cookie if they didnt tick a box
-                    $this->Cookie->delete('User');
-                }
 
                 $this->redirect($this->Auth->redirect());
             } else {

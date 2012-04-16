@@ -35,7 +35,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     public $components = array(
-        'Auth' => array(
+        /*'Auth' => array(
             'authenticate' => array(
                 'Form' => array(
                     'userModel' => 'User',
@@ -45,13 +45,35 @@ class AppController extends Controller {
                 )
             ),
             'loginAction' => array('controller' => 'users', 'action' => 'login', 'admin' => false)
+        ),*/
+        'Auth' => array(
+            'authenticate' => array(
+                'Authenticate.Cookie' => array(
+                    'fields' => array(
+                        'username' => 'username',
+                        'password' => 'password'
+                    ),
+                    'userModel' => 'User',
+                    'scope' => array('User.active' => 1)
+                ),
+                'Authenticate.MultiColumn' => array(
+                    'fields' => array(
+                        'username' => 'username',
+                        'password' => 'password'
+                    ),
+                    'columns' => array('username', 'email'),
+                    'userModel' => 'User',
+                    'scope' => array('User.active' => 1)
+                )
+            )
         ),
         'RequestHandler',
        // 'DebugKit.Toolbar',
         'Cookie',
-        'Session',
-
+        'Session'
     );
+    
+    
     public $helpers = array(
         'Html',
         'Text',
@@ -86,7 +108,7 @@ class AppController extends Controller {
             }
 
             // Load User model
-            $this->loadModel($this->Auth->authenticate['Form']['userModel'], $userData['id']);
+            $this->loadModel('User');
 
             // Update Last Activity
             $this->User->updateLastActivity();
@@ -98,21 +120,6 @@ class AppController extends Controller {
 
             // Set view vars.
             $this->set(compact('userData'));
-        } else { // Check if they have a cookie and try to log them in
-            $userData = $this->Cookie->read('User');
-            if (!empty($userData)) {
-                // Loader User model
-                $this->loadModel($this->Auth->authenticate['Form']['userModel']);
-
-                $userData = $this->User->login(
-                        $userData['username'], $userData['password']
-                );
-
-                // Log them in and refresh page
-                if (!empty($userData) && $this->Auth->login($userData['User'])) {
-                    $this->redirect($this->request->here);
-                }
-            }
         }
 
         if ($this->request->is('ajax')) {
