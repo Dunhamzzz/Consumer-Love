@@ -4,7 +4,7 @@
     'action' => 'score'
 )); ?>
 <?php echo $this->Form->input('product_id', array('value' => $product['Product']['id'], 'type' => 'hidden')); ?>
-<?php echo $this->Form->submit('&hearts; Love It', array(
+<?php echo $this->Form->submit('Love It', array(
     'class' => 'loveit',
     'div' => false,
     'name' => 'score',
