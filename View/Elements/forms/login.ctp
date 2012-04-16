@@ -4,8 +4,7 @@ echo $this->Form->inputs(array(
 	'legend' => false,
 	'fieldset' => false,
 	'username' => array('label' => false, 'placeholder' => 'Username / Email', 'maxlength' => false),
-	'password' => array('label' => false, 'placeholder' => '********'),
-	'remember' => array('type' => 'checkbox', 'label' => 'Remember')
+	'password' => array('label' => false, 'placeholder' => '********')
 ));
 
 echo $this->Form->hidden('User.return_to', array('value' => isset($returnTo) ? $returnTo : $this->here));
