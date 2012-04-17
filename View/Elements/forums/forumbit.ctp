@@ -1,8 +1,4 @@
-<tr>
-    <td>
-        <?php echo $this->Link->forum($product, $this->Love->productImage($product) . $product['Product']['name'], array('escape' => false)); ?>
-    </td>
-    <td>
-        <?php echo $product['Product']['thread_count']; ?>
-    </td>
-</tr>
+<li style="background-image: url(<?php echo $this->Love->productImage($product, 32, true); ?>);">
+    <h3><?php echo $this->Link->forum($product, $product['Product']['name']); ?></h3>
+    <p class="description"><?php echo $this->Text->truncate($product['Product']['description_formatted']); ?></p>
+</li>

@@ -97,6 +97,9 @@ class ThreadsController extends AppController {
             
             $this->set('title_for_layout', __('Your Forums'));
         } else {
+            $this->paginate['Product']['order'] = 'Name';
+            $this->set('forums', $this->paginate('Product'));
+            
             // Get most popular forums
             $this->set('title_for_layout', __('Consumer Love Forums'));
         }
