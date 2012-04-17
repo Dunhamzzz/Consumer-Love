@@ -1,0 +1,31 @@
+/* 
+    Document   : forums
+    Created on : Apr 17, 2012, 8:30:42 PM
+    Author     : Matthew Dunham
+    Description:
+        Stylesheets for the Consumer Love Forums
+*/
+
+#forum-listing {
+    
+}
+
+#forum-listing li {
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    padding: 10px 10px 10px 52px;
+    margin: 0;
+    height: 52px;
+}
+
+#forum-listing h3 {
+    margin: 0px;
+    font-weight: bold;
+}
+
+#forum-listing .description {
+    color: #999;
+    margin: 0;
+    padding: 0;
+    font-size: 0.75em;
+}
