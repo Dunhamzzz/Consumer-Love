@@ -29,7 +29,6 @@ class UsersController extends AppController {
             $this->set('top5Products', $this->Product->topByCategoryId(5));
             $this->set('top5Category', $this->Product->Category->findById(5));
             $this->set('categories', $this->Product->Category->getAllThreaded(true));
-
         } else {
             $products = $this->Product->find('active', array(
                 'conditions' => array(),
@@ -87,6 +86,16 @@ class UsersController extends AppController {
                 $this->User->saveField('last_login', date('Y-m-d H:i:s'));
                 $this->Session->setFlash('You have successfully logged in.');
 
+                if (!empty($this->request->data['User']['remember'])) {
+                    $cookieData = array_intersect_key(
+                                    $this->request->data['User'], array('username' => null, 'password' => null)
+                            );
+                    $this->Cookie->write('User', $cookieData, true, '1 year');
+                } elseif ($this->Cookie->read('User') != null) {
+                    // Delete cookie if they didnt tick a box
+                    $this->Cookie->delete('User');
+                }
+
                 $this->redirect($this->Auth->redirect());
             } else {
                 $this->Session->setFlash($this->Auth->loginError, $this->Auth->flashElement, array(), 'auth');
@@ -135,7 +144,7 @@ class UsersController extends AppController {
         // Get Latest Posts
         $this->set('latestPosts', $this->User->getLatestPosts($user['User']['id']));
 
-        $this->set('title_for_layout',  __('%s on Consumer Love', $user['User']['username']));
+        $this->set('title_for_layout', __('%s on Consumer Love', $user['User']['username']));
 
         $this->set(compact('user', 'latestLove'));
     }
@@ -191,6 +200,7 @@ class UsersController extends AppController {
     }
 
     /* Ajax Actions */
+
     public function checkUsername() {
         if ($this->request->is('ajax')) {
             $this->set('status', $this->User->checkUsernameAvailability($this->params['url']['username']));

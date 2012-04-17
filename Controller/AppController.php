@@ -68,7 +68,7 @@ class AppController extends Controller {
             )
         ),
         'RequestHandler',
-       // 'DebugKit.Toolbar',
+        'DebugKit.Toolbar',
         'Cookie',
         'Session'
     );
@@ -120,6 +120,12 @@ class AppController extends Controller {
 
             // Set view vars.
             $this->set(compact('userData'));
+        } else {
+            // Attempt Cookie Login
+            $user = $this->Auth->login();
+            if($user) {
+                $this->redirect($this->here);
+            }
         }
 
         if ($this->request->is('ajax')) {
