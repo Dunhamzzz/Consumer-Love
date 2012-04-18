@@ -35,17 +35,6 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
     public $components = array(
-        /*'Auth' => array(
-            'authenticate' => array(
-                'Form' => array(
-                    'userModel' => 'User',
-                    'userScope' => array('User.active' => 1),
-                    'authError' => 'You need to be logged in to access this location.',
-                    'loginError' => 'Invalid login details',
-                )
-            ),
-            'loginAction' => array('controller' => 'users', 'action' => 'login', 'admin' => false)
-        ),*/
         'Auth' => array(
             'authenticate' => array(
                 'Authenticate.Cookie' => array(
@@ -121,10 +110,15 @@ class AppController extends Controller {
             // Set view vars.
             $this->set(compact('userData'));
         } else {
-            // Attempt Cookie Login
-            $user = $this->Auth->login();
-            if($user) {
-                $this->redirect($this->here);
+            // Attempt Cookie Login, but only if not on login page as it prevents login logic from running.
+            if($this->request->is('post') 
+                && $this->request->params['controller'] != 'users'
+                && $this->request->params['action'] != 'login'
+            ) {
+                $user = $this->Auth->login();
+                if($user) {
+                    $this->redirect($this->here);
+                }
             }
         }
 
