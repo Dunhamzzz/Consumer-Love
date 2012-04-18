@@ -47,7 +47,7 @@ class News extends AppModel {
     /**
      * Handles User submitted news.
      */
-    public function submit($newsData, $userId) {
+    public function submit($newsData, $userData) {
         // Check Product Exists
         $this->Product->id = $newsData['News']['product_id'];
         if (!$this->Product->exists()) {
@@ -55,16 +55,16 @@ class News extends AppModel {
         }
 
         // Check User Exists
-        $this->User->id = $userId;
+        $this->User->id = $userData['User']['id'];
         if (!$this->User->exists()) {
             throw new DomainException(__('Invalid User.'));
         }
 
-        $newsData['News']['user_id'] = $userId;
+        $newsData['News']['user_id'] = $userData['User']['id'];
         $newsData['News']['deleted'] = 0;
 
         // @todo Logic to see if post is auto-published
-        if(AuthComponent::User('admin') == 1) {
+        if($userData['User']['admin'] == 1) {
             $newsData['News']['published'] = 1;
         }
 
