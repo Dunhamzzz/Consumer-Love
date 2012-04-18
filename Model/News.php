@@ -51,13 +51,13 @@ class News extends AppModel {
         // Check Product Exists
         $this->Product->id = $newsData['News']['product_id'];
         if (!$this->Product->exists()) {
-            throw new DomainException(__('Invalid product.'));
+            throw new CakeException(__('Invalid product.'));
         }
 
         // Check User Exists
         $this->User->id = $userData['User']['id'];
         if (!$this->User->exists()) {
-            throw new DomainException(__('Invalid User.'));
+            throw new CakeException(__('Invalid User.'));
         }
 
         $newsData['News']['user_id'] = $userData['User']['id'];
