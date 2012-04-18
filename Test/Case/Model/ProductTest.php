@@ -1,5 +1,6 @@
 <?php
-/* Product Test cases generated on: 2011-09-05 19:35:19 : 1315251319*/
+
+/* Product Test cases generated on: 2011-09-05 19:35:19 : 1315251319 */
 App::uses('Product', 'Model');
 
 /**
@@ -7,71 +8,72 @@ App::uses('Product', 'Model');
  *
  */
 class ProductTestCase extends CakeTestCase {
-/**
- * Fixtures
- *
- * @var array
- */
-	public $fixtures = array('app.product', 'app.inventory', 'app.user', 'app.comment', 'app.category', 'app.categories_product');
 
-/**
- * setUp method
- *
- * @return void
- */
-	public function setUp() {
-		parent::setUp();
+    /**
+     * Fixtures
+     *
+     * @var array
+     */
+    public $fixtures = array('app.product', 'app.inventory', 'app.user', 'app.comment', 'app.category', 'app.categories_product');
 
-		$this->Product = ClassRegistry::init('Product');
-	}
+    /**
+     * setUp method
+     *
+     * @return void
+     */
+    public function setUp() {
+        parent::setUp();
 
-/**
- * tearDown method
- *
- * @return void
- */
-	public function tearDown() {
-		unset($this->Product);
-		ClassRegistry::flush();
+        $this->Product = ClassRegistry::init('Product');
+    }
 
-		parent::tearDown();
-	}
+    /**
+     * tearDown method
+     *
+     * @return void
+     */
+    public function tearDown() {
+        unset($this->Product);
+        ClassRegistry::flush();
 
-/**
- * testSearch method
- *
- * @return void
- */
-	public function testSearch() {
-		
-	}
+        parent::tearDown();
+    }
 
-/**
- * testgetBySlug method
- *
- * @return void
- */
-	public function testGetBySlug() {
-		$product = $this->Product->getBySlug('product1');
-		$this->assertEquals(array('product-1'), Set::extract('/Product/id', $product));
-	}
+    /**
+     * testSearch method
+     *
+     * @return void
+     */
+    public function testSearch() {
+        
+    }
 
-/**
- * testTopByCategoryId method
- *
- * @return void
- */
-	public function testTopByCategoryId() {
-		
-	}
+    /**
+     * testgetBySlug method
+     *
+     * @return void
+     */
+    public function testGetBySlug() {
+        $product = $this->Product->getBySlug('product1');
+        $this->assertEquals(array('product-1'), Set::extract('/Product/id', $product));
+    }
 
-/**
- * testFormatDescription method
- *
- * @return void
- */
-	public function testFormatDescription() {
+    /**
+     * testTopByCategoryId method
+     *
+     * @return void
+     */
+    public function testTopByCategoryId() {
+        
+    }
 
-	}
+    /**
+     * testFormatDescription method
+     *
+     * @return void
+     */
+    public function testFormatDescription() {
+        
+    }
 
 }
