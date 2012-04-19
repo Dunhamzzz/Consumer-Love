@@ -10,12 +10,6 @@
         <meta property="og:image" content="" />
         <meta property="og:site_name" content="Consumer Love" />
         <meta property="fb:admins" content="505549054" />
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-        <script type="text/javascript">
-            if (typeof jQuery == 'undefined') {
-                document.write(unescape("%3Cscript src='/js/jquery-1.7.1.min.js' type='text/javascript'%3E%3C/script%3E"));
-            }
-        </script>
 
         <link rel="shortcut icon" href="/favicon.ico">
         <?php
@@ -24,8 +18,8 @@
         }
 
         echo $this->Html->script(array(
-            //'modernizr-2.0.6',
-            'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js',
+            'jquery-1.7.2.min',
+            'jquery-ui-1.8.19.min',
             'jquery.tipsy',
             'global'
         ));
