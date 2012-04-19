@@ -158,7 +158,11 @@ LIMIT 0 , 30
      * Returns a product row from a slug.
      * @param string $slug
      */
-    public function getBySlug($slug) {
+    public function getBySlug($slug = null) {
+        if(!$slug || empty($slug)) {
+            return false;
+        }
+        
         return $this->find('first', array(
                     'conditions' => array(
                         'slug' => $slug

@@ -40,40 +40,18 @@ class ProductTestCase extends CakeTestCase {
     }
 
     /**
-     * testSearch method
-     *
-     * @return void
+     * @covers Product::getBySlug
      */
-    public function testSearch() {
-        
-    }
-
-    /**
-     * testgetBySlug method
-     *
-     * @return void
-     */
-    public function testGetBySlug() {
+    public function testGetBySlug_sucess_expectsArray() {
         $product = $this->Product->getBySlug('product1');
         $this->assertEquals(array('product-1'), Set::extract('/Product/id', $product));
     }
-
+    
     /**
-     * testTopByCategoryId method
-     *
-     * @return void
+     * @covers Product::getBySlug
      */
-    public function testTopByCategoryId() {
-        
-    }
-
-    /**
-     * testFormatDescription method
-     *
-     * @return void
-     */
-    public function testFormatDescription() {
-        
+    public function testGetBySlug_noParams_expectsFalse() {
+        $this->assertFalse($this->Product->getBySlug());
     }
 
 }
