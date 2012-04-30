@@ -70,6 +70,7 @@ class LinkHelper extends AppHelper {
         return $this->Html->link($anchorText, array(
                     'controller' => 'threads',
                     'action' => 'all',
+                    'admin' => false,
                     'productSlug' => $productSlug
                         ), $htmlAttrs
         );
@@ -82,6 +83,7 @@ class LinkHelper extends AppHelper {
         return $this->Html->link($anchorText, array(
                     'controller' => 'categories',
                     'action' => 'view',
+                    'admin' => false,
                     'slug' => $category['slug']
                         ), $htmlAttrs
         );
@@ -93,6 +95,7 @@ class LinkHelper extends AppHelper {
         return $this->Html->link($thread['Thread']['title'], array(
                     'controller' => 'threads',
                     'action' => 'view',
+                    'admin' => false,
                     'threadSlug' => $thread['Thread']['slug'],
                     'productSlug' => $thread['Product']['slug']
                         ), $htmlAttrs);

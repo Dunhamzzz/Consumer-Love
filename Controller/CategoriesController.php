@@ -44,21 +44,18 @@ class CategoriesController extends AppController {
 
         // Paginate list of products
         $conditions = array_merge(
-               array('CategoryFilter.category_id' => $category['Category']['id']),
-               array($this->Category->Product->activeConditions())
+                array('CategoryFilter.category_id' => $category['Category']['id']), array($this->Category->Product->activeConditions())
         );
-       
+
         $this->set('products', $this->paginate($this->Category->Product, $conditions));
-        
+
         $this->set('title_for_layout', $category['Category']['name']);
     }
 
     /** Admin Actions * */
     public function admin_index() {
-        $categories = $this->Category->getAllThreaded(false);
-
-        $title_for_layout = 'Manage Categories';
-        $this->set(compact('title_for_layout', 'categories'));
+        $this->set('categories', $this->Category->getAllThreaded(false));
+        $this->set('title_for_layout', 'Manage Categories');
     }
 
     public function admin_new() {
@@ -75,27 +72,32 @@ class CategoriesController extends AppController {
             }
         }
 
-        $title_for_layout = 'Add Product';
-        $parents = $this->Product->Category->getAllThreaded();
-
-        $this->set(compact('parents', 'title_for_layout'));
+        $this->set('title_for_layout', 'Add Category');
+        $this->set('parents', $this->Product->Category->getAllThreaded());
     }
 
     public function admin_edit($id = null) {
-        $this->Category->id = $id;
-        if (!$this->Category->exists()) {
-            throw new NotFoundException(__('Invalid category'));
-        }
 
-        $category = $this->Category->read();
-
-        if ($this->request->is('put')) {
-            if ($this->Category->update($this->request->data)) {
+        if ($this->request->is('post')) {
+            if ($this->Category->save($this->request->data)) {
                 $this->Session->setFlash('Changes made to ' . $this->request->data['Category']['name'] . ' have been saved.');
+                
+                // If a new category was posted, redirect to main edit page.
+                if(!$id) {
+                    $this->redirect(array('action' => 'edit', $this->Category->id));
+                }
+                
             } else {
                 $this->Session->setFlash('Saving Failed.');
             }
+            
         } else {
+            $this->Category->id = $id;
+            if (!$this->Category->exists()) {
+                //throw new NotFoundException(__('Invalid category'));
+            }
+
+        $category = $this->Category->read();
             $this->request->data = $category;
         }
 
