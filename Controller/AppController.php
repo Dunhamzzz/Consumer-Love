@@ -52,17 +52,20 @@ class AppController extends Controller {
                     ),
                     'columns' => array('username', 'email'),
                     'userModel' => 'User',
-                    'scope' => array('User.active' => 1)
+                    'scope' => array('User.active' => 1),
                 )
-            )
+            ),
+            'loginAction' => array(
+                'controller' => 'users',
+                'action' => 'login',
+                'admin' => false
+            ),
         ),
         'RequestHandler',
         'DebugKit.Toolbar',
         'Cookie',
         'Session'
     );
-    
-    
     public $helpers = array(
         'Html',
         'Text',
@@ -111,12 +114,12 @@ class AppController extends Controller {
             $this->set(compact('userData'));
         } else {
             // Attempt Cookie Login, but only if not on login page as it prevents login logic from running.
-            if($this->request->is('post') 
-                && $this->request->params['controller'] != 'users'
-                && $this->request->params['action'] != 'login'
+            if ($this->request->is('post')
+                    && $this->request->params['controller'] != 'users'
+                    && $this->request->params['action'] != 'login'
             ) {
                 $user = $this->Auth->login();
-                if($user) {
+                if ($user) {
                     $this->redirect($this->here);
                 }
             }
@@ -127,9 +130,9 @@ class AppController extends Controller {
         }
 
         // Get Latest Posts
-       // $this->loadModel('Post');
-       // $this->Post = new Post();
-       // $this->set('latestPosts', $this->Post->getLatest());
+        // $this->loadModel('Post');
+        // $this->Post = new Post();
+        // $this->set('latestPosts', $this->Post->getLatest());
     }
 
     public function beforeRender() {
