@@ -24,31 +24,6 @@ $(function() {
         e.stopPropagation();
     });
 	
-    // Product Page Tabs	
-    $('.tabs-wrapper').tabs();
-	
-    // Placeholders
-    /*$('[placeholder]').focus(function() {
-        var input = $(this);
-        if (input.val() == input.attr('placeholder')) {
-            input.val('');
-            input.removeClass('placeholder');
-        }
-    }).blur(function() {
-        var input = $(this);
-        if (input.val() == '' || input.val() == input.attr('placeholder')) {
-            input.addClass('placeholder');
-            input.val(input.attr('placeholder'));
-        }
-    }).blur().parents('form').submit(function() {
-        $(this).find('[placeholder]').each(function() {
-            var input = $(this);
-            if (input.val() == input.attr('placeholder')) {
-                input.val('');
-            }
-        })
-    });*/
-	
     // Login/Register Dialog
     var $loginBox = $('#register-login');
     if($loginBox.length) {
@@ -116,6 +91,24 @@ $(function() {
         });
     });
 	
+    // Inventory Page Inifinite Scroll
+    if($('.products-list.inventory-list').length) {
+        
+        $('.pagination').hide();
+        
+        $('#content').infinitescroll({
+            debug: true,
+            navSelector: '.pagination',
+            nextSelector: 'span.btn.next a',
+            itemSelector: '.products-list',
+            loading: {
+                msgText : 'Loading...',
+                img     : '',
+                finishedMsg: 'You\'ve reached the end!'
+            }
+        });
+    }
+        
     // Homepage
     if($('#home').length) {
         $('#home').tabs();

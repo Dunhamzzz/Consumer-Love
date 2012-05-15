@@ -368,6 +368,7 @@ form.settings {
     overflow: hidden;
     border: 0;
     padding: 0 5px;
+    margin-top: 41px;
     line-height: 1.2;
     min-height: 10px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -487,6 +488,7 @@ footer p {
     height: 41px;
     z-index: 9999;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    position: fixed;
 }
 
 .username {
@@ -1075,23 +1077,26 @@ h2 .cta {
     margin-bottom: 10px;
 }
 
-ul.tabs {
+.product-tabs {
     float: left;
     height: 32px;
     margin-left: 10px;
 }
 
-ul.tabs li {
+.product-tabs li {
     float: left;
 }
 
-ul.tabs li a {
+.product-tabs li a, .product-tabs li span {
     display: block;
     padding: 4px 8px;
     color: #999;
 }
 
-ul.tabs .ui-tabs-selected {
+.product-tabs .active {
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    padding-left: 32px;
     font-weight: bold;
     border-style: solid;
     border-color: #999 #999 #fff;
@@ -1100,17 +1105,13 @@ ul.tabs .ui-tabs-selected {
     height: 30px;
 }
 
-ul.tabs .ui-tabs-selected a {
+.product-tabs .active span{
     color: #424C72;
     font-size: 18px;
 }
 
-ul.tabs .ui-state-hover a {
+.product-tabs li:hover a {
     color: #424C72
-}
-
-.ui-tabs-panel {
-    clear: both;
 }
 
 .love {
@@ -1468,10 +1469,14 @@ input.hateit:hover {
 }
 
 /* News Timeline Stuff */
+.dashboard-header {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 0.5em;
+}
+
 .news-article {
     border-bottom: 1px solid #999;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
+    margin-bottom: 0.5em;
 }
 
 .news-article:last-of-type {
@@ -1485,13 +1490,54 @@ input.hateit:hover {
     line-height: 32px;
 }
 
+.news-article p {
+    margin-bottom: 0.5em;
+    padding: 0;
+}
+
 .news-logo {
     float: left;
     margin-right: 5px;
 }
 
 /* User Profiles */
+ul.tabs {
+    float: left;
+    height: 32px;
+    margin-left: 10px;
+}
 
+ul.tabs li {
+    float: left;
+}
+
+ul.tabs li a {
+    display: block;
+    padding: 4px 8px;
+    color: #999;
+}
+
+ul.tabs .ui-tabs-selected {
+    font-weight: bold;
+    border-style: solid;
+    border-color: #999 #999 #fff;
+    border-width: 1px;
+    border-radius: 5px 5px 0 0;
+    height: 30px;
+}
+
+ul.tabs .ui-tabs-selected a {
+    color: #424C72;
+    font-size: 18px;
+}
+
+ul.tabs .ui-state-hover a {
+    color: #424C72
+}
+
+.ui-tabs-panel {
+    clear: both;
+}
 
 #bio {
     overflow: hidden;
@@ -1661,4 +1707,14 @@ input.hateit:hover {
 
 .settings-table td {
     text-align: left;
+}
+
+/** Inifinite Scroll Plugn **/
+#infscr-loading {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#infscr-loading img {
+    display: none;
 }

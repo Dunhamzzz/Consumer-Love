@@ -13,6 +13,16 @@ class UsersController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('dashboard', 'signup', 'checkUsername', 'view', 'inventory');
     }
+    
+    /**
+     * Inifinite scroll pagination fix. 
+     */
+    public function afterFilter() {
+        $pageCount = $this->params['paging']['Inventory']['pageCount'];
+        if ((!empty($this->params['named']['page'])) && ($this->params['named']['page'] > $pageCount)) {
+            throw NotFoundException(__('Page not found.'));
+        }
+    }
 
     public function dashboard() {
         $this->set('title_for_layout', __('Consumer Love'));
@@ -174,6 +184,11 @@ class UsersController extends AppController {
         $this->set('title_for_layout', __('Update Your Profile'));
     }
 
+    /**
+     * Displays list of a users inventory
+     * @param string $userSlug
+     * @throws NotFoundException 
+     */
     public function inventory($userSlug = null) {
         $user = $this->User->getBySlug($userSlug);
 
@@ -189,8 +204,14 @@ class UsersController extends AppController {
 
         $title_for_layout = $user['User']['username'] . '/Inventory';
         $this->set(compact('user', 'products', 'title_for_layout'));
+        
+        // If an ajax request, jsut load what we need.
+        
     }
 
+    /**
+     * Logout action. Will direct user to homepage. 
+     */
     public function logout() {
         if ($this->Cookie->read('User') != null) {
             $this->Cookie->delete('User');
@@ -211,6 +232,9 @@ class UsersController extends AppController {
 
     /* Admin Actions */
 
+    /*
+     * User list for admin
+     */
     public function admin_index() {
         $this->set('users', $this->paginate('User'));
     }
