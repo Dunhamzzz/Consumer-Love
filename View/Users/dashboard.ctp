@@ -11,17 +11,16 @@ $pageWidgets['top5'] = array();
 
 $this->set(compact('pageWidgets'));
 ?>
-<h2>Your Activity Feed</h2>
-<p>What's going on with the products and services you own.</p>
+<h2 class="dashboard-header">Your Activity Feed</h2>
 <?php if (!empty($news)): ?>
     <div class="timeline">
         <?php foreach ($news as $newsItem): ?>
             <article class="news-article">
+                <?php echo $this->Link->product($newsItem['Product'], $this->Love->productImage($newsItem['Product']), array('escape' => false, 'class' => 'news-logo')); ?>
                 <h2>
-                    <?php echo $this->Link->product($newsItem['Product'], $this->Love->productImage($newsItem['Product']), array('escape' => false, 'class' => 'news-logo')); ?>
                     <?php echo $this->Link->news($newsItem); ?>
                 </h2>
-                <?php echo $newsItem['News']['content']; ?>
+                <p><?php echo $newsItem['News']['content']; ?></p>
 
                 <?php //debug($newsItem); ?>
             </article>
