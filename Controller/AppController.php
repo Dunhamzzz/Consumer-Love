@@ -90,7 +90,7 @@ class AppController extends Controller {
         $this->loadModel('Product');
 
         $userData = AuthComponent::user();
-        if (!empty($userData)) {
+        if ($userData) {
 
             $this->userData = $userData;
 
@@ -114,10 +114,10 @@ class AppController extends Controller {
             $this->set(compact('userData'));
         } else {
             // Attempt Cookie Login, but only if not on login page as it prevents login logic from running.
-            if ($this->request->is('post')
-                    && $this->request->params['controller'] != 'users'
-                    && $this->request->params['action'] != 'login'
+            if (!$this->request->is('post')
+                && !($this->request->params['controller'] == 'users' && $this->request->params['action'] == 'login')
             ) {
+                
                 $user = $this->Auth->login();
                 if ($user) {
                     $this->redirect($this->here);
