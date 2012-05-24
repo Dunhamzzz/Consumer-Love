@@ -10,7 +10,9 @@ if (!empty($product['Tweet'])) {
 }
 $this->set(compact('pageWidgets'));
 $this->Html->addCrumb($product['Product']['name']);
+echo $this->element('products/header-tabs', array('current' => 'overview'));
 ?>
+
 <div id="product" class="product-section">
     <?php echo $this->Love->productImage($product, 128); ?>
     <?php if (isset($userData)): ?>
@@ -22,14 +24,6 @@ $this->Html->addCrumb($product['Product']['name']);
     </div>
 </div>
 <div id="product-tabs" class="tabs-wrapper">
-    <div class="tab-list-wrapper">
-        <ul class="tabs">
-            <li><a href="#latest">Latest</a></li>
-            <li><a href="#threads">Forum</a></li>
-            <li><a href="#reviews">Reviews</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-        </ul>
-    </div>
     <div id="latest">
         <h2>
             Latest <?php echo $product['Product']['name']; ?> News

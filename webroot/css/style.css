@@ -1077,41 +1077,20 @@ h2 .cta {
     margin-bottom: 10px;
 }
 
-.product-tabs {
-    float: left;
-    height: 32px;
-    margin-left: 10px;
-}
-
-.product-tabs li {
-    float: left;
-}
-
-.product-tabs li a, .product-tabs li span {
-    display: block;
-    padding: 4px 8px;
-    color: #999;
-}
-
-.product-tabs .active {
-    background-repeat: no-repeat;
-    background-position: 8px center;
+ul.product-tabs.tabs {
     padding-left: 32px;
-    font-weight: bold;
-    border-style: solid;
-    border-color: #999 #999 #fff;
-    border-width: 1px;
-    border-radius: 5px 5px 0 0;
-    height: 30px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    height: 31px;
 }
 
-.product-tabs .active span{
-    color: #424C72;
-    font-size: 18px;
+.product-tabs .overview.ui-tabs-selected span, .product-tabs .overview a {
+    padding: 4px 8px;
 }
 
-.product-tabs li:hover a {
-    color: #424C72
+.product-tabs .ui-tabs-selected span {
+    padding: 4px 8px;
+    display: block;
 }
 
 .love {

@@ -110,4 +110,41 @@ class LinkHelper extends AppHelper {
                 ));
     }
 
+    
+    // Links to a products gallery
+    public function gallery($productSlug, $anchorText = null, $htmlAttrs = array()) {
+        if (is_array($productSlug)) {
+            $product = $this->extractRow('Product', $productSlug);
+            $productSlug = $product['slug'];
+        }
+
+        $anchorText = $anchorText ? $anchorText : $product['name'] . ' Gallery';
+
+        return $this->Html->link($anchorText, array(
+                    'controller' => 'images',
+                    'action' => 'index',
+                    'admin' => false,
+                    'productSlug' => $productSlug
+                        ), $htmlAttrs
+        );
+    }
+    
+    // Links to a products review index
+    public function reviews($productSlug, $anchorText = null, $htmlAttrs = array()) {
+        if (is_array($productSlug)) {
+            $product = $this->extractRow('Product', $productSlug);
+            $productSlug = $product['slug'];
+        }
+
+        $anchorText = $anchorText ? $anchorText : $product['name'] . ' Reviews';
+
+        return $this->Html->link($anchorText, array(
+                    'controller' => 'reviews',
+                    'action' => 'index',
+                    'admin' => false,
+                    'productSlug' => $productSlug
+                        ), $htmlAttrs
+        );
+    }
+    
 }

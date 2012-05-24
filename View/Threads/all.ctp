@@ -9,13 +9,13 @@ if(!empty($product['Tweet'])) {
 	$pageWidgets['twitter'] = array('tweets' => $product['Tweet']);
 }
 $this->set(compact('pageWidgets'));
+echo $this->element('products/header-tabs', array('current' => 'forum'));
 ?><h1><?php echo $title_for_layout; ?></h1>
 <?php
 $this->Html->addCrumb($product['Product']['name'], array(
 	'controller' => 'products', 'action' => 'view', 'productSlug' => $product['Product']['slug']));
 $this->Html->addCrumb($product['Product']['name'].' Forum');
 ?>
- 
 <p>
 	Welcome to our <?php echo $this->Link->product($product);?> forum, where you can post discussions, questions and queries - and hopefully get them answered!
 </p>

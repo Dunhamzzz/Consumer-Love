@@ -7,6 +7,10 @@ $(function() {
         gravity: 's'
     });
     
+    
+    // Most tabs
+    $('.tabs-wrapper').tabs();
+    
     // This hides popped-up stuff, use with 
     $(document.body).click(function() {
         $('.hide-on-body-click').hide();
