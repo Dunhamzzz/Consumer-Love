@@ -134,7 +134,7 @@ $(function() {
                         url: '/products/autocomplete',
                         type: 'get',
                         data: {
-                            'q' : query
+                            'term' : query
                         },
                         dataType: 'html',
                         success: function(data) {
@@ -271,6 +271,15 @@ $(function() {
     $('.edit-post').click(function(e){
         $('li#post-'+ $(this).data('id') + ' .post-content').load($(this).attr('href') + ' #PostReplyForm');
         e.preventDefault();
+    });
+    
+    // Product json autocomplete
+    $('.product-autocomplete').autocomplete({
+        minLength: 2,
+        source : '/products/autocomplete.json',
+        select: function(event, ui) {
+            $('.product-autocomplete-value').val(ui.item.id);
+        }
     });
 	
 });

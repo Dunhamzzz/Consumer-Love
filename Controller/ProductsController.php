@@ -34,10 +34,10 @@ class ProductsController extends AppController {
         }
 
         // Get Threads, we need to paginate it
-        $threads = $this->paginate('Thread', array('product_id' => $product['Product']['id']));
+        $this->set('threads', $this->paginate('Thread', array('product_id' => $product['Product']['id'])));
 
         // Paginate News
-        $news = $this->paginate('News', array('product_id' => $product['Product']['id']));
+        $this->set('news' ,$this->paginate('News', array('product_id' => $product['Product']['id'])));
 
         // Is this in the users inventory?
         if ($this->userData) {
@@ -54,7 +54,7 @@ class ProductsController extends AppController {
         $this->set('canonical', '/' . $product['Product']['slug']);
 
         $this->set('title_for_layout', $product['Product']['name'] . ' &hearts;');
-        $this->set(compact('product', 'category', 'threads', 'canonical', 'related', 'news'));
+        $this->set(compact('product', 'category', 'canonical'));
     }
 
     // Page for users to suggest products for us to cover
@@ -72,9 +72,9 @@ class ProductsController extends AppController {
             throw new NotFoundException(__('Invalid Product'));
         }
 
-        $users = $this->Product->Inventory->haveProduct($product['Product']['id']);
+        $this->set('users', $this->Product->Inventory->haveProduct($product['Product']['id']));
 
-        $this->set(compact('product', 'users'));
+        $this->set(compact('product'));
     }
 
     /** Ajax Actions * */
@@ -83,9 +83,10 @@ class ProductsController extends AppController {
             throw new MethodNotAllowedException();
         }
 
-        $term = $this->request->query['q'];
+        $term = $this->request->query['term'];
         $products = $this->Product->search($term);
-        $categories = $this->Product->Category->search($term);
+        // If JSON only return products
+        //$categories = $this->Product->Category->search($term);
 
         $this->set(compact('products', 'categories', 'term'));
     }
@@ -134,18 +135,15 @@ class ProductsController extends AppController {
                 ));
             }
         }
-
-        $title_for_layout = 'Add Product';
-        $categories = $this->Product->Category->getAllThreaded();
-        $parents = array(0 => '[ No Parent ]') + $this->Product->getAllThreaded();
-
-        $this->set(compact('categories', 'title_for_layout', 'parents'));
+        
+        $this->set('title_for_layout', __('Add Product'));
+        $this->set('categories', $this->Product->Category->getAllThreaded());
     }
 
     public function admin_edit($id = null) {
         $this->Product->id = $id;
         if (!$this->Product->exists()) {
-            throw new NotFoundException('Invalid product ID.');
+            throw new NotFoundException(__('Invalid product.'));
         }
 
         $product = $this->Product->read();
@@ -154,16 +152,21 @@ class ProductsController extends AppController {
             if ($this->Product->update($this->request->data)) {
                 $this->Session->setFlash('Changes made to ' . $this->request->data['Product']['name'] . ' have been saved.');
             } else {
-                $this->Session->setFlash('Saving Failed.');
+                $this->Session->setFlash(__('Saving Failed.'));
             }
         } else {
             $this->request->data = $product;
         }
 
-        $title_for_layout = 'Edit ' . $this->request->data['Product']['name'];
-        $categories = $this->Product->Category->getAllThreaded();
-        $parents = array(0 => '[ No Parent ]') + $this->Product->getAllThreaded();
-        $this->set(compact('categories', 'product', 'title_for_layout', 'parents'));
+        $this->set('parent', $this->Product->find('first', array(
+            'fields' => array('name', 'logo'),
+            'conditions' => array('id' => $product['Product']['parent_id']),
+            'contain' => false
+        )));
+        
+        $this->set('title_for_layout', __('Edit %s', $this->request->data['Product']['name']));
+        $this->set('categories', $this->Product->Category->getAllThreaded());
+        $this->set(compact('product'));
     }
 
     public function admin_delete($id) {

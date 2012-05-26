@@ -18,6 +18,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
 body {
     line-height: 1.2;
     background-image: url(/img/layout/cl_bg.png);
+    padding-top: 41px;
 }
 
 a {
@@ -368,7 +369,6 @@ form.settings {
     overflow: hidden;
     border: 0;
     padding: 0 5px;
-    margin-top: 41px;
     line-height: 1.2;
     min-height: 10px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
@@ -487,7 +487,7 @@ footer p {
     width: 100%;
     height: 41px;
     z-index: 9999;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
     position: fixed;
 }
 
@@ -1586,6 +1586,31 @@ ul.tabs .ui-state-hover a {
 /* jQuery UI Tabs */
 .ui-tabs-selected {
 
+}
+
+/* jQuery UI Autocomplete */
+.ui-autocomplete {
+    background: #fff;
+    position: absolute; 
+    cursor: default;
+    border: 1px solid #a6a6a6;
+}	
+
+/* workarounds */
+* html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+
+.ui-autocomplete li {
+    
+}
+
+.ui-autocomplete a {
+    display: block;
+    padding: 5px;
+} 
+
+.ui-autocomplete .ui-state-hover {
+    background: #2D334D;
+    color: #fff;
 }
 
 /* Admin Styles */

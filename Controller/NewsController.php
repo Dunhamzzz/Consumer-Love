@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * News Controller
+ */
+ 
 class NewsController extends AppController {
 
     public function beforeFilter() {
