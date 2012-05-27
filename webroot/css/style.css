@@ -1179,6 +1179,15 @@ input.hateit:hover {
     margin: 0 0 3px;
 }
 
+.full-category-list li{
+    font-weight: bold;
+}
+
+.full-category-list li li {
+    font-weight: normal;
+    padding-left: 10px;
+}
+
 #product-paginate {
     margin-bottom: 10px;
     text-align: right;
