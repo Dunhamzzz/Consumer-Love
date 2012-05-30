@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Product Model. 
+ */
+
 class Product extends AppModel {
 
     public $order = 'name';
@@ -22,12 +26,13 @@ class Product extends AppModel {
 
     public $hasAndBelongsToMany = array('Category');
 
-    public $hasMany = array('Inventory', 'Feed', 'Thread', 'News');
-    
-    public $hasOne = array(
-        
+    public $hasMany = array(
+        'Inventory',
+        'Thread',
+        'News',
+        'Image'
     );
-
+    
     public $actsAs = array(
         'Upload.Upload' => array(
             'logo' => array(

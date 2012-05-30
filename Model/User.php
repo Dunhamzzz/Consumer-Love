@@ -6,7 +6,9 @@ class User extends AppModel {
     public $hasMany = array(
         'Inventory',
         'Thread',
-        'Post'
+        'Post',
+        'Image',
+        'News'
     );
     public $actsAs = array(
         'Utils.Sluggable' => array(
