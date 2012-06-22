@@ -13,3 +13,9 @@
 [submodule "Plugin/Authenticate"]
 	path = Plugin/Authenticate
 	url = git://github.com/ceeram/Authenticate.git
+[submodule "app/Plugin/Facebook"]
+	path = app/Plugin/Facebook
+	url = git://github.com/webtechnick/CakePHP-Facebook-Plugin.git
+[submodule "Plugin/Facebook"]
+	path = Plugin/Facebook
+	url = git://github.com/webtechnick/CakePHP-Facebook-Plugin.git
