@@ -1,1 +1,1 @@
-<div class="fb-like-box" data-href="https://www.facebook.com/pages/Consumer-Love/227663683916560" data-width="199" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div>
+<div class="fb-like-box" data-href="https://www.facebook.com/pages/Consumer-Love/227663683916560" data-width="280" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div>
