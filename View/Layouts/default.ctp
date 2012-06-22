@@ -121,12 +121,23 @@
 
                         // Put facebook on the end
                         $pageWidgets['facebook'] = array();
+
+                        // Loop through widgets, put MPU as second widget.
+                        $widgetIndex = 0;
                         foreach ($pageWidgets as $widget => $vars):
-                            if (is_int($widget))
+                            if (is_int($widget)) {
                                 $widget = $vars;
+                            }
+                            $widgetIndex++;
                             ?>
-                            <div class="widget <?php echo $widget; ?>">
-                                <?php echo $this->element('widgets/' . $widget, (array) $vars); ?>
+                            <?php if ($widgetIndex == 2): ?>
+                                <div class="sidebar-mpu">
+                                    <?php echo $this->element('ads/mpu'); ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class = "widget <?php echo $widget; ?>">
+                                <?php echo $this->element('widgets/' . $widget, (array) $vars);
+                                ?>
                             </div>
                         <?php endforeach; ?>
                     </div>

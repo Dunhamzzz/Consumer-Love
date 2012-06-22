@@ -1,3 +1,1 @@
-<div class="widget mpu">
-      <img src="http://lorempixel.com/output/city-q-g-300-250-5.jpg" alt="temporary ad"/>
-</div>
+<img src="http://lorempixel.com/output/abstract-q-g-300-250-3.jpg" alt="temporary ad"/>
