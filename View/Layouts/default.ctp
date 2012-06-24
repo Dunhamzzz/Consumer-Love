@@ -21,11 +21,13 @@
             'jquery-1.7.2.min',
             'jquery-ui-1.8.19.min',
             'jquery.tipsy',
+            'chosen/chosen.jquery.min.js',
             'global'
         ));
         echo $this->Html->css(array(
             'http://fonts.googleapis.com/css?family=Copse|Corben:700&v2',
             'tipsy',
+            '/js/chosen/chosen.css',
             'style'
         ));
 

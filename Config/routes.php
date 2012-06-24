@@ -66,6 +66,10 @@ Router::connect('/forum/:productSlug', array('controller' => 'threads', 'action'
 Router::connect('/forum/:productSlug/:threadSlug', array('controller' => 'threads', 'action' => 'view', 'plugin' => false), array('pass' => array('productSlug', 'threadSlug'))
 );
 
+// Products Gallery
+Router::connect('/gallery/:productSlug', array('controller' => 'images', 'action' => 'index', 'plugin' => false), array('pass' => array('productSlug'))
+);
+
 // News
 Router::connect('/news/:newsSlug', array('controller' => 'news', 'action' => 'view', 'plugin' => false), array(
     'pass' => array('newsSlug')

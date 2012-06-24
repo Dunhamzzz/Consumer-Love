@@ -11,6 +11,9 @@ $(function() {
     // Most tabs
     $('.tabs-wrapper').tabs();
     
+    // Chosen
+    $('select').chosen();
+    
     // This hides popped-up stuff, use with 
     $(document.body).click(function() {
         $('.hide-on-body-click').hide();
