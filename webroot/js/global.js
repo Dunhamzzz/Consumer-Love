@@ -12,7 +12,12 @@ $(function() {
     $('.tabs-wrapper').tabs();
     
     // Chosen
+    $('select.category').chosen({
+        allow_single_deselect: true
+    });
     $('select').chosen();
+    
+   
     
     // This hides popped-up stuff, use with 
     $(document.body).click(function() {
@@ -64,7 +69,8 @@ $(function() {
                     if(response != '1') {
                         $(this).removeClass('in');
                         $('.num-products').text(total - 1);
-                    } else {
+                    }
+                    else {
                         $(this).addClass('in');
                         $('.num-products').text(total + 1);
                     }

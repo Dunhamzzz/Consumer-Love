@@ -73,7 +73,7 @@ class CategoriesController extends AppController {
         }
 
         $this->set('title_for_layout', 'Add Category');
-        $this->set('parents', $this->Product->Category->getAllThreaded());
+        $this->set('parents', array('') + $this->Product->Category->getAllThreaded());
     }
 
     public function admin_edit($id = null) {
