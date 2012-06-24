@@ -106,7 +106,7 @@ class LinkHelper extends AppHelper {
         return $this->Html->link('New Thread', array(
                     'controller' => 'threads', 'action' => 'create', $productId
                         ), array(
-                    'class' => 'show-thread-form cta'
+                    'class' => 'show-thread-form button'
                 ));
     }
 

@@ -12,7 +12,6 @@ $this->set(compact('pageWidgets'));
 $this->Html->addCrumb($product['Product']['name']);
 echo $this->element('products/header-tabs', array('current' => 'overview'));
 ?>
-
 <div id="product" class="product-section">
     <?php echo $this->Love->productImage($product, 128); ?>
     <?php if (isset($userData)): ?>
@@ -32,7 +31,7 @@ echo $this->element('products/header-tabs', array('current' => 'overview'));
                 'controller' => 'news',
                 'action' => 'submit',
                 $product['Product']['slug'],
-                    ), array('class' => 'cta')
+                    ), array('class' => 'button')
             );
             ?>
         </h2>

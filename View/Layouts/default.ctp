@@ -50,6 +50,7 @@
         <div id="user-bar">
             <div class="container">
                 <a href="/" id="site-title" rel="home">Consumer Love <span class="heart"> &hearts;</span></a>
+                 <?php if (!isset($disableSidebar)): ?>
                 <div id="search" class="<?php echo isset($class) ? $class : ''; ?>">
                     <div id="suggest-wrapper">
                         <input id="suggest"
@@ -61,6 +62,7 @@
                         <div id="suggest-landing"></div>
                     </div>
                 </div>
+                <?php endif; ?>
                 <div id="user">
                     <?php if (isset($userData)): ?>
                         <div class="username">

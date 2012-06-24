@@ -3,7 +3,17 @@
     <div class="left-col">
         <h2>We love stuff</h2>
         <p>Get the most out of the products you own and the services you use everyday, or discover new products that suit you.</p>
-        <?php echo $this->element('search', array('class' => 'welcome')); ?>
+        <div id="search" class="<?php echo isset($class) ? $class : ''; ?>">
+            <div id="suggest-wrapper">
+                <input id="suggest"
+                       type="text"
+                       name="product_suggest"
+                       class="idle"
+                       value="Search for a product or brand"
+                       autocomplete="off"/>
+                <div id="suggest-landing"></div>
+            </div>
+        </div>
     </div>
     <div class="right-col">
         <?php
@@ -23,7 +33,7 @@
         <?php echo $this->Form->input('username', array('placeholder' => 'Username', 'class' => 'signup-username', 'id' => 'welcome-username')); ?>
         <?php echo $this->Form->input('password', array('placeholder' => 'Password', 'class' => 'signup-password', 'id' => 'welcome-password')); ?>
         <?php echo $this->Form->input('email', array('placeholder' => 'Email', 'class' => 'signup-email')); ?>
-        <?php echo $this->Form->submit('Sign up', array('class' => 'cta signup-submit')); ?>
+        <?php echo $this->Form->submit('Sign up', array('class' => 'btn signup-submit')); ?>
         <?php echo $this->Form->end(); ?>
     </div>
     <h3 class="featuring">Featuring these products and more</h3>
