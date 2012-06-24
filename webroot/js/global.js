@@ -187,9 +187,9 @@ $(function() {
     })
 	
     $('.top5select').attr('autocomplete', 'off').change(function() {
-        var $landing = $(this).next('div');
+        var $landing = $('.top5-landing');
         $landing.fadeOut('fast');
-        $landing.load('/products/top5/'+$(this).val() + ' .top5', function() {
+        $landing.load('/products/top5/'+$(this).val() + ' .top5-landing', function() {
             $(this).fadeIn('fast');
         });
     });

@@ -7,7 +7,7 @@ $top5SelectOptions = array(
 echo $this->Form->create('Product'); ?>
 <h3>Top Products In...</h3>
 <?php echo $this->Form->input('category_id', array_merge($top5SelectOptions, array('selected' => $top5Category['Category']['id']))); ?>
-<div class="top5">
+<div class="top5-landing">
 	<div>
 	<?php if(count($top5Products) !== 0):?>
 	<ul>
