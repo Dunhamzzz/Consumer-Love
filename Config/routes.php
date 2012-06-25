@@ -31,7 +31,8 @@ Router::connect('/', array('controller' => 'users', 'action' => 'dashboard'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+Router::connect('/about', array('controller' => 'pages', 'action' => 'index'));
+Router::connect('/about/*', array('controller' => 'pages', 'action' => 'display'));
 
 // Login/Signup
 Router::connect('/signup', array('controller' => 'users', 'action' => 'signup'));

@@ -153,7 +153,7 @@
                 <ul id="footer-links">
                     <li class="first">About
                         <ul class="sub">
-                            <li><?php echo $this->Html->link('About Us', '/pages/about'); ?></li>
+                            <li><?php echo $this->Html->link('About Us', '/about'); ?></li>
                         </ul>
                     </li>
                 </ul>
