@@ -3,7 +3,6 @@
 /**
  * Product Model. 
  */
-
 class Product extends AppModel {
 
     public $order = 'name';
@@ -23,16 +22,13 @@ class Product extends AppModel {
             )
         )
     );
-
     public $hasAndBelongsToMany = array('Category');
-
     public $hasMany = array(
         'Inventory',
         'Thread',
         'News',
         'Image'
     );
-    
     public $actsAs = array(
         'Upload.Upload' => array(
             'logo' => array(
@@ -52,7 +48,6 @@ class Product extends AppModel {
             'separator' => ''
         ),
     );
-    
     public $findMethods = array('active' => true);
 
     protected function _findActive($state, $query, $results = array()) {
@@ -114,29 +109,56 @@ class Product extends AppModel {
     /**
      * Returns an array of related products.
      * Products are classed as related if they share the same parent, are the parent/a child of, or are in the same category.
-     * @param array $productData
+     * @param array $product
      */
-    public function related($productData, $limit = 4) {
-        
+    public function related($product, $limit = 8) {
+
+        // Children of product
         $conditions = array(
-            'OR' => array(array('Product.parent_id' => $productData['Product']['id'])), // Children of product),
-            'Product.id <>' => $productData['Product']['id'],
+            'OR' => array(array('Product.parent_id' => $product['Product']['id'])), // Children of product),
+            'Product.id <>' => $product['Product']['id'],
             'Product.published' => 1
         );
-        
-        if(!empty($product['parent_id'])) {
-            $conditions['OR'][] = array('Product.parent_id' => $productData['Product']['parent_id']); // Siblings
-            $conditions['OR'][] = array('Product.id' => $productData['Product']['parent_id']); // Parent of product
+
+        // Siblings and parent of product if applicable
+        if (!empty($product['Product']['parent_id'])) {
+
+            $conditions['OR'][] = array('Product.parent_id' => $product['Product']['parent_id']);
+            $conditions['OR'][] = array('Product.id' => $product['Product']['parent_id']);
         }
-        
+
+        // Products in the same categories
+        // Get category IDs in an array
+        $categoryIds = Set::extract($product['Category'], '{n}.id');
+
+        $conditionsSubQuery['category_id IN(?)'] = implode(',', $categoryIds);
+
+        $db = $this->getDataSource();
+        $subQuery = $db->buildStatement(
+                array(
+            'fields' => array('product_id'),
+            'table' => 'categories_products',
+            'joins' => array(),
+            'alias' => 'c_p',
+            'conditions' => $conditionsSubQuery,
+            'order' => null,
+            'group' => null,
+            'limit' => null
+                ), $this->CategoryProduct
+        );
+        $subQuery = 'Product.id IN (' . $subQuery . ') ';
+        $subQueryExpression = $db->expression($subQuery);
+
+        $conditions['OR'][] = $subQueryExpression;
+
         return $this->find('all', array(
-            'conditions' => $conditions,
-            'contain' => array('Category'),
-            'group' => 'Product.id',
-            'limit' => $limit
-        ));
-        
-            $sql = "
+                    'conditions' => $conditions,
+                    'contain' => array('Category'),
+                    'group' => 'Product.id',
+                    'limit' => $limit
+                ));
+
+        $sql = "
 SELECT  `products` . * 
 FROM  `products` ,  `categories_products` 
 WHERE (
@@ -155,8 +177,6 @@ OR  `products`.`id` =  '4dde9f7a-b88c-41fb-ae8d-55c06d4ac163'
 GROUP BY  `products`.`id` 
 LIMIT 0 , 30
 ";
-    
-        
     }
 
     /**
@@ -164,10 +184,10 @@ LIMIT 0 , 30
      * @param string $slug
      */
     public function getBySlug($slug = null) {
-        if(!$slug || empty($slug)) {
+        if (!$slug || empty($slug)) {
             return false;
         }
-        
+
         return $this->find('first', array(
                     'conditions' => array(
                         'slug' => $slug
@@ -216,9 +236,9 @@ LIMIT 0 , 30
         return $formattedDescription;
     }
 
-     /**
+    /**
      * Updates a products total post
-      * @param array $post Post data from $this->data
+     * @param array $post Post data from $this->data
      */
     public function updateForumData($post) {
 
@@ -227,7 +247,7 @@ LIMIT 0 , 30
             'conditions' => array('Thread.id' => $post['Post']['thread_id']),
             'fields' => 'product_id',
             'contain' => false
-        ));
+                ));
 
         $this->id = $thread['Thread']['product_id'];
 
@@ -238,14 +258,13 @@ LIMIT 0 , 30
                 'Thread.product_id' => $this->id
             ),
             'contain' => false
-        ));
+                ));
 
         $this->save(array(
             'last_post_id' => $post['Post']['id'],
             'last_post_date' => date('Y-m-d H:i:s'),
             'post_count' => $postData[0][0]['total']
         ));
-
     }
 
 }

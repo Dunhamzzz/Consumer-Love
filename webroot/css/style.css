@@ -1111,6 +1111,11 @@ ul.product-tabs.tabs {
     display: block;
 }
 
+#related-products ul {
+    width: 640px;
+    margin: 0 auto;
+}
+
 .love {
     color: #CD0D00;
 }

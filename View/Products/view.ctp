@@ -68,7 +68,7 @@ echo $this->element('products/header-tabs', array('current' => 'overview'));
 </div>
 <?php if(!empty($related)): ?>
 <div id="related-products">
-    <h3>Related Products</h3>
+    <h2>Related Products</h2>
     <ul>
         <?php foreach($related as $relatedProduct) :?>
         <li><?php echo $this->element('products/medium_list', array('product' => $relatedProduct)); ?></li>
