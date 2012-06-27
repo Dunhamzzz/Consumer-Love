@@ -5,3 +5,4 @@ vendors/
 webroot/files/
 webroot/phpinfo.php
 nbproject/
+.DS_Store
