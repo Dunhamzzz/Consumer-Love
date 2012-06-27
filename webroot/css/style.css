@@ -428,7 +428,7 @@ form.settings {
 
 }
 
-#site-title:hover .heart {
+#site-title .heart {
     font-size: 34px;
     line-height: 25px;
 }
