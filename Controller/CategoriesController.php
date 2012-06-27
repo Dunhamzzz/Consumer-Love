@@ -76,11 +76,22 @@ class CategoriesController extends AppController {
         $this->set('parents', array('') + $this->Product->Category->getAllThreaded());
     }
 
+    /**
+     * Admin Edit category page.
+     * @param int $id 
+     */
     public function admin_edit($id = null) {
 
+        $this->Category->id = $id;
+        if (!$this->Category->exists()) {
+            throw new NotFoundException(__('Invalid category'));
+        }
+
+        $category = $this->Category->read();
+        
         if ($this->request->is('post')) {
             if ($this->Category->save($this->request->data)) {
-                $this->Session->setFlash('Changes made to ' . $this->request->data['Category']['name'] . ' have been saved.');
+                $this->Session->setFlash(__('Changes made to %s have been saved.', $this->request->data['Category']['name'] ));
                 
                 // If a new category was posted, redirect to main edit page.
                 if(!$id) {
@@ -88,23 +99,16 @@ class CategoriesController extends AppController {
                 }
                 
             } else {
-                $this->Session->setFlash('Saving Failed.');
+                $this->Session->setFlash(__('Saving failed, please fix the errors below.'));
             }
             
         } else {
-            $this->Category->id = $id;
-            if (!$this->Category->exists()) {
-                //throw new NotFoundException(__('Invalid category'));
-            }
-
-        $category = $this->Category->read();
             $this->request->data = $category;
         }
 
-        $title_for_layout = 'Edit Category: ' . $category['Category']['name'];
-        $parents = array(0 => '[ No Parent ]') + $this->Category->generateTreeList(null, null, null, " - ");
-
-        $this->set(compact('parents', 'category', 'title_for_layout'));
+        $this->set('title_for_layout', __('Edit Category: %s', $category['Category']['name']));
+        $this->set('parents', array(0 => '[ No Parent ]') + $this->Category->generateTreeList(null, null, null, " - "));
+        $this->set(compact('category'));
     }
 
 }
