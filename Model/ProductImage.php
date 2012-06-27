@@ -5,13 +5,13 @@
  * @author Matthew Dunham <me@dunhamzzz.com> 
  */
 
-class Image extends AppModel {
+class ProductImage extends AppModel {
     
     public $belongsTo = array(
         'Product', 'User'
     );
     
-    public $order = 'Image.created';
+    public $order = 'ProductImage.created';
     
     public $actsAs = array(
         'Upload.Upload' => array(

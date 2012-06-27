@@ -7,7 +7,7 @@ class User extends AppModel {
         'Inventory',
         'Thread',
         'Post',
-        'Image',
+        'ProductImage',
         'News'
     );
     public $actsAs = array(

@@ -4,7 +4,7 @@
  * Product Image gallery controller 
  */
 
-class ImagesController extends AppController {
+class ProductImagesController extends AppController {
     
     public function beforeFilter() {
         
@@ -18,7 +18,7 @@ class ImagesController extends AppController {
      */
     public function index($productSlug = null) {
         
-        $product = $this->Image->Product->getBySlug($productSlug);
+        $product = $this->ProductImage->Product->getBySlug($productSlug);
         
         if(!$product) {
             throw new NotFoundException(__('Product not found.'));

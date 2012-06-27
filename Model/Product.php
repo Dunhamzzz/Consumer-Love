@@ -27,7 +27,7 @@ class Product extends AppModel {
         'Inventory',
         'Thread',
         'News',
-        'Image'
+        'ProductImage'
     );
     public $actsAs = array(
         'Upload.Upload' => array(
