@@ -60,7 +60,7 @@ class CategoriesController extends AppController {
 
     public function admin_new() {
         if ($this->request->is('post')) {
-            if ($this->Product->add($this->request->data)) {
+            if ($this->Category->add($this->request->data)) {
                 $this->Session->setFlash($this->request->data['Category']['name'] . ' have been saved.');
 
                 $this->redirect(array(
@@ -93,10 +93,8 @@ class CategoriesController extends AppController {
             if ($this->Category->save($this->request->data)) {
                 $this->Session->setFlash(__('Changes made to %s have been saved.', $this->request->data['Category']['name'] ));
                 
-                // If a new category was posted, redirect to main edit page.
-                if(!$id) {
-                    $this->redirect(array('action' => 'edit', $this->Category->id));
-                }
+                // Refresh page
+                $this->redirect(array('action' => 'edit', $this->Category->id));
                 
             } else {
                 $this->Session->setFlash(__('Saving failed, please fix the errors below.'));
