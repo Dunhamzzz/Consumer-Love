@@ -17,7 +17,13 @@ $(function() {
     });
     $('select').chosen();
     
-   
+    // Adding a close button to flash messages
+    if($('#authMessage, #flashMessage').length) {
+       $('#authMessage, #flashMessage').append($('<div class="flash-close" title="Dismiss Message">&#215;</div>')); 
+       $('.flash-close').click(function() {
+           $(this).parent().fadeOut('slow');
+       });
+    }
     
     // This hides popped-up stuff, use with 
     $(document.body).click(function() {

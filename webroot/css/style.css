@@ -323,25 +323,11 @@ form.settings {
     width: auto;
 }
 
-.flash-holder {
-    display: none;
-}
-
-.flash {
-    padding: 5px;
-    font-weight: bold;
-    background: #f6a828;
-    text-align: center;
-    color: #363636;
-    border-bottom: 1px solid #363636;
-    position: fixed;
-    width: 100%;
-    z-index: 9999;
-    top: 0;
-}
-
-#flash-dismiss {
+.flash-close {
     float: right;
+    cursor: pointer;
+    line-height: 19px;
+    font-size: 20px;
 }
 
 .product-logo {
