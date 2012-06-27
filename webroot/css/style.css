@@ -429,7 +429,8 @@ form.settings {
 }
 
 #site-title:hover .heart {
-    /* text-shadow: 0 0 2px #FFA6BF; */
+    font-size: 34px;
+    line-height: 25px;
 }
 
 #menu {
