@@ -121,7 +121,7 @@ class LinkHelper extends AppHelper {
         $anchorText = $anchorText ? $anchorText : $product['name'] . ' Gallery';
 
         return $this->Html->link($anchorText, array(
-                    'controller' => 'images',
+                    'controller' => 'product_images',
                     'action' => 'index',
                     'admin' => false,
                     'productSlug' => $productSlug
