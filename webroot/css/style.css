@@ -96,6 +96,7 @@ h3 {
 .container {
     width: 960px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .guest {
@@ -563,10 +564,6 @@ footer p {
     margin: 0;
 }
 
-#user-options ul li.divider {
-
-}
-
 #user #user-options a {
     display: block;
     color:	#2D334D;
@@ -584,7 +581,7 @@ footer p {
 }
 
 #user-bar .container {
-    padding: 5px;
+    padding-top: 5px;
 }
 
 #user {
