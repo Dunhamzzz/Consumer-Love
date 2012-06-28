@@ -99,6 +99,16 @@ h3 {
     overflow: hidden;
 }
 
+#user-bar .container {
+    padding: 5px 30px;
+    overflow: visible;
+    width: 940px;
+}
+
+#menu .container {
+    position: relative;
+}
+
 .guest {
     cursor: pointer;	
 }
@@ -398,10 +408,6 @@ form.settings {
     color: #e7e2de;
 }
 
-#menu .container {
-    position: relative;
-}
-
 #site-title {
     font-family: 'Corben';
     color: #fff;
@@ -450,6 +456,7 @@ footer p {
 #footer-links {
     margin: 1em auto 0.5em;
     width: 960px;
+    padding: 0 20px;
     overflow: hidden;
     color: #fff;
 }
@@ -577,11 +584,6 @@ footer p {
 #user #user-options a:hover {
     color: #fff;
     background: #2D334D;	
-}
-
-#user-bar .container {
-    padding-top: 5px;
-    overflow: visible;
 }
 
 #user {
