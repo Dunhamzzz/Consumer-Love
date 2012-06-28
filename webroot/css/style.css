@@ -90,13 +90,13 @@ h3 {
 #main {
     border-bottom: 2px solid #9A98AC;
     border-bottom: 2px solid rgba(85, 86, 130, 0.5);
-    overflow: hidden;
 }
 
 .container {
     width: 960px;
     margin: 0 auto;
     padding: 0 20px;
+    overflow: hidden;
 }
 
 .guest {
@@ -382,7 +382,6 @@ form.settings {
 #nav {
     background-color: #9A98AC;
     background-color: rgba(85, 86, 130, 0.5);
-    overflow: hidden;
     border: 0;
     padding: 0 5px;
     line-height: 1.2;
@@ -582,6 +581,7 @@ footer p {
 
 #user-bar .container {
     padding-top: 5px;
+    overflow: visible;
 }
 
 #user {
