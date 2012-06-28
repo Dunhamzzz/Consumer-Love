@@ -829,8 +829,7 @@ footer p {
 /* Welcome Page */
 .container.welcome {
     background: transparent url(/img/layout/hearts-bg.png) no-repeat 10px 10px;
-    padding: 160px 25px 0 25px;
-    overflow: hidden;
+    padding-top: 160px;
 }
 
 .welcome #content {
