@@ -21,11 +21,23 @@ class ProductImagesController extends AppController {
         $product = $this->ProductImage->Product->getBySlug($productSlug);
         
         if(!$product) {
-            throw new NotFoundException(__('Product not found.'));
+            throw new NotFoundException(__('Invalid Product.'));
         }
         
         $this->set('product', $product);
         $this->set('title_for_layout', __('%s Image Gallery', $product['Product']['name']));
+    }
+    
+    /**
+     * Main upload function
+     * @param string $productSlug 
+     */
+    public function upload($productSlug = null) {
+        
+        $product = $this->Product->findBySlug($productSlug);
+        if(!$product) {
+            throw new NotFoundException(__('Invalid Product.'));
+        }
     }
     
     /**

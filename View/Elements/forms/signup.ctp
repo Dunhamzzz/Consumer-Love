@@ -10,7 +10,7 @@
 	),
 	'password' => array(
 		'label' => false,
-		'placeholder' => '********',
+		'placeholder' => 'Password',
 		'autocomplete' => 'off',
 		'id' => false,
 		'value' => ''

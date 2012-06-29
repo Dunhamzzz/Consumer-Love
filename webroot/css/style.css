@@ -90,12 +90,19 @@ h3 {
 #main {
     border-bottom: 2px solid #9A98AC;
     border-bottom: 2px solid rgba(85, 86, 130, 0.5);
-    overflow: hidden;
 }
 
 .container {
     width: 960px;
     margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+}
+
+#user-bar .container {
+    padding: 5px 30px;
+    overflow: visible;
+    width: 940px;
 }
 
 .guest {
@@ -381,7 +388,6 @@ form.settings {
 #nav {
     background-color: #9A98AC;
     background-color: rgba(85, 86, 130, 0.5);
-    overflow: hidden;
     border: 0;
     padding: 0 5px;
     line-height: 1.2;
@@ -396,10 +402,6 @@ form.settings {
 
 #menu a:hover {
     color: #e7e2de;
-}
-
-#menu .container {
-    position: relative;
 }
 
 #site-title {
@@ -450,6 +452,7 @@ footer p {
 #footer-links {
     margin: 1em auto 0.5em;
     width: 960px;
+    padding: 0 20px;
     overflow: hidden;
     color: #fff;
 }
@@ -563,10 +566,6 @@ footer p {
     margin: 0;
 }
 
-#user-options ul li.divider {
-
-}
-
 #user #user-options a {
     display: block;
     color:	#2D334D;
@@ -581,10 +580,6 @@ footer p {
 #user #user-options a:hover {
     color: #fff;
     background: #2D334D;	
-}
-
-#user-bar .container {
-    padding: 5px;
 }
 
 #user {
@@ -632,6 +627,12 @@ footer p {
     height: 250px;
     overflow: hidden;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.advert-placeholder {
+    background: forestgreen;
+    width: 300px;
+    height: 250px;
 }
 
 #homepage h2 {
@@ -828,8 +829,7 @@ footer p {
 /* Welcome Page */
 .container.welcome {
     background: transparent url(/img/layout/hearts-bg.png) no-repeat 10px 10px;
-    padding: 160px 25px 0 25px;
-    overflow: hidden;
+    padding-top: 160px;
 }
 
 .welcome #content {

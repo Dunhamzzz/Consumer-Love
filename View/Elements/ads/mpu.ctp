@@ -1,1 +1,1 @@
-<img src="http://lorempixel.com/output/abstract-q-g-300-250-3.jpg" alt="temporary ad"/>
+<div class="advert-placeholder"></div>
