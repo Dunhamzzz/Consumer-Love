@@ -28,4 +28,12 @@ class ProductImagesController extends AppController {
         $this->set('title_for_layout', __('%s Image Gallery', $product['Product']['name']));
     }
     
+    /**
+     * Views a single image and details on it
+     * @param type $imageId 
+     */
+    public function view($imageId) {
+        
+    }
+    
 }
