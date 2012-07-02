@@ -21,7 +21,6 @@ echo $this->element('products/header-tabs', array('current' => 'overview'));
         <p><?php echo nl2br($product['Product']['description_formatted'] ? $product['Product']['description_formatted'] : $product['Product']['description']); ?></p>
     </div>
 </div>
-<div id="product-tabs" class="tabs-wrapper">
     <div id="latest">
         <h2>
             Latest <?php echo $product['Product']['name']; ?> News
@@ -65,7 +64,6 @@ echo $this->element('products/header-tabs', array('current' => 'overview'));
         <h2><?php echo $product['Product']['name']; ?> Gallery</h2>
         <p>Gallery goes here</p>
     </div>
-</div>
 <?php if(!empty($related)): ?>
 <div id="related-products">
     <h2>Related Products</h2>

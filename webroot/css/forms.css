@@ -1,0 +1,231 @@
+/* Forms */
+input[type=text], input[type=email], input[type=password], input[type=checkbox], textarea {
+    padding: 5px;
+    border: 1px solid #a6a6a6;
+    color: #000;
+    font-family: Lucida Sans, Verdana;
+    font-size: 16px;
+}
+
+input.loading {
+    background: #fff url('/img/icons/ajax-loader.gif') 98% center no-repeat;
+}
+
+.placeholder, input::-webkit-input-placeholder, input:-moz-placeholder {
+    color: #aaa;	
+}
+
+.input {
+    margin-bottom: 15px;	
+}
+
+.input.checkbox {
+    overflow: hidden;
+}
+
+.input.checkbox input {
+    vertical-align: top;
+    width: auto;
+}
+
+.input label {
+    display: block;
+    float: left;
+    font-size: 16px;
+    margin: 0 5px 5px;
+}
+
+.input.text label, .input.email label, .input.password label {
+    width: 160px;
+    line-height: 41px;
+}
+
+input.form-error {
+    border-color: #CD0A0A;
+}
+
+.input .error-message {
+    color: #CD0A0A;
+}
+
+input.invalid {
+    background: #fff url(/img/icons/delete.png) no-repeat 98% center;
+}
+
+input.valid {
+    background: #fff url(/img/icons/tick.png) no-repeat 98% center;
+}
+
+h2 .button {
+    padding: 3px 6px;
+    float: right;
+    font-size: 14px;
+    line-height: 14px;
+}
+
+input[type=submit], .button {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #aaa;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 0 1px 0 white;
+    border-radius: 3px;
+
+    background: #fcfcfc;
+    background: -moz-linear-gradient(top, #fcfcfc 0%, #f6f6f6 47%, #ebebeb 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfcfc), color-stop(47%,#f6f6f6), color-stop(100%,#ebebeb));
+    background: -webkit-linear-gradient(top, #fcfcfc 0%,#f6f6f6 47%,#ebebeb 100%);
+    background: -o-linear-gradient(top, #fcfcfc 0%,#f6f6f6 47%,#ebebeb 100%);
+    background: -ms-linear-gradient(top, #fcfcfc 0%,#f6f6f6 47%,#ebebeb 100%);
+    background: linear-gradient(top, #fcfcfc 0%,#f6f6f6 47%,#ebebeb 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ebebeb',GradientType=0 );
+}
+
+input[type=submit]:hover, .button:hover {
+    border-color: #303D70;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    background: #4d5471;
+    cursor: pointer;
+
+    background: -moz-linear-gradient(top, #4d5471 1%, #2d334d 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#4d5471), color-stop(100%,#2d334d));
+    background: -webkit-linear-gradient(top, #4d5471 1%,#2d334d 100%);
+    background: -o-linear-gradient(top, #4d5471 1%,#2d334d 100%);
+    background: -ms-linear-gradient(top, #4d5471 1%,#2d334d 100%);
+    background: linear-gradient(top, #4d5471 1%,#2d334d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d5471', endColorstr='#2d334d',GradientType=0 );
+}
+
+input[type=submit]:active, .button:active {
+    border-color: #303D70;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    background: #4d5471;
+    cursor: pointer;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+
+    background: -moz-linear-gradient(top, #4d5471 1%, #2d334d 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#4d5471), color-stop(100%,#2d334d));
+    background: -webkit-linear-gradient(top, #4d5471 1%,#2d334d 100%);
+    background: -o-linear-gradient(top, #4d5471 1%,#2d334d 100%);
+    background: -ms-linear-gradient(top, #4d5471 1%,#2d334d 100%);
+    background: linear-gradient(top, #4d5471 1%,#2d334d 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d5471', endColorstr='#2d334d',GradientType=0 );
+}
+div.submit {
+    text-align: center;
+    overflow: hidden;
+}
+
+::-webkit-input-placeholder {
+    color: #414141;
+    -webkit-transition: color 0.15s;
+}
+
+:focus::-webkit-input-placeholder {
+    color: #e2e2e2;
+}​
+
+/* Writing Forms */
+.writing input[type=text], .writing textarea {
+    width: 678px;	
+}
+
+.writing .input {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 11px;
+    background: #efefef;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.writing .input label {
+    clear: both;
+    float: none;
+    line-height: inherit;
+}
+
+.writing fieldset {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 11px;
+    background: #efefef;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.writing fieldset .input {
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+}
+
+.writing .input.checkbox label {
+    float: left;
+}
+/* Signup Form */
+#signup .button {
+    float: right;
+}
+
+/* Threads */
+.description {
+    padding: 10px 0;
+}
+
+.threads {
+    border-top: 1px solid #ccc;
+}
+
+.thread-form {
+
+}
+
+.thread-form label {
+    display: block;
+    float: none;
+}
+
+.thread-form .checkbox label {
+    float: left;
+}
+
+.thread-form .thread-title {
+    width: 400px;
+}
+
+.thread-form .cta {
+    font-size: 16px;
+    float: right;
+    margin-left: 10px;
+}
+
+.thread-form textarea {
+    width: 516px;
+}
+
+.thread-form-footer {
+    text-align: right;
+    line-height: 40px;
+}
+
+.thread-form-footer label {
+    display: inline;
+    font-weight: normal;
+}
+
+.admin-form fieldset {
+    padding: 10px;
+}
+
+.admin-form legend {
+    font-size: 24px;
+    font-weighT: bold;
+}
+ 
+.writing .long-text, .writing textarea {
+    width: 600px;
+}
