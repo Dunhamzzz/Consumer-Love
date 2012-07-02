@@ -19,3 +19,6 @@
 [submodule "Plugin/Facebook"]
 	path = Plugin/Facebook
 	url = git://github.com/webtechnick/CakePHP-Facebook-Plugin.git
+[submodule "Plugin/Migrations"]
+	path = Plugin/Migrations
+	url = https://github.com/CakeDC/migrations.git
