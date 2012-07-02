@@ -11,6 +11,10 @@ class ProductImage extends AppModel {
         'Product', 'User'
     );
     
+    public $hasMany = array(
+        'ProductImageComment'
+    );
+    
     public $order = 'ProductImage.created';
     
     public $actsAs = array(

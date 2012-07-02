@@ -38,6 +38,13 @@ class ProductImagesController extends AppController {
         if(!$product) {
             throw new NotFoundException(__('Invalid Product.'));
         }
+    }
+    
+    /**
+     * Views a single image and details on it
+     * @param type $imageId 
+     */
+    public function view($imageId) {
         
     }
     
