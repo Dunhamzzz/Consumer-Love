@@ -89,7 +89,7 @@ class CategoriesController extends AppController {
 
         $category = $this->Category->read();
         
-        if ($this->request->is('post')) {
+        if ($this->request->is('put')) {
             if ($this->Category->save($this->request->data)) {
                 $this->Session->setFlash(__('Changes made to %s have been saved.', $this->request->data['Category']['name'] ));
                 
