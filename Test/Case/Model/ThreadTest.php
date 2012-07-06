@@ -12,7 +12,7 @@ class ThreadTestCase extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array('app.thread', 'app.post', 'app.user', 'app.comment', 'app.inventory', 'app.product', 'app.feed', 'app.news', 'app.category', 'app.categories_product');
+	public $fixtures = array('app.thread', 'app.post', 'app.user', 'app.inventory', 'app.product', 'app.news', 'app.category', 'app.categories_product');
 
 /**
  * setUp method

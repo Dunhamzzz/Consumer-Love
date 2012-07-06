@@ -14,7 +14,7 @@ class ProductTestCase extends CakeTestCase {
      *
      * @var array
      */
-    public $fixtures = array('app.product', 'app.inventory', 'app.user', 'app.comment', 'app.category', 'app.categories_product');
+    public $fixtures = array('app.product', 'app.inventory', 'app.user', 'app.category', 'app.categories_product');
 
     /**
      * setUp method
