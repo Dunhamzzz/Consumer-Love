@@ -4,7 +4,7 @@
  * Custom test suite to execute all tests
  */
 
-class AllModelsTests extends PHPUnit_Framework_TestSuite {
+class AllModelsTest extends PHPUnit_Framework_TestSuite {
     
     public static function suite() {
         
