@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Consumer Love" default="phpunit">
-    <target name="phpunit">
-        <exec command="cake test app AllModels --coverage-clover logs/reports/clover.xml --coverage-html logs/reports/html/ --log-junit logs/reports/phpunit.xml"></exec>
+<project name="Consumer Love" default="test">
+    
+    <target name="clean" description="Cleanup build artifacts">
+        <delete dir="${basedir}/build"/>
+        <delete dir="${basedir}/build/coverage"/>
+        <delete dir="${basedir}/build/coverage/html"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build"/>
+        <mkdir dir="${basedir}/build/coverage"/>
+        <mkdir dir="${basedir}/build/coverage/html"/>
+    </target>
+    
+    <target name="test">
+        <exec command="cake test app AllModels --coverage-clover build/coverage/clover.xml --coverage-html build/coverage/html/ --log-junit build/junit.xml"></exec>
     </target>
 </project>
