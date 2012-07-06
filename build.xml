@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Consumer Love" default="build">
+<project name="Consumer Love" default="phpunit">
     <target name="phpunit">
         <exec command="cake test app --coverage-clover logs/reports/clover.xml"></exec>
     </target>
