@@ -63,6 +63,26 @@ Cache::config('default', array('engine' => 'File'));
  * CakePlugin::load('DebugKit'); //Loads a single plugin named DebugKit
  *
  */
+Configure::write('Dispatcher.filters', array(
+	'AssetDispatcher',
+	'CacheDispatcher'
+));
+
+/**
+ * Configures default file logging options
+ */
+App::uses('CakeLog', 'Log');
+CakeLog::config('debug', array(
+	'engine' => 'FileLog',
+	'scopes' => array('notice', 'info', 'debug'),
+	'file' => 'debug',
+));
+CakeLog::config('error', array(
+	'engine' => 'FileLog',
+	'scopes' => array('warning', 'error', 'critical', 'alert', 'emergency'),
+	'file' => 'error',
+));
+
 CakePlugin::loadAll();
 
 // The number of anti-spam actions a user has to be trusted
