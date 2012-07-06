@@ -10,6 +10,7 @@ class User extends AppModel {
         'ProductImage',
         'News'
     );
+    
     public $actsAs = array(
         'Utils.Sluggable' => array(
             'label' => 'username',
@@ -17,6 +18,7 @@ class User extends AppModel {
             'separator' => '-'
         )
     );
+    
     public $validate = array(
         'username' => array(
             'username_required' => array(
@@ -86,20 +88,6 @@ class User extends AppModel {
             $this->data['User']['password'] = AuthComponent::password($this->data['User']['password']);
         }
         return true;
-    }
-
-    // Checks a login and returns a user
-    public function login($usernameOrEmail, $password) {
-        return $this->find('first', array(
-                    'conditions' => array(
-                        'OR' => array(
-                            'User.email' => $usernameOrEmail,
-                            'User.username' => $usernameOrEmail
-                        ),
-                        'User.password' => $password
-                    ),
-                    'recursive' => -1
-                ));
     }
 
     public function getBySlug($slug, $contain = false) {
@@ -190,16 +178,4 @@ class User extends AppModel {
         $this->set($data);
         return $this->validates(array('fieldList' => array('username')));
     }
-
-    // Gets latest posts by user
-    public function getLatestPosts($userId, $limit = 10) {
-        return $this->Post->find('all', array(
-                    'conditions' => array(
-                        'Post.user_id' => $userId
-                    ),
-                    'contain' => array('Thread' => array('Product')),
-                    'limit' => $limit
-                ));
-    }
-
 }
