@@ -12,7 +12,7 @@ class PostTestCase extends CakeTestCase {
  *
  * @var array
  */
-	public $fixtures = array('app.post', 'app.thread', 'app.product', 'app.user', 'app.report');
+	public $fixtures = array('app.post', 'app.thread', 'app.product', 'app.user');
 
 /**
  * setUp method
