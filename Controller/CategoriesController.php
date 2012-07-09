@@ -1,7 +1,7 @@
 <?php
 
 class CategoriesController extends AppController {
-
+    
     public $paginate = array(
         'Product' => array(
             'joins' => array(
@@ -73,7 +73,7 @@ class CategoriesController extends AppController {
         }
 
         $this->set('title_for_layout', 'Add Category');
-        $this->set('parents', array('') + $this->Product->Category->getAllThreaded());
+        $this->set('parents', array(0 => '[ No Parent ]') + $this->Category->generateTreeList(null, null, null, " - "));
     }
 
     /**
