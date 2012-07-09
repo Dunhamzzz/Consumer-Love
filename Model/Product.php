@@ -22,7 +22,11 @@ class Product extends AppModel {
             )
         )
     );
-    public $hasAndBelongsToMany = array('Category');
+    
+    public $hasAndBelongsToMany = array(
+        'Category' => array('unique' => 'keepExisting')
+    );
+    
     public $hasMany = array(
         'Inventory',
         'Thread',
@@ -157,26 +161,6 @@ class Product extends AppModel {
                     'group' => 'Product.id',
                     'limit' => $limit
                 ));
-
-        $sql = "
-SELECT  `products` . * 
-FROM  `products` ,  `categories_products` 
-WHERE (
- `categories_products`.`product_id` =  `products`.`id` 
-AND  `categories_products`.`category_id` 
-IN (
-
-SELECT  `category_id` 
-FROM  `categories_products` 
-WHERE  `categories_products`.`product_id` =  '4dde9f7a-f060-49cb-bcc3-55c06d4ac163'
-)
-)
-OR  `products`.`parent_id` =  '4dde9f7a-f060-49cb-bcc3-55c06d4ac163'
-OR  `products`.`parent_id` =  '4dde9f7a-b88c-41fb-ae8d-55c06d4ac163'
-OR  `products`.`id` =  '4dde9f7a-b88c-41fb-ae8d-55c06d4ac163'
-GROUP BY  `products`.`id` 
-LIMIT 0 , 30
-";
     }
 
     /**
