@@ -210,11 +210,8 @@ div.submit {
 .thread-form-footer {
     text-align: right;
     line-height: 40px;
-}
-
-.thread-form-footer label {
-    display: inline;
-    font-weight: normal;
+    overflow: hidden;
+    margin-bottom: 10px;
 }
 
 .admin-form fieldset {

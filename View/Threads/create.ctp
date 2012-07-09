@@ -1,5 +1,4 @@
 <?php
-// Register Widgets
 $pageWidgets = array(
 	'product_meta' => array($product['Product'])
 );

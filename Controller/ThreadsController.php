@@ -4,7 +4,7 @@ class ThreadsController extends AppController {
 
     public $paginate = array(
         'Thread' => array(
-            'limit' => 25,
+            'limit' => 20,
             'order' => 'LastPost.created DESC'
         ),
         'Post' => array(
@@ -45,9 +45,6 @@ class ThreadsController extends AppController {
         if (!empty($this->request->data)) {
             $this->request->data['Thread']['user_id'] = $this->userData['id'];
             $this->request->data['Thread']['user_ip'] = $this->RequestHandler->getClientIp();
-
-            // Spam check goes here
-            $this->request->data['Thread']['published'] = 1;
 
             if ($this->Thread->add($this->request->data)) {
                 $this->Session->setFlash('Your thread has been saved successfully.');
@@ -105,8 +102,15 @@ class ThreadsController extends AppController {
         }
 
     }
-
+    
     /* Admin Actions */
+    public function admin_index() {
+        
+        $this->paginate['order'] = 'created DESC';
+        $this->set('threads', $this->paginate());
+        $this->set('title_for_layout', __('Forum Admin'));
+    }
+    
     public function admin_delete($id) {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();

@@ -2,7 +2,6 @@
 // Register Widgets
 $pageWidgets = array(
 	'product_meta' => array($product['Product']),
-	'product_submit' => array($product['Product'])
 );
 
 if(!empty($product['Tweet'])) {
