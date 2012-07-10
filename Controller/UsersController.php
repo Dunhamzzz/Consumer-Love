@@ -64,18 +64,17 @@ class UsersController extends AppController {
             $this->redirect('/');
         }
 
-        if (!empty($this->data)) {
-            $user = $this->User->register($this->data);
-            if ($user !== false) {
-                $this->set('user', $user);
+        if($this->request->is('post')) {
+            
+            if($this->User->register($this->request->data)) {
                 $this->Session->setFlash('Your account has been created, please login below.');
                 $this->redirect(array('action' => 'login'));
             } else {
                 $this->Session->setFlash('Your account could not be created, please correct the errors below.');
             }
-        }
-
-        //$this->layout = 'feature';
+            
+        } 
+        
         $this->set('title_for_layout', 'Consumer Love / Sign up');
     }
 
