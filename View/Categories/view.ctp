@@ -20,11 +20,11 @@ foreach ($path as $breadcrumb) {
         <img class="loader" src="/img/icons/ajax-loader.gif" alt="Loading" style="vertical-align: top; height: 22px; display: none;"/>
         <input type="hidden" name="category_id" value="<?php echo $category['Category']['id']; ?>" />
         Sort By:
-        <select name="sort" >
+        <select name="sort" class="filter-select">
             <option value="Product.name">Name</option>
             <option value="Product.inventory_count">Users</option>
         </select>
-        <select name="order">
+        <select name="order" class="filter-select">
             <option value="asc">Asc.</option>
             <option value="desc">Desc.</option>
         </select>

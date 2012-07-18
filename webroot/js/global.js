@@ -15,7 +15,10 @@ $(function() {
     $('select.category').chosen({
         allow_single_deselect: true
     });
-    $('select').chosen();
+    
+    $('select').chosen({
+        disable_search_threshold: 5
+    });
     
     // Adding a close button to flash messages
     if($('#authMessage, #flashMessage').length) {
