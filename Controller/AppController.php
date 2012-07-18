@@ -139,8 +139,14 @@ class AppController extends Controller {
         $this->set('pageWidgets', array());
     }
 
-    public function isAuthorized() {
-        return true;
+    public function isAuthorized($user) {
+        // Admin can access every action
+        if ($user['admin'] === '1') {
+            return true;
+        }
+
+        // Default deny
+        return false;
     }
 
     /* Facebook Plugin Callbacks */
