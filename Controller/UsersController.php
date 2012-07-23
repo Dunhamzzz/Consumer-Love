@@ -124,7 +124,7 @@ class UsersController extends AppController {
     // Page for people to merge their accounts and setup username
     public function connect() {
         if (isset($this->data)) {
-            $this->User->id = $this->userData['User']['id'];
+            $this->User->id = $this->Auth->user('id');
             if ($this->User->save($this->data)) {
                 $this->Session->setFlash('Thanks for setting up your account.');
                 $this->redirect('/');

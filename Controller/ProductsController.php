@@ -40,8 +40,8 @@ class ProductsController extends AppController {
         $this->set('news' ,$this->paginate('News', array('product_id' => $product['Product']['id'])));
 
         // Is this in the users inventory?
-        if ($this->userData) {
-            $inInventory = $this->Product->Inventory->has($product['Product']['id'], AuthComponent::user('id'));
+        if ($this->Auth->user()) {
+            $inInventory = $this->Product->Inventory->has($product['Product']['id'], $this->Auth->user('id'));
             if (!empty($inInventory)) {
                 $this->request->data = $inInventory;
             }

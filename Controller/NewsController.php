@@ -57,7 +57,7 @@ class NewsController extends AppController {
             $this->request->data['News']['product_id'] = $product['Product']['id'];
 
             try {
-                $news = $this->News->submit($this->request->data, $this->userData);
+                $news = $this->News->submit($this->request->data, $this->Auth->user());
             } catch (Exception $e) {
                 $this->setFlash($e->getMessage);
             }

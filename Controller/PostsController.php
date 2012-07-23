@@ -48,7 +48,7 @@ class PostsController extends AppController {
         }
 
         if ($save) {
-            $this->request->data['Post']['user_id'] = $this->userData['id'];
+            $this->request->data['Post']['user_id'] = $this->Auth->user('id');
             $this->request->data['Post']['user_ip'] = $this->RequestHandler->getClientIp();
 
             if ($postId = $this->Post->savePost($this->request->data)) {
