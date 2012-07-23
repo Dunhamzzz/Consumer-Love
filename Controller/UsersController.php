@@ -151,7 +151,7 @@ class UsersController extends AppController {
         $this->set('inventory', $this->User->Inventory->get($user['User']['id'], 8));
 
         // Get Latest Posts
-        $this->set('latestPosts', $this->User->Post->getLatestByUserId($user['User']['id']));
+        $this->set('latestPosts', $this->User->Post->getLatest(5, $user['User']['id']));
 
         $this->set('title_for_layout', __('%s on Consumer Love', $user['User']['username']));
 
