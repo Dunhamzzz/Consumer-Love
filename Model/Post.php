@@ -81,14 +81,21 @@ class Post extends AppModel {
      * Get latest posts globally
      * @param int $limit
      */
-    public function getLatest($limit = 5) {
+    public function getLatest($limit = 5, $userId = null) {
         
         if(!(int) $limit) {
             throw new DomainException('Invalid value passed for limit.');
         }
         
+        $conditions = array('Post.published' => 1);
+        
+        if($userId) {
+            $conditions['Post.user_id'] = $userId;
+        }
+        
         return $this->find('all', array(
-            'conditions' => array('Post.published' => 1),
+            'conditions' => $conditions, 
+            'contain' => array('Author', 'Thread' => array('Product' => array('slug'))),
             'order' => 'Post.created DESC',
             'limit' => $limit
         ));
