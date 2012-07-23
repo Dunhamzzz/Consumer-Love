@@ -100,12 +100,13 @@ $age = $this->Love->age($user['User']['dob']);
     <section id="forum">
         <h2>Latest Forum Posts</h2>
         <?php if (!empty($latestPosts)): ?>
+        <? debug($latestPosts);?>
             <ul>
                 <?php foreach ($latestPosts as $post): ?>
                     <li>
                         <blockquote><?php echo $post['Post']['content']; ?></blockquote>
-                        on <?php echo $this->Link->thread($post['Thread']); ?>
-                        in <?php echo $this->Link->forum($post['Thread'], $post['Thread']['Product']['name']); ?>
+                        on <?php echo $this->Link->thread($post); ?>
+                        in <?php echo $this->Link->forum($post, $post['Thread']['Product']['name']); ?>
                     </li>
                 <?php endforeach; ?>
             </ul>

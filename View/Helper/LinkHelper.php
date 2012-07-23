@@ -91,7 +91,7 @@ class LinkHelper extends AppHelper {
 
     // To a Thread
     public function thread($thread, $htmlAttrs = array()) {
-
+        // This can't have extract row as it needs data from multiple models
         return $this->Html->link($thread['Thread']['title'], array(
                     'controller' => 'threads',
                     'action' => 'view',
