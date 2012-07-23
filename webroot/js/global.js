@@ -123,10 +123,11 @@ $(function() {
             navSelector: '.pagination',
             nextSelector: 'span.btn.next a',
             itemSelector: '.products-list',
+            bufferPx: 180,
             loading: {
                 msgText : 'Loading...',
                 img     : '',
-                finishedMsg: 'You\'ve reached the end!'
+                finishedMsg: 'Showing all available entries.'
             }
         });
     }
