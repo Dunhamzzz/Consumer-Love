@@ -11,12 +11,12 @@ class Post extends AppModel {
         )
     );
     public $hasMany = array(
-        'Report' => array(
+       /* 'Report' => array(
             'foreignKey' => 'foreign_key',
             'conditions' => array(
                 'Report.model' => 'post'
             )
-        )
+        ) */
     );
     public $validate = array(
         'content' => array(
@@ -82,6 +82,11 @@ class Post extends AppModel {
      * @param int $limit
      */
     public function getLatest($limit = 5) {
+        
+        if(!(int) $limit) {
+            throw new DomainException('Invalid value passed for limit.');
+        }
+        
         return $this->find('all', array(
             'conditions' => array('Post.published' => 1),
             'order' => 'Post.created DESC',

@@ -46,10 +46,20 @@ class PostFixture extends CakeTestFixture {
             'thread_id' => 'thread-2',
             'user_id' => 'user-1',
             'user_ip' => '80.7.15.114',
-            'content' => 'Alternatives? Don\'t be silly!',
-            'published' => 1,
+            'content' => 'This is unpublished!',
+            'published' => 0,
             'created' => '2011-09-06 20:00:17',
             'modified' => '2011-09-06 20:00:17'
+        ),
+        array(
+            'id' => 'post-3.5',
+            'thread_id' => 'thread-2',
+            'user_id' => 'user-1',
+            'user_ip' => '80.7.15.114',
+            'content' => 'Alternatives? Don\'t be silly!',
+            'published' => 1,
+            'created' => '2011-09-06 20:22:17',
+            'modified' => '2011-09-06 20:22:17'
         ),
         array(
             'id' => 'post-4',
@@ -58,8 +68,29 @@ class PostFixture extends CakeTestFixture {
             'user_ip' => '80.7.15.114',
             'content' => 'first 10 char',
             'published' => 1,
-            'created' => '2011-09-06 20:01:48',
-            'modified' => '2011-09-06 22:30:03'
+            'created' => '2012-09-06 20:05:48',
+            'modified' => '2012-09-06 20:05:48'
+        ),
+        array(
+            'id' => 'post-5',
+            'thread_id' => 'thread-1',
+            'user_id' => 'user-1',
+            'user_ip' => '80.7.111.114',
+            'content' => 'A reply of 10 charactrs',
+            'published' => 1,
+            'created' => '2012-09-06 20:07:48',
+            'modified' => '2012-09-06 20:07:48'
+        ),
+        
+        array(
+            'id' => 'post-6',
+            'thread_id' => 'thread-1',
+            'user_id' => 'user-2',
+            'user_ip' => '80.7.15.114',
+            'content' => 'A bitchin\' reply to your reply!',
+            'published' => 1,
+            'created' => '2012-09-06 20:11:48',
+            'modified' => '2012-09-06 20:11:48'
         ),
     );
 
