@@ -8,6 +8,14 @@ class UsersController extends AppController {
             'limit' => 10
         )
     );
+    
+    /**
+     * Actions allowed to all logged-in users
+     * @var array 
+     */
+    protected $allowedActions = array(
+        'logout', 'settings'
+    );
 
     public function beforeFilter() {
         parent::beforeFilter();

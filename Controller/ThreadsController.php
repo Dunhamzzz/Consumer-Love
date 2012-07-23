@@ -1,7 +1,7 @@
 <?php
 
 class ThreadsController extends AppController {
-
+    
     public $paginate = array(
         'Thread' => array(
             'limit' => 20,
@@ -14,13 +14,31 @@ class ThreadsController extends AppController {
         'Product' => array(
             'limit' => 20,
             'order' => 'Product.post_count DESC',
-			'contain' => array('Category')
+            'contain' => array('Category')
         )
     );
 
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow(array('all', 'view', 'forums'));
+    }
+
+    public function isAuthorized($user) {
+        // All registered users can add posts
+        if (in_array($this->action, array('create'))) {
+            return true;
+        }
+
+        // The owner of a post can edit and delete it
+        if (in_array($this->action, array('delete'))) {
+            
+            $threadId = $this->request->params['pass'][0];
+            if ($this->Thread->isOwnedBy($threadId, $user['id'])) {
+                return true;
+            }
+        }
+
+        return parent::isAuthorized($user);
     }
 
     public function all($productSlug) {
@@ -43,14 +61,14 @@ class ThreadsController extends AppController {
         $product = $this->Thread->Product->read();
 
         if (!empty($this->request->data)) {
-            $this->request->data['Thread']['user_id'] = $this->userData['id'];
+            $this->request->data['Thread']['user_id'] = $this->Auth->user('id');
             $this->request->data['Thread']['user_ip'] = $this->RequestHandler->getClientIp();
 
             if ($this->Thread->add($this->request->data)) {
-                $this->Session->setFlash('Your thread has been saved successfully.');
+                $this->Session->setFlash(__('Your thread has been saved successfully.'));
                 $this->redirect(array('controller' => 'products', 'action' => 'view', 'productSlug' => $product['Product']['slug']));
             } else {
-                $this->Session->setFlash('Please correct the errors below.');
+                $this->Session->setFlash(__('Unable to create new thread, please correct the errors below.'));
             }
         }
 
@@ -78,44 +96,76 @@ class ThreadsController extends AppController {
         $this->set('title_for_layout', $thread['Thread']['title']);
         $this->set(compact('product', 'thread'));
     }
-    
-    
-     /**
+
+    /**
      * Displays a list of forums to user, otherwise, most popular forums
      * URL: /forums
      */
     public function forums() {
 
-        if($this->Auth->user()) {
+        if ($this->Auth->user()) {
             // Get list of products from inventory
             $this->set('forums', $this->paginate('Product', array(
-                'Product.id' => array_keys($this->userInventory)
-            )));
-            
+                        'Product.id' => array_keys($this->userInventory)
+                    )));
+
             $this->set('title_for_layout', __('Your Forums'));
         } else {
             $this->paginate['Product']['order'] = 'Name';
             $this->set('forums', $this->paginate('Product'));
-            
+
             // Get most popular forums
             $this->set('title_for_layout', __('Consumer Love Forums'));
         }
-
     }
-    
+
+    public function delete($threadId = null) {
+
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
+
+        // Get Product so we know where to redirect back to
+        $thread = $this->Thread->getForReply($threadId);
+
+        if (!$thread) {
+            throw new NotFoundException(__('No thread found.'));
+        }
+
+        if ($this->Thread->delete($threadId)) {
+            $this->Session->setFlash(__('Thread deleted.'));
+            $this->redirect('/' . $thread['Product']['slug']);
+        }
+
+        $this->Session->setFlash(__('Thread not deleted!'));
+        $this->redirect('/' . $thread['Product']['slug']);
+    }
+
     /* Admin Actions */
+
     public function admin_index() {
-        
+
         $this->paginate['order'] = 'created DESC';
         $this->set('threads', $this->paginate());
         $this->set('title_for_layout', __('Forum Admin'));
     }
-    
-    public function admin_delete($id) {
+
+    public function admin_actions() {
         if (!$this->request->is('post')) {
             throw new MethodNotAllowedException();
+        }
+
+        if (empty($this->request->data['threadId'])) {
+            throw new DomainException(__('No threads selected.'));
+        }
+
+        if ($this->request->data['action'] == 'Delete') {
+
+            $this->Thread->deleteAll(array('Thread.id' => $this->request->data('threadId')));
+            $this->Session->setFlash(__('Selected thread(s) deleted.'));
+            $this->redirect('/admin/threads/index');
         } else {
-            
+            throw new MethodNotAllowedException();
         }
     }
 

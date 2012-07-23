@@ -1,6 +1,10 @@
 <?php
 
 class InventoriesController extends AppController {
+    
+    protected $allowedActions = array(
+        'score', 'remove', 'toggle'
+    );
 
     public function beforeFilter() {
         parent::beforeFilter();

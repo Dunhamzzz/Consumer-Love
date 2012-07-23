@@ -60,6 +60,7 @@ class AppController extends Controller {
                 'action' => 'login',
                 'admin' => false
             ),
+            'authorize' => array('Controller')
         ),
         'RequestHandler',
         'DebugKit.Toolbar',
@@ -82,7 +83,12 @@ class AppController extends Controller {
      * Stores user data for each request
      */
     public $userInventory;
-    public $userData;
+    
+    /**
+     * Actions a logged-in user is allowed to access.
+     * @var array 
+     */
+    protected $allowedActions;
 
     public function beforeFilter() {
 
@@ -91,8 +97,6 @@ class AppController extends Controller {
 
         $userData = AuthComponent::user();
         if ($userData) {
-
-            $this->userData = $userData;
 
             // Allow stuff if admin
             if ($this->Auth->user('is_admin')) {
@@ -129,10 +133,6 @@ class AppController extends Controller {
             //Configure::write('debug', 0);
         }
 
-        // Get Latest Posts
-        // $this->loadModel('Post');
-        // $this->Post = new Post();
-        // $this->set('latestPosts', $this->Post->getLatest());
     }
 
     public function beforeRender() {
@@ -140,8 +140,13 @@ class AppController extends Controller {
     }
 
     public function isAuthorized($user) {
+        
+        if(in_array($this->action, $this->allowedActions)) {
+            return true;
+        }
+        
         // Admin can access every action
-        if ($user['admin'] === '1') {
+        if ($user['admin'] == '1') {
             return true;
         }
 

@@ -10,14 +10,7 @@ class Post extends AppModel {
             'counterCache' => true
         )
     );
-    public $hasMany = array(
-       /* 'Report' => array(
-            'foreignKey' => 'foreign_key',
-            'conditions' => array(
-                'Report.model' => 'post'
-            )
-        ) */
-    );
+    public $hasMany = array();
     public $validate = array(
         'content' => array(
             'rule' => array('minLength', 10),
@@ -28,7 +21,7 @@ class Post extends AppModel {
     public function afterSave($created) {
 
         // Update Product post count for most popular products forums
-        if($created) {
+        if ($created) {
             $this->Thread->Product->updateForumData($this->data);
         }
     }
@@ -82,23 +75,23 @@ class Post extends AppModel {
      * @param int $limit
      */
     public function getLatest($limit = 5, $userId = null) {
-        
-        if(!(int) $limit) {
+
+        if (!(int) $limit) {
             throw new DomainException('Invalid value passed for limit.');
         }
-        
+
         $conditions = array('Post.published' => 1);
-        
-        if($userId) {
+
+        if ($userId) {
             $conditions['Post.user_id'] = $userId;
         }
-        
+
         return $this->find('all', array(
-            'conditions' => $conditions, 
-            'contain' => array('Author', 'Thread' => array('Product' => array('slug'))),
-            'order' => 'Post.created DESC',
-            'limit' => $limit
-        ));
+                    'conditions' => $conditions,
+                    'contain' => array('Author', 'Thread' => array('Product' => array('slug'))),
+                    'order' => 'Post.created DESC',
+                    'limit' => $limit
+                ));
     }
 
 }

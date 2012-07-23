@@ -4,10 +4,18 @@
  */
  
 class NewsController extends AppController {
-
+    
+    /**
+     * Actions allowed for logged in users
+     * @var type 
+     */
+    protected $allowedActions = array(
+        'submit'
+    );
+    
     public function beforeFilter() {
 
-        $this->Auth->allow('view');
+        $this->Auth->allow('index', 'view');
 
         parent::beforeFilter();
     }

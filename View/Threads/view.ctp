@@ -32,4 +32,18 @@ $this->Html->addCrumb('Forum', array('action' => 'all', 'productSlug' => $thread
 <?php echo $this->element('forms/post'); ?>
 <?php if($userData['admin']): ?>
 <h2>Admin Controls</h2>
+<ul>
+    <li><?php echo $this->Form->postLink(__('Delete Thread'), array(
+       'action' => 'delete',
+       $thread['Thread']['id']
+    ), array('confirm' => __('Are you sure you wish to delete this thread?'))); ?></li>
+</ul>
+<?php elseif($userData['id'] == $thread['Thread']['user_id']): ?>
+<h2>Thread Owner Controls</h2>
+<ul>
+    <li><?php echo $this->Form->postLink(__('Delete Thread'), array(
+        'action' => 'delete',
+        $thread['Thread']['id']
+        ), array('confirm' => __('Are you sure you wish to delete this thread?'))); ?></li>
+</ul>
 <?php endif; ?>

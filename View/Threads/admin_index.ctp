@@ -1,9 +1,9 @@
 <h1><?php echo __('Forum Admin'); ?></h1>
 <?php echo $this->element('pagination/basic'); ?>
-
+<form action="/admin/threads/actions" method="POST">
 <ul class="threads">
 <?php foreach($threads as $thread): ?>
-    <li title="<?php echo $thread['Post'][0]['content']; ?>">
+    <li title="<?php echo $thread['FirstPost']['content']; ?>">
         <span class="thread-info">
             <span class="thread-link">
                 <?php
@@ -23,7 +23,13 @@
             <li><?php echo $thread['Thread']['post_count'] > 2 ? $thread['Thread']['post_count'] . ' replies' : $thread['Thread']['post_count'] == 2 ? '1 reply' : 'No replies'; ?></li>
             <li><?php echo $this->Time->timeAgoInWords($thread['Thread']['modified']); ?></li>
         </ul>
+        <input type="checkbox" name="threadId[]" value="<?php echo $thread['Thread']['id']; ?>">
     </li>
 <?php endforeach; ?>
 </ul>
 <?php echo $this->element('pagination/basic'); ?>
+    <input type="submit" name="action" value="Delete">
+</form>
+<script>
+    
+</script>
