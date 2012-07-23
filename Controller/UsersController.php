@@ -18,9 +18,11 @@ class UsersController extends AppController {
      * Inifinite scroll pagination fix. 
      */
     public function afterFilter() {
-        $pageCount = $this->params['paging']['Inventory']['pageCount'];
-        if ((!empty($this->params['named']['page'])) && ($this->params['named']['page'] > $pageCount)) {
-            throw NotFoundException(__('Page not found.'));
+        if($this->request->is('ajax')) {
+            $pageCount = $this->params['paging']['Inventory']['pageCount'];
+            if ((!empty($this->params['named']['page'])) && ($this->params['named']['page'] > $pageCount)) {
+                throw NotFoundException(__('Page not found.'));
+            }
         }
     }
 
