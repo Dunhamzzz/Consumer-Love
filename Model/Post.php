@@ -81,7 +81,7 @@ class Post extends AppModel {
      * Get latest posts globally
      * @param int $limit
      */
-    public function getLatest($limit = 5, $userId = null) {
+    public function getLatestByUserId($limit = 5, $userId = null) {
         
         if(!(int) $limit) {
             throw new DomainException('Invalid value passed for limit.');
