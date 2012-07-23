@@ -35,23 +35,14 @@ class AppModel extends Model {
 
     public $actsAs = array('Containable');
 
-    public function afterFind($results, $primary = false) {
-        /* Needs documenting
-        if (!empty($results)) {
-            foreach ($results as $i => $row) {
-                if (!empty($row[0])) {
-                    foreach ($row[0] as $field => $value) {
-                        if (!empty($row[$this->alias][$field])) {
-                            $field = 'total_' . $field;
-                        }
-                        $results[$i][$this->alias][$field] = $value;
-                    }
-                    unset($results[$i][0]);
-                }
-            }
-        }
-         */
-        return parent::afterFind($results, $primary);
+    /**
+     * Checks if a model record is owned by a user
+     * @param string $modelId
+     * @param string $user
+     * @return bool 
+     */
+    public function isOwnedBy($modelId, $user) {
+        return $this->field('id', array('id' => $modelId, 'user_id' => $user)) === $modelId;
     }
 
     /**
