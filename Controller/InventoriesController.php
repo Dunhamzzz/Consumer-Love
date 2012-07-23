@@ -2,7 +2,7 @@
 
 class InventoriesController extends AppController {
     
-    protected $allowedActions = array(
+    public $allowedActions = array(
         'score', 'remove', 'toggle'
     );
 

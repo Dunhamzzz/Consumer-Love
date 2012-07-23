@@ -9,7 +9,7 @@ class NewsController extends AppController {
      * Actions allowed for logged in users
      * @var type 
      */
-    protected $allowedActions = array(
+    public $allowedActions = array(
         'submit'
     );
     

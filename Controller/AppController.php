@@ -88,7 +88,7 @@ class AppController extends Controller {
      * Actions a logged-in user is allowed to access.
      * @var array 
      */
-    protected $allowedActions;
+    public $allowedActions;
 
     public function beforeFilter() {
 

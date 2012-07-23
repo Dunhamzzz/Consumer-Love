@@ -13,7 +13,7 @@ class UsersController extends AppController {
      * Actions allowed to all logged-in users
      * @var array 
      */
-    protected $allowedActions = array(
+    public $allowedActions = array(
         'logout', 'settings'
     );
 

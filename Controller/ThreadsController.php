@@ -17,6 +17,10 @@ class ThreadsController extends AppController {
             'contain' => array('Category')
         )
     );
+    
+    public $allowedActions = array(
+        'create'
+    );
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -24,11 +28,6 @@ class ThreadsController extends AppController {
     }
 
     public function isAuthorized($user) {
-        // All registered users can add posts
-        if (in_array($this->action, array('create'))) {
-            return true;
-        }
-
         // The owner of a post can edit and delete it
         if (in_array($this->action, array('delete'))) {
             
