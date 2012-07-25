@@ -13,7 +13,7 @@ class ThreadsController extends AppController {
         ),
         'Product' => array(
             'limit' => 20,
-            'order' => 'Product.post_count DESC',
+            'order' => 'Product.name ASC',
             'contain' => array('Category')
         )
     );
@@ -105,10 +105,10 @@ class ThreadsController extends AppController {
         if ($this->Auth->user()) {
             // Get list of products from inventory
             $this->set('forums', $this->paginate('Product', array(
-                        'Product.id' => array_keys($this->userInventory)
+                        'Product.id' => array_keys($this->userInventory),
                     )));
 
-            $this->set('title_for_layout', __('Your Forums'));
+            $this->set('title_for_layout', __('Your Consumer Love Forums'));
         } else {
             $this->paginate['Product']['order'] = 'Name';
             $this->set('forums', $this->paginate('Product'));
