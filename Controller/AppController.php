@@ -80,15 +80,15 @@ class AppController extends Controller {
     );
 
     /**
-     * Stores user data for each request
-     */
-    public $userInventory;
-    
-    /**
      * Actions a logged-in user is allowed to access.
      * @var array 
      */
-    public $allowedActions;
+    public $allowedActions = array();
+    
+    /**
+     * Stores user data for each request
+     */
+    public $userInventory;
 
     public function beforeFilter() {
 
