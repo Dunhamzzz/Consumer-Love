@@ -1,3 +1,8 @@
+<?php
+if(isset($userData)) {
+    $this->set('pageWidgets', array('forum_root'));
+}
+?>
 <h1><?php echo $title_for_layout; ?></h1>
 <?php echo $this->element('pagination/basic'); ?>
 <ul id="forum-listing">

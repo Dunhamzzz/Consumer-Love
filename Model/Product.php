@@ -24,7 +24,7 @@ class Product extends AppModel {
     );
     
     public $hasAndBelongsToMany = array(
-        'Category' => array('unique' => 'keepExisting')
+        'Category' => array('unique' => false)
     );
     
     public $hasMany = array(

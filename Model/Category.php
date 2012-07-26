@@ -22,7 +22,10 @@ class Category extends AppModel {
     );
 
     public $hasAndBelongsToMany = array(
-        'Product' => array('counterCache' => array('Product.published' => 1))
+        'Product' => array(
+            'counterCache' => array('Product.published' => 1),
+            'unique' => false
+        )
     );
 
     public function search($term, $limit = 10) {
