@@ -27,7 +27,7 @@ class Inventory extends AppModel {
         return $this->deleteAll(array(
                     'product_id' => $productId,
                     'user_id' => $userId
-                ));
+                ), false, true);
     }
 
     public function add($productId, $userId) {
