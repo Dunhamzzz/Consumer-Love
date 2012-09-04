@@ -3,7 +3,10 @@
 class Post extends AppModel {
 
     public $belongsTo = array(
-        'Thread' => array('counterCache' => true),
+        'Thread' => array(
+            'counterCache' => true
+        ),
+        
         'Author' => array(
             'className' => 'User',
             'foreignKey' => 'user_id',
@@ -22,6 +25,7 @@ class Post extends AppModel {
 
         // Update Product post count for most popular products forums
         if ($created) {
+            $this->Thread->updateThreadData($this->data);
             $this->Thread->Product->updateForumData($this->data);
         }
     }
@@ -33,7 +37,6 @@ class Post extends AppModel {
             'user_id' => $data['user_id'],
             'user_ip' => $data['user_ip'],
             'content' => $data['content'],
-            'published' => 1
         );
 
         $this->create();
@@ -44,25 +47,17 @@ class Post extends AppModel {
 
     public function savePost($data) {
         $this->set($data);
-
         if ($this->validates()) {
 
-            // If being created
-            if (empty($data['Post']['id'])) {
-                $data['Post']['published'] = 1;
-            }
+            $this->save($data, false, array('thread_id', 'user_id', 'user_ip', 'content'));
 
-            $this->save($data, false, array('thread_id', 'user_id', 'user_ip', 'content', 'published'));
-
-            if (empty($data['Post']['id'])) {
-                // Set latest post info in thread
-                $this->Thread->id = $data['Post']['thread_id'];
-                $this->Thread->set(array(
-                    'last_post_id' => $this->id,
-                    'last_user_id' => $data['Post']['user_id']
-                ));
-                $this->Thread->save();
-            }
+            // Set latest post info in thread
+            $this->Thread->id = $data['Post']['thread_id'];
+            $this->Thread->set(array(
+                'last_post_id' => $this->id,
+                'last_user_id' => $data['Post']['user_id']
+            ));
+            $this->Thread->save();
 
             return $this->id;
         }

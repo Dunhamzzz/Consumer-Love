@@ -7,4 +7,9 @@
 	<?php endif; ?>
 	<li><?php echo $this->Html->link('Manage Categories', array('controller' => 'categories', 'action' => 'index', 'admin' => true));?></li>
 	<li><?php echo $this->Html->link('Add Category', array('controller' => 'categories', 'action' => 'new', 'admin' => true));?>
+        <li><?php echo $this->Html->link('Manage Threads', array(
+            'controller' => 'threads',
+            'action' => 'index',
+            'admin' => true,
+        )); ?></li>
 </ul>

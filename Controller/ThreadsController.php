@@ -1,11 +1,11 @@
 <?php
 
 class ThreadsController extends AppController {
-    
+
     public $paginate = array(
         'Thread' => array(
             'limit' => 20,
-            'order' => 'LastPost.created DESC'
+            'order' => 'Thread.last_post_date DESC'
         ),
         'Post' => array(
             'limit' => 10,
@@ -17,7 +17,6 @@ class ThreadsController extends AppController {
             'contain' => array('Category')
         )
     );
-    
     public $allowedActions = array(
         'create'
     );
@@ -30,7 +29,7 @@ class ThreadsController extends AppController {
     public function isAuthorized($user) {
         // The owner of a post can edit and delete it
         if (in_array($this->action, array('delete'))) {
-            
+
             $threadId = $this->request->params['pass'][0];
             if ($this->Thread->isOwnedBy($threadId, $user['id'])) {
                 return true;
@@ -41,6 +40,7 @@ class ThreadsController extends AppController {
     }
 
     public function all($productSlug) {
+
         $product = $this->Thread->Product->getBySlug($productSlug);
         $this->set('threads', $this->paginate('Thread', array('product_id' => $product['Product']['id'])));
 
@@ -65,7 +65,7 @@ class ThreadsController extends AppController {
 
             if ($this->Thread->add($this->request->data)) {
                 $this->Session->setFlash(__('Your thread has been saved successfully.'));
-                $this->redirect(array('controller' => 'products', 'action' => 'view', 'productSlug' => $product['Product']['slug']));
+                //$this->redirect(array('controller' => 'products', 'action' => 'view', 'productSlug' => $product['Product']['slug']));
             } else {
                 $this->Session->setFlash(__('Unable to create new thread, please correct the errors below.'));
             }

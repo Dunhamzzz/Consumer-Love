@@ -9,10 +9,6 @@ class Thread extends AppModel {
             'className' => 'Post',
             'foreignKey' => 'first_post_id'
         ),
-        'LastPost' => array(
-            'className' => 'Post',
-            'foreignKey' => 'last_post_id'
-        )
     );
     public $hasMany = array('Post');
     public $actsAs = array(
@@ -53,25 +49,25 @@ class Thread extends AppModel {
         if ($this->validates()) {
 
             // @todo Spam Check 
-            $data['Thread']['published'] = 1;
 
             $this->create();
-            $this->save($data, false, array('product_id', 'user_id', 'title', 'published', 'user_ip'));
+            $this->save($data, false, array('product_id', 'user_id', 'title', 'user_ip'));
 
-            $threadId = $this->id;
             $userId = $data['Thread']['user_id'];
-            $postId = $this->Post->addFirst($threadId, $data['Thread']);
+            $postId = $this->Post->addFirst($this->id, $data['Thread']);
 
             // Now update last post IDs etc
+            $this->read(); // Need to load the record into the ORM first
             $this->set(array(
                 'first_post_id' => $postId,
                 'last_post_id' => $postId,
-                'last_user_id' => $userId
+                'last_user_id' => $userId,
+                'last_post_date' => date('Y-m-d h:i:s')
             ));
 
             $this->save();
 
-            return $threadId;
+            return $this->id;
         } else {
             return false;
         }
@@ -91,6 +87,8 @@ class Thread extends AppModel {
             $conditions['Thread.product_id'] = $productId;
         }
 
+        $conditions['Thread.deleted'] = 0;
+
         return $this->find('first', array(
                     'conditions' => $conditions,
                     'contain' => array(
@@ -108,6 +106,20 @@ class Thread extends AppModel {
                         'Product'
                     )
                 ));
+    }
+
+    /**
+     * Updates a thread meta data
+     * @param array $post Post data from $this->data
+     */
+    public function updateThreadData($post) {
+
+        $this->read(null, $post['Post']['thread_id']);
+        $this->save(array(
+            'last_post_id' => $post['Post']['id'],
+            'last_post_date' => date('Y-m-d H:i:s'),
+            'last_post_user' => $post['Post']['user_id']
+        ));
     }
 
 }

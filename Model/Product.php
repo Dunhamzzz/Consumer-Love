@@ -226,6 +226,8 @@ class Product extends AppModel {
      */
     public function updateForumData($post) {
 
+        //var_dump($post); die;
+        
         // Find Product from thread
         $thread = $this->Thread->find('first', array(
             'conditions' => array('Thread.id' => $post['Post']['thread_id']),
