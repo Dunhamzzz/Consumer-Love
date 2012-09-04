@@ -42,7 +42,17 @@ class Thread extends AppModel {
             'required' => true
         )
     );
+    
+    public function afterDelete() {
+        
+        $this->Post->deleteAll(array('thread_id' => $this->id));
+    }
 
+    /**
+     * Saves a thread, returns the thread slug for redirecting to it;
+     * @param type $data
+     * @return boolean
+     */
     public function add($data) {
         $this->set($data);
 
@@ -62,12 +72,12 @@ class Thread extends AppModel {
                 'first_post_id' => $postId,
                 'last_post_id' => $postId,
                 'last_user_id' => $userId,
-                'last_post_date' => date('Y-m-d h:i:s')
+                'last_post_date' => date('Y-m-d H:i:s')
             ));
 
             $this->save();
 
-            return $this->id;
+            return $this->field('slug');
         } else {
             return false;
         }

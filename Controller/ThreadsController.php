@@ -5,7 +5,10 @@ class ThreadsController extends AppController {
     public $paginate = array(
         'Thread' => array(
             'limit' => 20,
-            'order' => 'Thread.last_post_date DESC'
+            'order' => 'Thread.last_post_date DESC',
+            'contain' => array(
+                'Product', 'FirstPost', 'User'
+            )
         ),
         'Post' => array(
             'limit' => 10,
@@ -63,9 +66,16 @@ class ThreadsController extends AppController {
             $this->request->data['Thread']['user_id'] = $this->Auth->user('id');
             $this->request->data['Thread']['user_ip'] = $this->RequestHandler->getClientIp();
 
-            if ($this->Thread->add($this->request->data)) {
-                $this->Session->setFlash(__('Your thread has been saved successfully.'));
-                //$this->redirect(array('controller' => 'products', 'action' => 'view', 'productSlug' => $product['Product']['slug']));
+            $threadSlug = $this->Thread->add($this->request->data);
+            
+            if ($threadSlug) {
+                $this->Session->setFlash(__('Your thread has been posted successfully.'));
+                $this->redirect(array(
+                    'controller' => 'threads',
+                    'action' => 'view',
+                    'productSlug' => $product['Product']['slug'],
+                    'threadSlug' => $threadSlug
+                ));
             } else {
                 $this->Session->setFlash(__('Unable to create new thread, please correct the errors below.'));
             }
@@ -160,7 +170,7 @@ class ThreadsController extends AppController {
 
         if ($this->request->data['action'] == 'Delete') {
 
-            $this->Thread->deleteAll(array('Thread.id' => $this->request->data('threadId')));
+            $this->Thread->deleteAll(array('Thread.id' => $this->request->data('threadId')), true);
             $this->Session->setFlash(__('Selected thread(s) deleted.'));
             $this->redirect('/admin/threads/index');
         } else {

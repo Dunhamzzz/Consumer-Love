@@ -1,6 +1,6 @@
 <ul class="threads">
     <?php foreach ($threads as $thread): ?>
-        <li title="<?php echo $thread['Post'][0]['content']; ?>">
+        <li title="<?php echo $thread['FirstPost']['content']; ?>">
             <span class="thread-info">
                 <span class="thread-link">
                     <?php
@@ -17,7 +17,7 @@
             </span>
             <ul class="lastpost-info">
                 <li><?php echo $thread['Thread']['post_count'] > 2 ? $thread['Thread']['post_count'] . ' replies' : $thread['Thread']['post_count'] == 2 ? '1 reply' : 'No replies'; ?></li>
-                <li><?php echo $this->Time->timeAgoInWords($thread['Thread']['modified']); ?></li>
+                <li><?php echo $this->Time->timeAgoInWords($thread['Thread']['last_post_date']); ?></li>
             </ul>
         </li>
 <?php endforeach; ?>

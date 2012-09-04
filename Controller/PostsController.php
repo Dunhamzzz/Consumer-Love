@@ -7,6 +7,10 @@ class PostsController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
     }
+    
+    public $allowedActions = array(
+        'reply', 'edit'
+    );
 
     public function reply($threadId = null) {
         if ($this->request->is('post')) {
@@ -34,7 +38,7 @@ class PostsController extends AppController {
         }
 
         // Check if we want a user to do a captcha
-        if (AuthComponent::user('human_proven_count') < Configure::read('ProvenHuman')) {
+       /* if (AuthComponent::user('human_proven_count') < Configure::read('ProvenHuman')) {
             if (!empty($this->request->data)) {
                 if ($this->Recaptcha->verify() && $save) {
                     $this->User->increaseHumanProven();
@@ -45,7 +49,7 @@ class PostsController extends AppController {
             }
 
             $this->set('requireCaptcha', true);
-        }
+        }*/
 
         if ($save) {
             $this->request->data['Post']['user_id'] = $this->Auth->user('id');
