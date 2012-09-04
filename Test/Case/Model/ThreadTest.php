@@ -76,7 +76,7 @@ class ThreadTestCase extends CakeTestCase {
         );
         
         $thread = $this->Thread->add($data);
-        $this->assertTrue(strlen($thread) == 36, 'Failed getting UUID of thread after save.');
+        $this->assertTrue(strlen($thread) == 22, 'Failed getting expected thread slug after save.');
         // Get latest thread to check this is it
         $latestThread = $this->Thread->find('first', array('order' => 'created DESC', 'contain' => false));
         $this->assertEquals($data['Thread']['title'], $latestThread['Thread']['title']);

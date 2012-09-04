@@ -75,7 +75,7 @@ class Post extends AppModel {
             throw new DomainException('Invalid value passed for limit.');
         }
 
-        $conditions = array('Post.published' => 1);
+        $conditions = array('Post.deleted' => 0);
 
         if ($userId) {
             $conditions['Post.user_id'] = $userId;
