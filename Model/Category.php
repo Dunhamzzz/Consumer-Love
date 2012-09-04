@@ -28,6 +28,23 @@ class Category extends AppModel {
         )
     );
 
+    /**
+     * Adds a category to the database.
+     * @return bool
+     */
+    public function add($data) {
+
+        $this->set($data);
+
+        if ($this->validates()) {
+            $this->create();
+            return $this->save($data);
+        } else {
+            return false;
+        }
+    }
+
+    
     public function search($term, $limit = 10) {
         // Prevent wildcard searches
         $term = str_replace('%', ' ', $term);

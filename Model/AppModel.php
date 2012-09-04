@@ -86,22 +86,6 @@ class AppModel extends Model {
     }
 
     /**
-     * Adds a model to the database.
-     * @return bool
-     */
-    public function add($data) {
-
-        $this->set($data);
-
-        if ($this->validates()) {
-            $this->create();
-            return $this->save($data);
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Generic update method.
      * @return bool
      */

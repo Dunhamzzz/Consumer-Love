@@ -250,5 +250,22 @@ class Product extends AppModel {
             'post_count' => $postData[0][0]['total']
         ));
     }
+    
+    /**
+     * Adds a product to the database.
+     * @return bool
+     */
+    public function add($data) {
+
+        $this->set($data);
+
+        if ($this->validates()) {
+            $this->create();
+            return $this->save($data);
+        } else {
+            return false;
+        }
+    }
+
 
 }
