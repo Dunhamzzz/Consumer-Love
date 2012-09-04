@@ -29,3 +29,63 @@
     padding: 0;
     font-size: 0.75em;
 }
+
+.threads li {
+    padding: 10px;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+}
+
+.threads li:last-of-type {
+    border-bottom: none;	
+}
+
+.thread-link {
+    display: block;
+}
+
+.thread-link a {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.thread-meta {
+    display: block;
+    padding: 0 0 0 2px;
+    font-size: 11px;
+}
+
+.thread-info {
+    float: left;	
+}
+
+.lastpost-info {
+    float: right;
+    font-size: 11px;
+    width: 130px;
+    margin: 0;
+}
+
+.lastpost-info li {
+    padding: 0;
+    border: 0;
+}
+
+/* Thread View */
+.thread-actions {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.thread-description {
+    overflow: hidden;
+}
+
+.posts li:first-of-type {
+    border-top: 1px solid #e4e4e4;
+    padding-top: 10px;
+}
+
+.posts li.mine {
+    background: #e5ecff;
+}

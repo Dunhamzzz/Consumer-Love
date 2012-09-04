@@ -867,6 +867,8 @@ footer p {
     margin: 0 0 10px 10px;
     width: 102px;
     line-height: 16px;
+    padding: 6px 12px;
+    border-radius: 4px;
 }
 
 #product .product-logo {
@@ -1119,58 +1121,6 @@ input.hateit:hover {
 
 .inventory-options .remove {
 
-}
-
-.threads li {
-    padding: 10px;
-    overflow: hidden;
-    border-bottom: 1px solid #ccc;
-}
-
-.threads li:last-of-type {
-    border-bottom: none;	
-}
-
-.thread-link {
-    display: block;
-}
-
-.thread-link a {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.thread-meta {
-    display: block;
-    padding: 0 0 0 2px;
-    font-size: 11px;
-}
-
-.thread-info {
-    float: left;	
-}
-
-.lastpost-info {
-    float: right;
-    font-size: 11px;
-    width: 130px;
-    margin: 0;
-}
-
-.lastpost-info li {
-    padding: 0;
-    border: 0;
-}
-
-.thread-actions {
-    overflow: hidden;
-    margin-bottom: 10px;
-}
-
-.thread-description {
-    overflow: hidden;
-    border-bottom: 1px solid #e4e4e4;
-    padding-bottom: 10px;
 }
 
 /* Signup Form */

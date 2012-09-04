@@ -22,14 +22,6 @@ $this->Html->addCrumb('Forum', array('action' => 'all', 'productSlug' => $thread
     <?php endforeach; ?>
 </ul>
 <?php echo $this->element('pagination/basic'); ?>
-<div class="post-actions">
-    <?php 
-    if(isset($userData)) {
-        echo $this->Html->link('Reply', array('controller' => 'posts', 'action' => 'reply', $thread['Thread']['id']), array('class' => 'cta reply'))
-    ;
-    }
-    ?>
-</div>
 <?php if (isset($userData)) : ?>
     <h2>Post a Reply</h2>
     <?php echo $this->element('forms/post'); ?>

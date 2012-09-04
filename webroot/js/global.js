@@ -288,7 +288,7 @@ $(function() {
     });
 	
     $('.edit-post').click(function(e){
-        $('li#post-'+ $(this).data('id') + ' .post-content').load($(this).attr('href') + ' #PostReplyForm');
+        $('li#post-'+ $(this).data('id') + ' .post-content').load($(this).attr('href'));
         e.preventDefault();
     });
     

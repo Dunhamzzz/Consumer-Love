@@ -230,3 +230,16 @@ div.submit {
 .filter-select {
     min-width: 70px;
 }
+
+/* Inline Forms - Normally only displaying one field */
+.inline-form .input {
+    margin: 0;
+}
+
+.inline-form.post textarea {
+    width: 397px;
+}
+
+.inline-form-submit {
+    text-align: right;
+}

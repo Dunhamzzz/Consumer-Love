@@ -109,6 +109,10 @@ class PostsController extends AppController {
 
         $this->set('title_for_layout', __('Edit Your Post'));
         $this->set(compact('post', 'thread'));
+        
+        if($this->request->is('ajax')) {
+            $this->render('inline_edit', null);
+        }
     }
 
 }
