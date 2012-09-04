@@ -63,7 +63,7 @@ class Product extends AppModel {
         return $results;
     }
 
-    public function beforeSave() {
+    public function beforeSave($options = array()) {
         if (!empty($this->data['Product']['description'])) {
             $this->data['Product']['description_formatted'] = $this->formatDescription($this->data['Product']['description']);
         }
