@@ -17,6 +17,9 @@ class Inventory extends AppModel {
     public $validate = array(
     );
 
+    const SCORE_UP = 'up';
+    const SCORE_DOWN = 'down';
+
     /**
      * Removes a product from a users inventory
      * @param string $productId
@@ -112,25 +115,29 @@ class Inventory extends AppModel {
     }
 
     /**
-     * Scores an owned product up or down
+     * Scores an owned product up or down for love / hate purposes
      * @param $inventory Inventory row.
      * @param $score string 'up' or 'down'.
      */
     public function score($inventory, $score) {
 
-        if ($score == 'up') {
+        if(!array_key_exists('Inventory', $inventory)) {
+            throw new DomainException('Invalid inventory item passed to Inventory::score()');
+        }
+
+        if ($score == self::SCORE_UP) {
             $score = 1;
-        } elseif ($score == 'down') {
+        } elseif ($score == self::SCORE_DOWN) {
             $score = -1; // Can't seem to save -1 as an int with Cake
         } else {
-            throw new Exception('Invalid vote received.');
+            throw new DomainException('Invalid vote passed to Inventory::score()');
         }
 
         $inventory['Inventory']['score'] = $score;
         $inventory['Inventory']['score_date'] = date('Y-m-d');
 
         if (!$this->save($inventory['Inventory'], false, array('score', 'score_date'))) {
-            throw new DomainException('An internal error occured.');
+            throw new CakeException('An internal error occured.');
         }
 
         return true;

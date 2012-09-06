@@ -2,7 +2,8 @@
 
 App::uses('Inventory', 'Model');
 
-class InventoryTestCase extends CakeTestCase {
+class InventoryTestCase extends CakeTestCase
+{
 
     public $fixtures = array('app.product', 'app.inventory', 'app.user');
 
@@ -11,7 +12,8 @@ class InventoryTestCase extends CakeTestCase {
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
 
         $this->Inventory = ClassRegistry::init('Inventory');
@@ -22,34 +24,63 @@ class InventoryTestCase extends CakeTestCase {
      *
      * @return void
      */
-    public function tearDown() {
+    public function tearDown()
+    {
         unset($this->Inventory);
         ClassRegistry::flush();
 
         parent::tearDown();
     }
 
-    public function testScore() {
-        $inventory = $this->Inventory->read(null, 'inventory-1');
+    /**
+     * @covers Inventory::score()
+     */
+    public function testScore_voteUp_expectsTrue()
+    {
 
         // Test Scoring Up
-        $this->Inventory->score($inventory, 'up');
+        $score = $this->Inventory->score($this->Inventory->read(null,
+                        'inventory-1'), 'up');
 
         $inventory = $this->Inventory->read(null, 'inventory-1');
 
-
-
+        $this->assertTrue($score);
         $this->assertEquals((int) 1, $inventory['Inventory']['score']);
         $this->assertEquals(date('Y-m-d'), $inventory['Inventory']['score_date']);
+    }
 
-
+    /**
+     * @covers Inventory::score()
+     */
+    public function testScore_voteDown_expectsTrue()
+    {
         // Test Scoring Down
-        $this->Inventory->score($inventory, 'down');
+        $score = $this->Inventory->score($this->Inventory->read(null,
+                        'inventory-1'), 'down');
         $inventory = $this->Inventory->read(null, 'inventory-1');
 
+        $this->assertTrue($score);
         $this->assertEquals((int) -1, $inventory['Inventory']['score']);
         $this->assertEquals(date('Y-m-d'), $inventory['Inventory']['score_date']);
     }
 
+    /**
+     * @covers Inventory::score()
+     * @expectedException DomainException
+     * @expectedExceptionMessage Invalid inventory item passed to Inventory::score()
+     */
+    public function testScore_invalidInventory_expectsException() {
+        $this->Inventory->score(array(), 'up');
+    }
+
+    /**
+     * @covers Inventory::score()
+     * @expectedException DomainException
+     * @expectedExceptionMessage Invalid vote passed to Inventory::score()
+     */
+    public function testScore_invalidVote_expectsException() {
+        $inventory = $this->Inventory->read(null, 'inventory-1');
+        $this->Inventory->score($inventory, 'invalid-value');
+    }
 }
 
