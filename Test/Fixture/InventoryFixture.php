@@ -36,7 +36,18 @@ class InventoryFixture extends CakeTestFixture {
             'score_date' => '2011-09-29',
             'deleted' => 0,
             'created' => '2011-09-29 14:50:21'
-        )
+        ),
+        array(
+            'id' => 'inventory-4',
+            'product_id' => 'product-3',
+            'user_id' => 'user-1',
+            'private' => 0,
+            'feed' => 1,
+            'score' => 1,
+            'score_date' => '0000-00-00',
+            'deleted' => 0,
+            'created' => '2012-09-29 13:50:21'
+        ),
     );
 
 }

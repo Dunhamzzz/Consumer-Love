@@ -69,7 +69,8 @@ class InventoryTestCase extends CakeTestCase
      * @expectedException DomainException
      * @expectedExceptionMessage Invalid inventory item passed to Inventory::score()
      */
-    public function testScore_invalidInventory_expectsException() {
+    public function testScore_invalidInventory_expectsException()
+    {
         $this->Inventory->score(array(), 'up');
     }
 
@@ -78,9 +79,39 @@ class InventoryTestCase extends CakeTestCase
      * @expectedException DomainException
      * @expectedExceptionMessage Invalid vote passed to Inventory::score()
      */
-    public function testScore_invalidVote_expectsException() {
+    public function testScore_invalidVote_expectsException()
+    {
         $inventory = $this->Inventory->read(null, 'inventory-1');
         $this->Inventory->score($inventory, 'invalid-value');
     }
-}
 
+    /**
+     * @covers Inventory::remove
+     */
+    public function testRemove_validateData_expectsTrue()
+    {
+        $removal = $this->Inventory->remove('product-2', 'user-1');
+        $this->assertTrue($removal);
+
+        // Test that we cannot find product 2 in the users inventory
+        $inventory = $this->Inventory->find('all', array(
+           'conditions' => array(
+               'user_id' => 'user-1',
+               'product_id' => 'product-2'
+            ),
+           'contain' => false
+        ));
+
+        $this->assertEmpty($inventory);
+
+        // Check that it didn't remove any other inventories
+        $inventoryCount = $this->Inventory->find('count', array(
+            'conditions' => array(
+                'user_id' => 'user-1'
+            )
+        ));
+
+        $this->assertEquals($inventoryCount, 2);
+    }
+
+}

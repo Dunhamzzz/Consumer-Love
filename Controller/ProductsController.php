@@ -109,7 +109,7 @@ class ProductsController extends AppController {
     /** Admin Functions */
     // Product Dashboard
     public function admin_index() {
-        
+
     }
 
     public function admin_all() {
@@ -135,7 +135,7 @@ class ProductsController extends AppController {
                 ));
             }
         }
-        
+
         $this->set('title_for_layout', __('Add Product'));
         $this->set('categories', $this->Product->Category->getAllThreaded());
     }
@@ -163,7 +163,7 @@ class ProductsController extends AppController {
             'conditions' => array('id' => $product['Product']['parent_id']),
             'contain' => false
         )));
-        
+
         $this->set('title_for_layout', __('Edit %s', $this->request->data['Product']['name']));
         $this->set('categories', $this->Product->Category->getAllThreaded());
         $this->set(compact('product'));

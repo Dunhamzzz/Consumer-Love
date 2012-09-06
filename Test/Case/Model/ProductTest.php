@@ -7,7 +7,8 @@ App::uses('Product', 'Model');
  * Product Test Case
  *
  */
-class ProductTestCase extends CakeTestCase {
+class ProductTestCase extends CakeTestCase
+{
 
     /**
      * Fixtures
@@ -21,7 +22,8 @@ class ProductTestCase extends CakeTestCase {
      *
      * @return void
      */
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
 
         $this->Product = ClassRegistry::init('Product');
@@ -32,7 +34,8 @@ class ProductTestCase extends CakeTestCase {
      *
      * @return void
      */
-    public function tearDown() {
+    public function tearDown()
+    {
         unset($this->Product);
         ClassRegistry::flush();
 
@@ -42,15 +45,17 @@ class ProductTestCase extends CakeTestCase {
     /**
      * @covers Product::getBySlug
      */
-    public function testGetBySlug_sucess_expectsArray() {
+    public function testGetBySlug_success_expectsArray()
+    {
         $product = $this->Product->getBySlug('product1');
         $this->assertEquals(array('product-1'), Set::extract('/Product/id', $product));
     }
-    
+
     /**
      * @covers Product::getBySlug
      */
-    public function testGetBySlug_noParams_expectsFalse() {
+    public function testGetBySlug_noParams_expectsFalse()
+    {
         $this->assertFalse($this->Product->getBySlug());
     }
 

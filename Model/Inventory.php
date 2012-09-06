@@ -1,6 +1,7 @@
 <?php
 
-class Inventory extends AppModel {
+class Inventory extends AppModel
+{
 
     public $belongsTo = array(
         'Product' => array(
@@ -25,15 +26,16 @@ class Inventory extends AppModel {
      * @param string $productId
      * @param string $userId
      */
-    public function remove($productId, $userId) {
-
+    public function remove($productId, $userId)
+    {
         return $this->deleteAll(array(
                     'product_id' => $productId,
                     'user_id' => $userId
-                ), false, true);
+                        ), false, true);
     }
 
-    public function add($productId, $userId) {
+    public function add($productId, $userId)
+    {
         $this->create();
         $inventory = array(
             'Inventory' => array(
@@ -52,7 +54,8 @@ class Inventory extends AppModel {
     /**
      * Returns an id => data array of products in a users' inventory
      */
-    public function get($userId, $limit = null) {
+    public function get($userId, $limit = null)
+    {
         $query = array(
             'conditions' => array(
                 'Inventory.user_id' => $userId,
@@ -89,20 +92,22 @@ class Inventory extends AppModel {
     /**
      * Checks whether a product is in a users inventory
      */
-    public function has($productId, $userId) {
+    public function has($productId, $userId)
+    {
         return $this->find('first', array(
-                    'conditions' => array(
-                        'user_id' => $userId,
-                        'product_id' => $productId
-                    )
-                ));
+            'conditions' => array(
+                'user_id' => $userId,
+                'product_id' => $productId
+            )
+        ));
     }
 
     /**
      * Toggles an item in a users inventory
      * @return bool
      */
-    public function toggle($productId, $userId) {
+    public function toggle($productId, $userId)
+    {
         $check = $this->has($productId, $userId);
 
         if (empty($check)) {
@@ -119,9 +124,10 @@ class Inventory extends AppModel {
      * @param $inventory Inventory row.
      * @param $score string 'up' or 'down'.
      */
-    public function score($inventory, $score) {
+    public function score($inventory, $score)
+    {
 
-        if(!array_key_exists('Inventory', $inventory)) {
+        if (!array_key_exists('Inventory', $inventory)) {
             throw new DomainException('Invalid inventory item passed to Inventory::score()');
         }
 
@@ -136,7 +142,8 @@ class Inventory extends AppModel {
         $inventory['Inventory']['score'] = $score;
         $inventory['Inventory']['score_date'] = date('Y-m-d');
 
-        if (!$this->save($inventory['Inventory'], false, array('score', 'score_date'))) {
+        if (!$this->save($inventory['Inventory'], false,
+                        array('score', 'score_date'))) {
             throw new CakeException('An internal error occured.');
         }
 
@@ -148,14 +155,15 @@ class Inventory extends AppModel {
      * @param string $productId
      * @return array
      */
-    public function haveProduct($productId) {
+    public function haveProduct($productId)
+    {
         return $this->find('all', array(
-                    'conditions' => array(
-                        'product_id' => $productId
-                    ),
-                    'order' => array('User.username'),
-                    'contain' => array('User')
-                ));
+            'conditions' => array(
+                'product_id' => $productId
+            ),
+            'order' => array('User.username'),
+            'contain' => array('User')
+        ));
     }
 
 }
