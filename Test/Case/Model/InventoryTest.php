@@ -33,7 +33,7 @@ class InventoryTestCase extends CakeTestCase
     }
 
     /**
-     * @covers Inventory::score()
+     * @covers Inventory::score
      */
     public function testScore_voteUp_expectsTrue()
     {
@@ -50,7 +50,7 @@ class InventoryTestCase extends CakeTestCase
     }
 
     /**
-     * @covers Inventory::score()
+     * @covers Inventory::score
      */
     public function testScore_voteDown_expectsTrue()
     {
@@ -65,7 +65,7 @@ class InventoryTestCase extends CakeTestCase
     }
 
     /**
-     * @covers Inventory::score()
+     * @covers Inventory::score
      * @expectedException DomainException
      * @expectedExceptionMessage Invalid inventory item passed to Inventory::score()
      */
@@ -74,7 +74,7 @@ class InventoryTestCase extends CakeTestCase
     }
 
     /**
-     * @covers Inventory::score()
+     * @covers Inventory::score
      * @expectedException DomainException
      * @expectedExceptionMessage Invalid vote passed to Inventory::score()
      */
