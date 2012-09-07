@@ -300,6 +300,17 @@ $(function() {
             $('.product-autocomplete-value').val(ui.item.id);
         }
     });
+    
+    // Thread View
+    $('#thread-title').scrollToFixed({
+        marginTop: 41,
+        fixed: function() {
+            $(this).addClass('fixed');
+        },
+        unfixed: function() {
+            $(this).removeClass('fixed');
+        }
+    });
 	
 });
 

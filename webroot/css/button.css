@@ -25,12 +25,13 @@
 }
 
 /* Pagination Buttons */
-p.pagination {
+.pagination {
     text-align: right;
+    margin-bottom: 10px;
 }
 
 .pagination .btn {
-    padding: 0 3px;
+    padding: 3px 5px;
     margin-right: 5px;
 }
 

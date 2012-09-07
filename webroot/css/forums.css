@@ -78,14 +78,83 @@
 }
 
 .thread-description {
-    overflow: hidden;
+    float: left;
 }
 
-.posts li:first-of-type {
+#thread-title {
+    
+}
+
+#thread-title.fixed {
+    background: #fff;
+    margin-left: -10px;
+    width: 650px;
+    padding: 10px;
+    border-bottom: 1px solid #efefef;
+}
+
+#posts {
+    margin-left: -10px;
+    width: 650px;
+}
+
+
+#posts li:first-of-type {
     border-top: 1px solid #e4e4e4;
     padding-top: 10px;
 }
 
-.posts li.mine {
+#posts li.mine {
     background: #e5ecff;
+}
+
+
+#posts li {
+    border-bottom: 1px solid #e4e4e4;
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+#posts li:hover {
+
+}
+
+.post-meta {
+    float: left;
+    width: 200px;
+    font-size: 10px;
+    line-height: 2em;
+}
+
+.post-meta img {
+    float: left;
+    margin-right: 10px;
+}
+
+.post-meta a {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.post-meta time {
+    color: #999;
+}
+
+.post-content {
+    margin-left: 200px;
+    padding: 0 10px 10px;
+}
+
+.edit-post {
+    float: right;
+    display: block;
+    background: url(/img/icons/comment_edit.png) no-repeat left center; /* sprite this */
+    text-indent: 2000em;
+    width: 16px;
+}
+
+.post-actions {
+    margin-bottom: 10px;	
 }
