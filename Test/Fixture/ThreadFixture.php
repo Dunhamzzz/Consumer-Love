@@ -23,6 +23,7 @@ class ThreadFixture extends CakeTestFixture {
         'first_post_id' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 36, 'collate' => 'utf8_general_ci', 'comment' => '', 'charset' => 'utf8'),
         'last_post_id' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 36, 'collate' => 'utf8_general_ci', 'comment' => '', 'charset' => 'utf8'),
         'last_user_id' => array('type' => 'string', 'null' => false, 'default' => NULL, 'length' => 36, 'collate' => 'utf8_general_ci', 'comment' => '', 'charset' => 'utf8'),
+        'last_post_date' => array('type' => 'datetime', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
         'post_count' => array('type' => 'integer', 'null' => false, 'default' => '0', 'collate' => NULL, 'comment' => ''),
         'created' => array('type' => 'datetime', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
         'modified' => array('type' => 'datetime', 'null' => false, 'default' => NULL, 'collate' => NULL, 'comment' => ''),
@@ -46,6 +47,7 @@ class ThreadFixture extends CakeTestFixture {
             'first_post_id' => 'post-1',
             'last_post_id' => 'post-4',
             'last_user_id' => 'user-1',
+            'last_post_date' => '2012-05-06 13:13:13',
             'post_count' => '3',
             'created' => '2011-09-05 20:55:03',
             'modified' => '2011-09-05 20:55:03'
@@ -60,6 +62,7 @@ class ThreadFixture extends CakeTestFixture {
             'first_post_id' => 'post-3',
             'last_post_id' => 'post-3',
             'last_user_id' => 'user-1',
+            'last_post_date' => '2012-05-08 22:12:44',
             'post_count' => '1',
             'created' => '2011-09-05 20:55:03',
             'modified' => '2011-09-05 20:55:03'

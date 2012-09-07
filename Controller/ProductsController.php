@@ -26,6 +26,12 @@ class ProductsController extends AppController {
         $this->Auth->allow('index', 'view', 'autocomplete', 'top5', 'users');
     }
 
+    /**
+     * Main product view page
+     * URL: /productSlug
+     * @param string $slug
+     * @throws NotFoundException
+     */
     public function view($slug = null) {
         $product = $this->Product->getBySlug($slug);
 
@@ -64,7 +70,12 @@ class ProductsController extends AppController {
         }
     }
 
-    // Shows users who own a certain product
+    /**
+     * Shows users who own a certain product
+     * URL: /productSlug/users
+     * @param string $slug
+     * @throws NotFoundException
+     */
     public function users($slug = null) {
         $product = $this->Product->getBySlug($slug);
 
