@@ -116,7 +116,7 @@ class ThreadTestCase extends CakeTestCase {
     }
 
     /**
-     * @covers getLatestByProductId
+     * @covers Thread::getLatestByProductId
      */
     public function testGetLatestByProductId_noProductId_expectsEmptyArray()
     {
@@ -124,7 +124,7 @@ class ThreadTestCase extends CakeTestCase {
     }
 
     /**
-     * @covers getLatestByProductId
+     * @covers Thread::getLatestByProductId
      */
     public function testGetLatestByProductId_validProductId_expectsArray()
     {
@@ -134,7 +134,7 @@ class ThreadTestCase extends CakeTestCase {
     }
 
      /**
-     * @covers getLatestByProductId
+     * @covers Thread::getLatestByProductId
      */
     public function testGetLatestByProductId_limit1_expectsArray()
     {
