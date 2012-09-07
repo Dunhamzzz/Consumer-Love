@@ -67,6 +67,21 @@ class ThreadFixture extends CakeTestFixture {
             'created' => '2011-09-05 20:55:03',
             'modified' => '2011-09-05 20:55:03'
         ),
+        array(
+            'id' => 'thread-3',
+            'product_id' => 'product-1',
+            'user_id' => 'user-1',
+            'title' => 'Another thread was started',
+            'slug' => 'another-thread-was-started',
+            'deleted' => 0,
+            'first_post_id' => 'post-3',
+            'last_post_id' => 'post-3',
+            'last_user_id' => 'user-1',
+            'last_post_date' => '2012-19-06 20:12:48',
+            'post_count' => '1',
+            'created' => '2012-19-06 20:12:48',
+            'modified' => '2012-19-06 20:12:48'
+        ),
     );
 
 }

@@ -81,7 +81,7 @@ class PostFixture extends CakeTestFixture {
             'created' => '2012-09-06 20:07:48',
             'modified' => '2012-09-06 20:07:48'
         ),
-        
+
         array(
             'id' => 'post-6',
             'thread_id' => 'thread-1',
@@ -91,6 +91,16 @@ class PostFixture extends CakeTestFixture {
             'deleted' => 0,
             'created' => '2012-09-06 20:11:48',
             'modified' => '2012-09-06 20:11:48'
+        ),
+        array(
+            'id' => 'post-7',
+            'thread_id' => 'thread-3',
+            'user_id' => 'user-1',
+            'user_ip' => '80.7.15.114',
+            'content' => 'Started another thread',
+            'deleted' => 0,
+            'created' => '2012-19-06 20:12:48',
+            'modified' => '2012-19-06 20:12:48'
         ),
     );
 

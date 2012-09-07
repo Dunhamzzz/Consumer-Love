@@ -39,8 +39,8 @@ class ProductsController extends AppController {
             throw new NotFoundException(__('Invalid Product'));
         }
 
-        // Get Threads, we need to paginate it
-        $this->set('threads', $this->paginate('Thread', array('product_id' => $product['Product']['id'])));
+        // Get Latest Threads
+        $this->set('threads', $this->Product->Thread->getLatestByProductId($product['Product']['id'], 5));
 
         // Paginate News
         $this->set('news' ,$this->paginate('News', array('product_id' => $product['Product']['id'])));

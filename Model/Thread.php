@@ -42,9 +42,11 @@ class Thread extends AppModel {
             'required' => true
         )
     );
-    
+
+    public $order = 'Thread.last_post_date DESC';
+
     public function afterDelete() {
-        
+
         $this->Post->deleteAll(array('thread_id' => $this->id));
     }
 
@@ -58,7 +60,7 @@ class Thread extends AppModel {
 
         if ($this->validates()) {
 
-            // @todo Spam Check 
+            // @todo Spam Check
 
             $this->create();
             $this->save($data, false, array('product_id', 'user_id', 'title', 'user_ip'));
@@ -129,6 +131,28 @@ class Thread extends AppModel {
             'last_post_id' => $post['Post']['id'],
             'last_post_date' => date('Y-m-d H:i:s'),
             'last_post_user' => $post['Post']['user_id']
+        ));
+    }
+
+    /**
+     * Gets latest threads
+     * @param type $productId
+     * @return array Array of latest threads
+     */
+    public function getLatestByProductId($productId = null, $limit = 5) {
+
+        if(!$productId) {
+            return array();
+        }
+
+        return $this->find('all', array(
+            'conditions' => array(
+                'product_id' => $productId
+            ),
+            'contain' => array(
+                'Post', 'FirstPost', 'User'
+            ),
+            'limit' => $limit
         ));
     }
 
