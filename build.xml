@@ -95,7 +95,7 @@
 
     <target name="phpunit"
 	 description="Execute all unit tests with CakePHP and publish reports.">
-	<exec command="cake test app AllTests --coverage-clover ./build/coverage/clover.xml --coverage-html ./build/coverage/html/ --log-junit ./build/logs/junit.xml"/>
+	<exec command="cake test app AllTests --coverage-clover ./build/logs/clover.xml --coverage-html ./build/coverage/ --log-junit ./build/logs/junit.xml"/>
     </target>
 
     <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
