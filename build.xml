@@ -2,29 +2,29 @@
 <project name="Consumer Love" default="test">
 
     <target name="clean" description="Cleanup build artifacts">
-	<delete dir="${basedir}/build"/>
+	<delete dir="${basedir}/build/logs"/>
 	<delete dir="${basedir}/build/coverage"/>
 	<delete dir="${basedir}/build/coverage/html"/>
     </target>
 
     <target name="prepare" depends="clean" description="Prepare for build">
-	<mkdir dir="${basedir}/build"/>
+	<mkdir dir="${basedir}/build/logs"/>
 	<mkdir dir="${basedir}/build/coverage"/>
 	<mkdir dir="${basedir}/build/coverage/html"/>
     </target>
 
     <target name="test"
 	    description="Execute all unit tests with CakePHP.">
-	<exec command="cake test app AllTests --coverage-clover build/coverage/clover.xml --coverage-html build/coverage/html/ --log-junit build/junit.xml"></exec>
+	<exec command="cake test app AllTests --coverage-clover build/coverage/clover.xml --coverage-html build/coverage/html/ --log-junit build/logs/junit.xml"></exec>
     </target>
 
     <target name="phpmd-ci" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
 	<exec executable="phpmd">
-	    <arg path="${basedir}/src" />
+	    <arg path="${basedir}" />
 	    <arg value="xml" />
 	    <arg value="${basedir}/build/phpmd.xml" />
 	    <arg value="--reportfile" />
-	    <arg value="${basedir}/build/pmd.xml" />
+	    <arg value="${basedir}/build/logs/pmd.xml" />
 	</exec>
     </target>
 
@@ -39,7 +39,7 @@
     <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
 	<exec executable="phpcs" output="/dev/null">
 	    <arg value="--report=checkstyle" />
-	    <arg value="--report-file=${basedir}/build/checkstyle.xml" />
+	    <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
 	    <arg value="--standard=CakePHP" />
 	    <arg path="${basedir}" />
 	</exec>
