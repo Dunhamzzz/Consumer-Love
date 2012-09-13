@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Consumer Love" default="test">
+<project name="Consumer Love" default="build">
+
+    <target name="build"
+	    depends="prepare,lint,phpunit"/>
+
     <target name="clean" description="Cleanup build artifacts">
 	<delete dir="${basedir}/build/logs"/>
 	<delete dir="${basedir}/build/coverage"/>
@@ -12,35 +16,18 @@
 	<mkdir dir="${basedir}/build/coverage/html"/>
     </target>
 
-    <target name="test"
+    <target name="lint" description="Perform syntax check of sourcecode files">
+        <phplint>
+            <fileset dir=".">
+                <include name="*.php" />
+                <include name="**/*.php" />
+            </fileset>
+        </phplint>
+    </target>
+
+    <target name="phpunit"
 	    description="Execute all unit tests with CakePHP.">
 	<exec command="cake test app AllTests --coverage-clover build/coverage/clover.xml --coverage-html build/coverage/html/ --log-junit build/logs/junit.xml"></exec>
     </target>
 
-    <target name="phpmd-ci" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
-	<exec executable="phpmd">
-	    <arg path="${basedir}" />
-	    <arg value="xml" />
-	    <arg value="${basedir}/build/phpmd.xml" />
-	    <arg value="--reportfile" />
-	    <arg value="${basedir}/build/logs/pmd.xml" />
-	</exec>
-    </target>
-
-    <target name="phpcpd" description="Find duplicate code using PHPCPD">
-	<exec executable="phpcpd">
-	    <arg value="--log-pmd" />
-	    <arg value="${basedir}/build/pmd-cpd.xml" />
-	    <arg path="${basedir}" />
-	</exec>
-    </target>
-
-    <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
-	<exec executable="phpcs" output="/dev/null">
-	    <arg value="--report=checkstyle" />
-	    <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
-	    <arg value="--standard=CakePHP" />
-	    <arg path="${basedir}" />
-	</exec>
-    </target>
 </project>
