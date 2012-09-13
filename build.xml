@@ -2,7 +2,7 @@
 <project name="Consumer Love" default="build">
 
     <target name="build"
-	    depends="prepare,lint,phpunit"/>
+	    depends="prepare,lint,phpunit,phpcs-ci"/>
 
     <target name="clean" description="Cleanup build artifacts">
 	<delete dir="${basedir}/build/logs"/>
@@ -28,6 +28,15 @@
     <target name="phpunit"
 	    description="Execute all unit tests with CakePHP.">
 	<exec command="cake test app AllTests --coverage-clover build/coverage/clover.xml --coverage-html build/coverage/html/ --log-junit build/logs/junit.xml"></exec>
+    </target>
+
+    <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
+	<exec executable="phpcs" output="/dev/null">
+	    <arg value="--report=checkstyle" />
+	    <arg value="--report-file=${basedir}/build/logs/checkstyle.xml" />
+	    <arg value="--standard=CakePHP" />
+	    <arg path="${basedir}" />
+	</exec>
     </target>
 
 </project>
