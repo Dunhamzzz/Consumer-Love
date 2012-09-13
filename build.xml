@@ -2,18 +2,28 @@
 <project name="Consumer Love" default="test">
 
     <target name="clean" description="Cleanup build artifacts">
-        <delete dir="${basedir}/build"/>
-        <delete dir="${basedir}/build/coverage"/>
-        <delete dir="${basedir}/build/coverage/html"/>
+	<delete dir="${basedir}/build"/>
+	<delete dir="${basedir}/build/coverage"/>
+	<delete dir="${basedir}/build/coverage/html"/>
     </target>
 
     <target name="prepare" depends="clean" description="Prepare for build">
-        <mkdir dir="${basedir}/build"/>
-        <mkdir dir="${basedir}/build/coverage"/>
-        <mkdir dir="${basedir}/build/coverage/html"/>
+	<mkdir dir="${basedir}/build"/>
+	<mkdir dir="${basedir}/build/coverage"/>
+	<mkdir dir="${basedir}/build/coverage/html"/>
     </target>
 
-    <target name="test">
-        <exec command="cake test app AllTests --coverage-clover build/coverage/clover.xml --coverage-html build/coverage/html/ --log-junit build/junit.xml"></exec>
+    <target name="test"
+	    description="Execute all unit tests with CakePHP.">
+	<exec command="cake test app AllTests --coverage-clover build/coverage/clover.xml --coverage-html build/coverage/html/ --log-junit build/junit.xml"></exec>
+    </target>
+
+    <target name="phpmd"
+	    description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
+	<exec executable="phpmd">
+	    <arg path="${basedir}" />
+	    <arg value="text" />
+	    <arg value="${basedir}/build/phpmd.xml" />
+	</exec>
     </target>
 </project>
