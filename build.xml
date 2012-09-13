@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="name-of-project" default="build" basedir=".">
+<project name="cl" default="build" basedir=".">
     <target name="build"
 	 depends="prepare,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd,phpdox,phpunit,phpcb"/>
 
@@ -20,20 +20,20 @@
     </target>
 
     <target name="clean" description="Cleanup build artifacts">
-	<delete dir="${builddir}/build/api"/>
-	<delete dir="${builddir}/build/code-browser"/>
-	<delete dir="${builddir}/build/coverage"/>
-	<delete dir="${builddir}/build/logs"/>
-	<delete dir="${builddir}/build/pdepend"/>
+	<delete dir="./build/api"/>
+	<delete dir="./build/code-browser"/>
+	<delete dir="./build/coverage"/>
+	<delete dir="./build/logs"/>
+	<delete dir="./build/pdepend"/>
     </target>
 
     <target name="prepare" depends="clean" description="Prepare for build">
-	<mkdir dir="${builddir}/build/api"/>
-	<mkdir dir="${builddir}/build/code-browser"/>
-	<mkdir dir="${builddir}/build/coverage"/>
-	<mkdir dir="${builddir}/build/logs"/>
-	<mkdir dir="${builddir}/build/pdepend"/>
-	<mkdir dir="${builddir}/build/phpdox"/>
+	<mkdir dir="./build/api"/>
+	<mkdir dir="./build/code-browser"/>
+	<mkdir dir="./build/coverage"/>
+	<mkdir dir="./build/logs"/>
+	<mkdir dir="./build/pdepend"/>
+	<mkdir dir="./build/phpdox"/>
     </target>
 
     <target name="lint" description="Perform syntax check of sourcecode files">
@@ -48,44 +48,44 @@
     <target name="phploc" description="Measure project size using PHPLOC">
 	<exec executable="phploc">
 	    <arg value="--log-csv" />
-	    <arg value="${builddir}/build/logs/phploc.csv" />
-	    <arg path="${builddir}" />
+	    <arg value="./build/logs/phploc.csv" />
+	    <arg path="." />
 	</exec>
     </target>
 
     <target name="pdepend" description="Calculate software metrics using PHP_Depend">
 	<exec executable="pdepend">
-	    <arg value="--jdepend-xml=${builddir}/build/logs/jdepend.xml" />
-	    <arg value="--jdepend-chart=${builddir}/build/pdepend/dependencies.svg" />
-	    <arg value="--overview-pyramid=${builddir}/build/pdepend/overview-pyramid.svg" />
-	    <arg path="${builddir}" />
+	    <arg value="--jdepend-xml=./build/logs/jdepend.xml" />
+	    <arg value="--jdepend-chart=./build/pdepend/dependencies.svg" />
+	    <arg value="--overview-pyramid=./build/pdepend/overview-pyramid.svg" />
+	    <arg path="." />
 	</exec>
     </target>
 
     <target name="phpmd-ci" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
 	<exec executable="phpmd">
-	    <arg path="${builddir}" />
+	    <arg path="." />
 	    <arg value="xml" />
-	    <arg value="${builddir}/build/phpmd.xml" />
+	    <arg value="./build/phpmd.xml" />
 	    <arg value="--reportfile" />
-	    <arg value="${builddir}/build/logs/pmd.xml" />
+	    <arg value="./build/logs/pmd.xml" />
 	</exec>
     </target>
 
     <target name="phpcs-ci" description="Find coding standard violations using PHP_CodeSniffer creating a log file for the continuous integration server">
 	<exec executable="phpcs" output="/dev/null">
 	    <arg value="--report=checkstyle" />
-	    <arg value="--report-file=${builddir}/build/logs/checkstyle.xml" />
-	    <arg value="--standard=${builddir}/build/phpcs.xml" />
-	    <arg path="${builddir}" />
+	    <arg value="--report-file=./build/logs/checkstyle.xml" />
+	    <arg value="--standard=./build/phpcs.xml" />
+	    <arg path="." />
 	</exec>
     </target>
 
     <target name="phpcpd" description="Find duplicate code using PHPCPD">
 	<exec executable="phpcpd">
 	    <arg value="--log-pmd" />
-	    <arg value="${builddir}/build/logs/pmd-cpd.xml" />
-	    <arg path="${builddir}" />
+	    <arg value="./build/logs/pmd-cpd.xml" />
+	    <arg path="." />
 	</exec>
     </target>
 
@@ -95,17 +95,17 @@
 
     <target name="phpunit"
 	 description="Execute all unit tests with CakePHP and publish reports.">
-	<exec command="cake test app AllTests --coverage-clover ${builddir}/build/coverage/clover.xml --coverage-html ${builddir}/build/coverage/html/ --log-junit ${builddir}/build/logs/junit.xml"/>
+	<exec command="cake test app AllTests --coverage-clover ./build/coverage/clover.xml --coverage-html ./build/coverage/html/ --log-junit ./build/logs/junit.xml"/>
     </target>
 
     <target name="phpcb" description="Aggregate tool output with PHP_CodeBrowser">
 	<exec executable="phpcb">
 	    <arg value="--log" />
-	    <arg path="${builddir}/build/logs" />
+	    <arg path="./build/logs" />
 	    <arg value="--source" />
-	    <arg path="${builddir}" />
+	    <arg path="." />
 	    <arg value="--output" />
-	    <arg path="${builddir}/build/code-browser" />
+	    <arg path="./build/code-browser" />
 	</exec>
     </target>
 </project>
