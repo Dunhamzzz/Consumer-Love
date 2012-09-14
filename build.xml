@@ -80,7 +80,7 @@
         <exec executable="phpcs" output="/dev/null">
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${basedir}/../build/logs/checkstyle.xml" />
-            <arg value="--standard=${basedir}/../phpcs.xml" />
+            <arg value="--standard=CakePHP" />
             <arg path="${basedir}" />
         </exec>
     </target>
