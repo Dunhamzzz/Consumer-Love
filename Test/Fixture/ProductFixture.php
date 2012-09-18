@@ -61,7 +61,7 @@ class ProductFixture extends CakeTestFixture {
             'created' => '2011-01-23 03:29:49',
             'modified' => '201-05-26 08:44:40'
         ),
-        array(
+        array( // Nobody owns this product
             'id' => 'product-5',
             'name' => 'Product 5',
             'slug' => 'product5',

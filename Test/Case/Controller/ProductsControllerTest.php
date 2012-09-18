@@ -1,8 +1,8 @@
 <?php
+
 /**
  * Test Case for the products controller
  */
-
 class ProductsControllerTest extends ControllerTestCase
 {
 
@@ -76,6 +76,44 @@ class ProductsControllerTest extends ControllerTestCase
         $this->assertTrue(array_key_exists('threads', $viewVars), 'No $thread passed to view');
         $this->assertTrue(array_key_exists('news', $viewVars), 'No $news passed to view');
         $this->assertTrue(array_key_exists('related', $viewVars), 'No $related passed to view');
+    }
+
+    /**
+     * @covers ProductsController::users
+     * @expectedException NotFoundException
+     * @expectedExceptionMessage Invalid Product
+     */
+    public function testUsers_noSlug_expectsException()
+    {
+        $this->testAction('/products/users/');
+    }
+
+    /**
+     * @covers ProductsController::users
+     */
+    public function testUsers_validSlugButNoUsers_expectsHtml()
+    {
+        $html = $this->testAction('/products/users/product5', array('return' => 'contents'));
+
+        // Look for title
+        $titleMatcher = array(
+            'tag' => 'h1',
+            'content' => 'Users who follow ',
+            'child' => array(
+                'tag' => 'a',
+                'content' => 'Product 5'
+            )
+        );
+
+        $this->assertTag($titleMatcher, $html, 'Title tag does not have expected contents');
+
+        // Look for 'No users have this product' message
+        $matcher = array(
+            'tag' => 'p',
+            'content' => 'No users have this product'
+        );
+
+        $this->assertTag($matcher, $html);
     }
 
 }
